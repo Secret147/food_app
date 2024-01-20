@@ -9,6 +9,7 @@ class Dimensions {
   static bool darkmode = true;
 
   //height
+  static late double height5;
   static late double height10;
   static late double height20;
   static late double height34;
@@ -19,6 +20,7 @@ class Dimensions {
   static late double height80;
 
   static late double height100;
+  static late double height110;
   static late double height140;
   static late double height150;
   static late double height170;
@@ -26,6 +28,7 @@ class Dimensions {
   static late double height260;
   static late double height280;
   static late double height320;
+  static late double height520;
   static late double imageHeight;
   static late double boxHeight;
   static late double circleHeight;
@@ -54,9 +57,7 @@ class Dimensions {
 
     //height
 
-    imageHeight = heightScreen / 2.56;
-    boxHeight = heightScreen / 2.34;
-    circleHeight = heightScreen / 3;
+    height5 = heightScreen / 176.8;
     height10 = heightScreen / 84.4;
     height20 = heightScreen / 42.2;
     height34 = heightScreen / 24.82;
@@ -66,6 +67,7 @@ class Dimensions {
     height60 = heightScreen / 14;
     height80 = heightScreen / 10.55;
     height100 = heightScreen / 8.44;
+    height110 = heightScreen / 7.67;
     height140 = heightScreen / 6;
     height150 = heightScreen / 5.62;
     height170 = heightScreen / 4.96;
@@ -73,6 +75,10 @@ class Dimensions {
     height260 = heightScreen / 3.24;
     height280 = heightScreen / 3;
     height320 = heightScreen / 2.63;
+    height520 = heightScreen / 1.62;
+    imageHeight = heightScreen / 2.56;
+    boxHeight = heightScreen / 2.34;
+    circleHeight = heightScreen / 3;
 
 //font-size
     font10 = heightScreen / 84.4;

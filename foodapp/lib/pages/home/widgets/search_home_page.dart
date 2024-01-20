@@ -24,10 +24,10 @@ class SearchHomePage extends StatelessWidget {
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(Dimensions.borderRadius10),
               ),
-              hintText: "Search",
+              hintText: "Enter Search",
               hintStyle: TextStyle(
                 color: darkmode,
-                fontSize: Dimensions.font18,
+                fontSize: Dimensions.font16,
               ),
               prefixIcon: Container(
                 margin: EdgeInsets.symmetric(horizontal: Dimensions.height10),

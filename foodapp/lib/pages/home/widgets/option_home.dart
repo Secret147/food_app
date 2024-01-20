@@ -31,9 +31,23 @@ class OptionHomePage extends StatelessWidget {
                         height: Dimensions.height60,
                         width: Dimensions.height60,
                         decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Dimensions.darkmode
+                                  ? const Color.fromARGB(255, 127, 126, 126)
+                                      .withOpacity(0)
+                                  : const Color.fromARGB(255, 127, 126, 126)
+                                      .withOpacity(0.5),
+                              spreadRadius: 5,
+                              blurRadius: 7,
+                              offset: const Offset(3, 3),
+                            ),
+                          ],
                           borderRadius:
                               BorderRadius.circular(Dimensions.borderRadius10),
-                          color: AppColors.iconColor,
+                          color: Dimensions.darkmode
+                              ? AppColors.iconColor
+                              : AppColors.brightColor,
                         ),
                         child: Image.asset("assets/icons/pizza 1.png"),
                       ),

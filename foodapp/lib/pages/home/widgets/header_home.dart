@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:foodapp/utils/colors.dart';
 import 'package:foodapp/utils/dimensions.dart';
+import 'package:foodapp/widgets/pos_icon/pos_icon_text.dart';
 import 'package:foodapp/widgets/text_darkmode/text_dark_mode.dart';
 import 'package:foodapp/widgets/text_normal/text_normal.dart';
 import 'package:get/get.dart';
@@ -22,22 +23,7 @@ class HeaderHomePage extends StatelessWidget {
                   margin: EdgeInsets.only(left: Dimensions.height10),
                   child: TextDarkMode(
                       text: "Delivery to", textSize: Dimensions.font18)),
-              Row(
-                children: [
-                  const Icon(
-                    CupertinoIcons.location_solid,
-                    color: AppColors.mainColor,
-                    size: 30,
-                  ),
-                  SizedBox(
-                    height: Dimensions.height50,
-                  ),
-                  TextNormal(
-                    text: "Dong Da, Ha Noi",
-                    color: AppColors.textGrayColor,
-                  )
-                ],
-              )
+              const PosIconText(pos: "Dong Da, Ha Noi"),
             ],
           ),
           Container(

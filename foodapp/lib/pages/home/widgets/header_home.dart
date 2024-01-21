@@ -4,7 +4,7 @@ import 'package:foodapp/utils/dimensions.dart';
 import 'package:foodapp/widgets/pos_icon/pos_icon_text.dart';
 import 'package:foodapp/widgets/text_darkmode/text_dark_mode.dart';
 import 'package:foodapp/widgets/text_normal/text_normal.dart';
-import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 
 class HeaderHomePage extends StatelessWidget {
   const HeaderHomePage({super.key});
@@ -26,14 +26,17 @@ class HeaderHomePage extends StatelessWidget {
               const PosIconText(pos: "Dong Da, Ha Noi"),
             ],
           ),
-          Container(
-            height: Dimensions.height50,
-            width: Dimensions.height50,
-            decoration: const BoxDecoration(
-              shape: BoxShape.circle,
+          GestureDetector(
+            onTap: () => context.goNamed("proflie"),
+            child: Container(
+              height: Dimensions.height50,
+              width: Dimensions.height50,
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+              ),
+              child:
+                  Image.asset("assets/images/Ellipse 6.png", fit: BoxFit.cover),
             ),
-            child:
-                Image.asset("assets/images/Ellipse 6.png", fit: BoxFit.cover),
           )
         ],
       ),

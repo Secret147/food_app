@@ -76,7 +76,7 @@ class _SignInPageState extends State<SignInPage> {
                   height: Dimensions.height20,
                 ),
                 InkWell(
-                  onTap: () => context.goNamed("signin"),
+                  onTap: () => context.goNamed("home"),
                   child: ButtonCustom(
                     text: "Sign in",
                     background: AppColors.mainColor,

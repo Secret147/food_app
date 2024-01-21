@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:foodapp/pages/home/widgets/header_home.dart';
@@ -6,6 +7,7 @@ import 'package:foodapp/pages/home/widgets/option_home.dart';
 import 'package:foodapp/pages/home/widgets/popular_home.dart';
 
 import 'package:foodapp/pages/home/widgets/search_home_page.dart';
+import 'package:foodapp/pages/navigationcustom/navigation_custom.dart';
 import 'package:foodapp/utils/colors.dart';
 import 'package:foodapp/utils/dimensions.dart';
 import 'package:foodapp/widgets/itemcustomv2/item_custom_v2.dart';
@@ -19,7 +21,9 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     Color darkmode =
         Dimensions.darkmode ? AppColors.brightColor : AppColors.textColor;
+
     return Scaffold(
+      bottomNavigationBar: const NavigatinCustom(),
       body: SafeArea(
         child: Container(
           margin: EdgeInsets.all(Dimensions.height20),
@@ -27,16 +31,16 @@ class HomePage extends StatelessWidget {
             children: [
               const HeaderHomePage(),
               SizedBox(
-                height: Dimensions.height30,
-              ),
-              const SearchHomePage(),
-              SizedBox(
-                height: Dimensions.height30,
+                height: Dimensions.height10,
               ),
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
+                      const SearchHomePage(),
+                      SizedBox(
+                        height: Dimensions.height30,
+                      ),
                       ListItemCustom(
                         title: "Popular near you",
                         heightItem: Dimensions.height260,

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:foodapp/pages/detail/widgets/button_detail.dart';
 import 'package:foodapp/pages/detail/widgets/header_detail.dart';
 import 'package:foodapp/pages/detail/widgets/infor_detail.dart';
+import 'package:foodapp/pages/navigationcustom/navigation_custom.dart';
 import 'package:foodapp/utils/colors.dart';
 import 'package:foodapp/utils/dimensions.dart';
 import 'package:foodapp/widgets/ExpandText/expand_text.dart';
@@ -14,6 +15,7 @@ class DetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: const NavigatinCustom(),
       body: Column(
         children: [
           const HeaderDetailPage(),

@@ -1,11 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:foodapp/providers/test.dart';
 import 'package:foodapp/utils/colors.dart';
 import 'package:foodapp/utils/dimensions.dart';
+import 'package:provider/provider.dart';
 
-class SearchHomePage extends StatelessWidget {
+class SearchHomePage extends StatefulWidget {
   const SearchHomePage({super.key});
 
+  @override
+  State<SearchHomePage> createState() => _SearchHomePageState();
+}
+
+class _SearchHomePageState extends State<SearchHomePage> {
   @override
   Widget build(BuildContext context) {
     Color darkmode =
@@ -40,17 +47,25 @@ class SearchHomePage extends StatelessWidget {
             ),
           ),
         ),
-        Container(
-          width: Dimensions.height60,
-          margin: EdgeInsets.only(left: Dimensions.height20),
-          height: Dimensions.height60,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(Dimensions.borderRadius10),
-            color: AppColors.mainColor,
-          ),
-          child: const Icon(
-            Icons.menu,
-            color: AppColors.brightColor,
+        GestureDetector(
+          onTap: () {
+            setState(() {
+              context.read<TestProvider>().changeMode();
+              print(Dimensions.darkmode);
+            });
+          },
+          child: Container(
+            width: Dimensions.height60,
+            margin: EdgeInsets.only(left: Dimensions.height20),
+            height: Dimensions.height60,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(Dimensions.borderRadius10),
+              color: AppColors.mainColor,
+            ),
+            child: const Icon(
+              Icons.menu,
+              color: AppColors.brightColor,
+            ),
           ),
         )
       ]),

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:foodapp/utils/colors.dart';
 import 'package:foodapp/utils/dimensions.dart';
 import 'package:foodapp/widgets/text_darkmode/text_dark_mode.dart';
+import 'package:go_router/go_router.dart';
 
 class HeaderCart extends StatelessWidget {
   const HeaderCart({super.key});
@@ -14,9 +15,12 @@ class HeaderCart extends StatelessWidget {
       height: Dimensions.height60,
       child: Row(
         children: [
-          Icon(
-            Icons.arrow_back_ios_new,
-            color: AppColors.modeColor,
+          GestureDetector(
+            onTap: () => context.goNamed("signin"),
+            child: Icon(
+              Icons.arrow_back_ios_new,
+              color: AppColors.modeColor,
+            ),
           ),
           Expanded(
             child: Center(

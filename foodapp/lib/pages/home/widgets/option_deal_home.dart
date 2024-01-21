@@ -45,7 +45,9 @@ class _OptionDealHomePageState extends State<OptionDealHomePage> {
                       bottom: currentDeal == index
                           ? const BorderSide(
                               width: 2.0, color: AppColors.mainColor)
-                          : const BorderSide(),
+                          : const BorderSide(
+                              width: 0,
+                              color: Color.fromARGB(255, 15, 59, 145)),
                     ),
                   ),
                   child: Align(
@@ -56,7 +58,7 @@ class _OptionDealHomePageState extends State<OptionDealHomePage> {
                         fontSize: Dimensions.font16,
                         color: currentDeal == index
                             ? AppColors.mainColor
-                            : AppColors.brightColor,
+                            : AppColors.modeColor,
                       ),
                     ),
                   ),

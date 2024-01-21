@@ -6,8 +6,8 @@ class Dimensions {
   static late double heightScreen;
   static late double widthScreen;
 
-  static bool darkmode = true;
-
+  static bool darkmode = false;
+  static int pageActive = 0;
   //height
   static late double height5;
   static late double height10;
@@ -28,6 +28,7 @@ class Dimensions {
   static late double height260;
   static late double height280;
   static late double height320;
+  static late double height400;
   static late double height520;
   static late double imageHeight;
   static late double boxHeight;
@@ -49,11 +50,8 @@ class Dimensions {
   static late double borderRadius15;
 
   void init(BuildContext context) {
-    heightValue = MediaQuery.of(context).size.height;
-    widthValue = MediaQuery.of(context).size.width;
-
-    heightScreen = heightValue > widthValue ? heightValue : widthValue;
-    widthScreen = heightValue < widthValue ? heightValue : widthValue;
+    heightScreen = MediaQuery.of(context).size.height;
+    widthScreen = MediaQuery.of(context).size.width;
 
     //height
 
@@ -75,6 +73,7 @@ class Dimensions {
     height260 = heightScreen / 3.24;
     height280 = heightScreen / 3;
     height320 = heightScreen / 2.63;
+    height400 = heightScreen / 2.11;
     height520 = heightScreen / 1.62;
     imageHeight = heightScreen / 2.56;
     boxHeight = heightScreen / 2.34;

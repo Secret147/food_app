@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:foodapp/utils/colors.dart';
 import 'package:foodapp/utils/dimensions.dart';
 import 'package:foodapp/widgets/profileitem/profile_item.dart';
+import 'package:go_router/go_router.dart';
 
 class ListProfile extends StatelessWidget {
   const ListProfile({super.key});
@@ -42,10 +43,16 @@ class ListProfile extends StatelessWidget {
         SizedBox(
           height: Dimensions.height20,
         ),
-        const ProfileItem(
-          colorIcon: Color.fromARGB(255, 239, 10, 33),
-          text: "LogOut",
-          icon: Icons.logout,
+        GestureDetector(
+          onTap: () {
+            context.goNamed('introduction');
+            Dimensions.pageActive = 0;
+          },
+          child: const ProfileItem(
+            colorIcon: Color.fromARGB(255, 239, 10, 33),
+            text: "LogOut",
+            icon: Icons.logout,
+          ),
         ),
       ],
     );

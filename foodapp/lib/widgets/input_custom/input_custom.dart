@@ -4,23 +4,32 @@ import 'package:foodapp/utils/colors.dart';
 import 'package:foodapp/utils/dimensions.dart';
 
 class InputCustom extends StatelessWidget {
-  const InputCustom({
+  InputCustom({
     super.key,
     required this.label,
     required this.icon,
+    this.focus = false,
   });
   final String label;
   final IconData icon;
+  bool focus;
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      textInputAction: TextInputAction.next,
       style: TextStyle(
-        color: AppColors.brightColor,
+        color: AppColors.modeColor,
         fontSize: Dimensions.font20,
       ),
+      autofocus: focus,
       decoration: InputDecoration(
+        labelStyle: const TextStyle(
+          color: AppColors.textGrayColor,
+        ),
         focusColor: AppColors.brightColor,
+        enabledBorder: outlineCustom(),
+        focusedBorder: outlineCustom(),
         border: const OutlineInputBorder(),
         labelText: label,
         suffixIcon: Icon(
@@ -29,4 +38,8 @@ class InputCustom extends StatelessWidget {
       ),
     );
   }
+
+  OutlineInputBorder outlineCustom() => OutlineInputBorder(
+        borderSide: BorderSide(color: Colors.grey.shade400),
+      );
 }

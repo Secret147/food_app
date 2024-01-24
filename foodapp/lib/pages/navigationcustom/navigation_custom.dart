@@ -26,41 +26,44 @@ class _NavigatinCustomState extends State<NavigatinCustom> {
   @override
   Widget build(BuildContext context) {
     List<BottomNavigationBarItem> listItem = [
-      BottomNavigationBarItem(
+      const BottomNavigationBarItem(
         icon: Icon(
           CupertinoIcons.home,
-          size: 32,
-          color: AppColors.modeColor,
         ),
         label: "Home",
       ),
-      BottomNavigationBarItem(
+      const BottomNavigationBarItem(
           icon: Icon(
-            size: 32,
             Icons.favorite_border,
-            color: AppColors.modeColor,
           ),
           label: "Favorite"),
-      BottomNavigationBarItem(
+      const BottomNavigationBarItem(
           icon: Icon(
-            size: 32,
             CupertinoIcons.cart,
-            color: AppColors.modeColor,
           ),
           label: "Cart"),
-      BottomNavigationBarItem(
+      const BottomNavigationBarItem(
           icon: Icon(
-            size: 32,
-            Icons.person,
-            color: AppColors.modeColor,
+            Icons.person_2_outlined,
           ),
           label: "User"),
     ];
     return BottomNavigationBar(
       backgroundColor: const Color.fromARGB(31, 243, 9, 9),
       currentIndex: Dimensions.pageActive,
-      selectedItemColor: AppColors.modeColor,
+      selectedItemColor: AppColors.mainColor,
+      selectedLabelStyle: const TextStyle(
+        fontWeight: FontWeight.bold,
+      ),
       selectedFontSize: Dimensions.font16,
+      selectedIconTheme: IconThemeData(
+        color: AppColors.mainColor,
+        size: Dimensions.font20,
+      ),
+      unselectedIconTheme: IconThemeData(
+        color: AppColors.modeColor,
+        size: Dimensions.font20,
+      ),
       elevation: 0,
       items: listItem,
       onTap: (index) {

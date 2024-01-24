@@ -55,20 +55,21 @@ class _SignUpPageState extends State<SignUpPage> {
                 SizedBox(
                   height: Dimensions.height40,
                 ),
-                const InputCustom(
+                InputCustom(
                   label: "Email",
                   icon: CupertinoIcons.mail,
+                  focus: true,
                 ),
                 SizedBox(
                   height: Dimensions.height20,
                 ),
-                const InputPasswordCustom(
+                InputPasswordCustom(
                   label: "Password",
                 ),
                 SizedBox(
                   height: Dimensions.height20,
                 ),
-                const InputPasswordCustom(
+                InputPasswordCustom(
                   label: "Re-Enter Password",
                 ),
                 SizedBox(

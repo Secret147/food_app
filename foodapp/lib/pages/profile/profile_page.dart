@@ -26,9 +26,9 @@ class ProfilePage extends StatelessWidget {
           ),
           const ImageProfile(),
           SizedBox(
-            height: Dimensions.height50,
+            height: Dimensions.height30,
           ),
-          const ListProfile(),
+          const Expanded(child: SingleChildScrollView(child: ListProfile())),
         ],
       ),
     );

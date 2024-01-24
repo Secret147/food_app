@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:foodapp/pages/cart/cart_page.dart';
 import 'package:foodapp/pages/detail/detail_page.dart';
+import 'package:foodapp/pages/edit/edit_profile_page.dart';
+import 'package:foodapp/pages/forgotpassword/forgotpassword.dart';
 import 'package:foodapp/pages/home/home_page.dart';
 import 'package:foodapp/pages/introduction/introduction_page.dart';
+import 'package:foodapp/pages/otp/otp_page.dart';
 import 'package:foodapp/pages/profile/profile_page.dart';
 import 'package:foodapp/pages/signin/signin_page.dart';
 import 'package:foodapp/pages/signup/signup_page.dart';
@@ -17,48 +20,12 @@ class RouterCustom {
         builder: (BuildContext context, GoRouterState state) {
           return const HomePage();
         },
-        pageBuilder: (BuildContext context, GoRouterState state) {
-          return CustomTransitionPage<void>(
-            key: state.pageKey,
-            child: const HomePage(),
-            transitionDuration: const Duration(milliseconds: 400),
-            transitionsBuilder: (BuildContext context,
-                Animation<double> animation,
-                Animation<double> secondaryAnimation,
-                Widget child) {
-              // Change the opacity of the screen using a Curve based on the the animation's
-              // value
-              return FadeTransition(
-                opacity: animation,
-                child: child,
-              );
-            },
-          );
-        },
       ),
       GoRoute(
         path: '/introduction',
         name: "introduction",
         builder: (BuildContext context, GoRouterState state) {
           return const IntroductionPage();
-        },
-        pageBuilder: (BuildContext context, GoRouterState state) {
-          return CustomTransitionPage<void>(
-            key: state.pageKey,
-            child: const IntroductionPage(),
-            transitionDuration: const Duration(milliseconds: 400),
-            transitionsBuilder: (BuildContext context,
-                Animation<double> animation,
-                Animation<double> secondaryAnimation,
-                Widget child) {
-              // Change the opacity of the screen using a Curve based on the the animation's
-              // value
-              return FadeTransition(
-                opacity: animation,
-                child: child,
-              );
-            },
-          );
         },
       ),
       GoRoute(
@@ -67,48 +34,12 @@ class RouterCustom {
         builder: (BuildContext context, GoRouterState state) {
           return const SignUpPage();
         },
-        pageBuilder: (BuildContext context, GoRouterState state) {
-          return CustomTransitionPage<void>(
-            key: state.pageKey,
-            child: const SignUpPage(),
-            transitionDuration: const Duration(milliseconds: 400),
-            transitionsBuilder: (BuildContext context,
-                Animation<double> animation,
-                Animation<double> secondaryAnimation,
-                Widget child) {
-              // Change the opacity of the screen using a Curve based on the the animation's
-              // value
-              return FadeTransition(
-                opacity: animation,
-                child: child,
-              );
-            },
-          );
-        },
       ),
       GoRoute(
         path: '/signin',
         name: "signin",
         builder: (BuildContext context, GoRouterState state) {
           return const SignInPage();
-        },
-        pageBuilder: (BuildContext context, GoRouterState state) {
-          return CustomTransitionPage<void>(
-            key: state.pageKey,
-            child: const SignInPage(),
-            transitionDuration: const Duration(milliseconds: 400),
-            transitionsBuilder: (BuildContext context,
-                Animation<double> animation,
-                Animation<double> secondaryAnimation,
-                Widget child) {
-              // Change the opacity of the screen using a Curve based on the the animation's
-              // value
-              return FadeTransition(
-                opacity: animation,
-                child: child,
-              );
-            },
-          );
         },
       ),
       GoRoute(
@@ -162,6 +93,31 @@ class RouterCustom {
         },
       ),
       GoRoute(
+        path: '/editprofile',
+        name: "editprofile",
+        builder: (BuildContext context, GoRouterState state) {
+          return const EditProfilePage();
+        },
+        pageBuilder: (BuildContext context, GoRouterState state) {
+          return CustomTransitionPage<void>(
+            key: state.pageKey,
+            child: const EditProfilePage(),
+            transitionDuration: const Duration(milliseconds: 400),
+            transitionsBuilder: (BuildContext context,
+                Animation<double> animation,
+                Animation<double> secondaryAnimation,
+                Widget child) {
+              // Change the opacity of the screen using a Curve based on the the animation's
+              // value
+              return FadeTransition(
+                opacity: animation,
+                child: child,
+              );
+            },
+          );
+        },
+      ),
+      GoRoute(
         path: '/profile',
         name: "profile",
         builder: (BuildContext context, GoRouterState state) {
@@ -171,6 +127,56 @@ class RouterCustom {
           return CustomTransitionPage<void>(
             key: state.pageKey,
             child: const ProfilePage(),
+            transitionDuration: const Duration(milliseconds: 400),
+            transitionsBuilder: (BuildContext context,
+                Animation<double> animation,
+                Animation<double> secondaryAnimation,
+                Widget child) {
+              // Change the opacity of the screen using a Curve based on the the animation's
+              // value
+              return FadeTransition(
+                opacity: animation,
+                child: child,
+              );
+            },
+          );
+        },
+      ),
+      GoRoute(
+        path: '/otp',
+        name: "otp",
+        builder: (BuildContext context, GoRouterState state) {
+          return const OTPPage();
+        },
+        pageBuilder: (BuildContext context, GoRouterState state) {
+          return CustomTransitionPage<void>(
+            key: state.pageKey,
+            child: const OTPPage(),
+            transitionDuration: const Duration(milliseconds: 400),
+            transitionsBuilder: (BuildContext context,
+                Animation<double> animation,
+                Animation<double> secondaryAnimation,
+                Widget child) {
+              // Change the opacity of the screen using a Curve based on the the animation's
+              // value
+              return FadeTransition(
+                opacity: animation,
+                child: child,
+              );
+            },
+          );
+        },
+      ),
+      GoRoute(
+        path: '/forgotpassword',
+        name: "forgotpassword",
+        builder: (BuildContext context, GoRouterState state) {
+          return const ForgotPassword();
+        },
+        pageBuilder: (BuildContext context, GoRouterState state) {
+          return CustomTransitionPage<void>(
+            key: state.pageKey,
+            child: const ForgotPassword(),
             transitionDuration: const Duration(milliseconds: 400),
             transitionsBuilder: (BuildContext context,
                 Animation<double> animation,

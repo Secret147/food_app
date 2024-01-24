@@ -48,7 +48,7 @@ class _IntroductionPageState extends State<IntroductionPage> {
     return Scaffold(
       body: SafeArea(
         child: Column(children: [
-          InkWell(
+          GestureDetector(
               onTap: () => context.goNamed("signin"),
               child: const HeaderIntroduction()),
           Expanded(

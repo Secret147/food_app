@@ -125,7 +125,7 @@ class PriceCart extends StatelessWidget {
         ),
       ),
       SizedBox(
-        height: Dimensions.height40,
+        height: Dimensions.height20,
       ),
       Container(
           margin: EdgeInsets.symmetric(horizontal: Dimensions.height20),

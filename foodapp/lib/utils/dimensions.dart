@@ -44,6 +44,7 @@ class Dimensions {
   static late double font18;
   static late double font32;
   static late double font20;
+  static late double font40;
 
   //border
   static late double borderRadius10;
@@ -87,6 +88,7 @@ class Dimensions {
     font18 = heightScreen / 46.8;
     font20 = heightScreen / 42.2;
     font32 = heightScreen / 26.375;
+    font40 = heightScreen / 21.1;
 
     //border
     borderRadius10 = heightScreen / 84.4;

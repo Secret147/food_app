@@ -55,28 +55,107 @@ class _SignInPageState extends State<SignInPage> {
                 SizedBox(
                   height: Dimensions.height40,
                 ),
-                const InputCustom(
+                InputCustom(
                   label: "Email",
                   icon: CupertinoIcons.mail,
+                  focus: true,
                 ),
                 SizedBox(
                   height: Dimensions.height20,
                 ),
-                const InputPasswordCustom(
+                InputPasswordCustom(
                   label: "Password",
                 ),
                 SizedBox(
                   height: Dimensions.height20,
                 ),
-                Container(
-                  alignment: Alignment.centerRight,
-                  child: TextDarkMode(text: "Forgot Password?"),
+                GestureDetector(
+                  onTap: () => context.goNamed("forgotpassword"),
+                  child: Container(
+                    alignment: Alignment.centerRight,
+                    child: TextDarkMode(text: "Forgot Password?"),
+                  ),
                 ),
                 SizedBox(
                   height: Dimensions.height20,
                 ),
                 InkWell(
-                  onTap: () => context.goNamed("home"),
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        content: SizedBox(
+                          height: Dimensions.height150,
+                          child: Column(
+                            children: [
+                              TextNormal(
+                                text: "Sign in with gmail",
+                                color: AppColors.textGrayColor,
+                              ),
+                              Text(
+                                "(+91) 65485 8XX98",
+                                style: TextStyle(
+                                  fontSize: Dimensions.font20,
+                                  fontWeight: FontWeight.bold,
+                                  color: AppColors.modeColor,
+                                ),
+                              ),
+                              SizedBox(
+                                height: Dimensions.height20,
+                              ),
+                              TextNormal(
+                                text: "We will send the authentication code",
+                                color: AppColors.textGrayColor,
+                                textSize: 14,
+                              ),
+                              TextNormal(
+                                text: "to the phone number you entered",
+                                color: AppColors.textGrayColor,
+                                textSize: 14,
+                              ),
+                              TextNormal(
+                                text: "Do you want to continue?",
+                                color: AppColors.textGrayColor,
+                                textSize: 14,
+                              ),
+                            ],
+                          ),
+                        ),
+                        actions: <Widget>[
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: SizedBox(
+                                  width: Dimensions.height100,
+                                  child: ButtonCustom(
+                                    text: "Cancel",
+                                    color: AppColors.mainColor,
+                                    background: AppColors.brightColor,
+                                    textColor: AppColors.mainColor,
+                                  ),
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  context.goNamed("home");
+                                },
+                                child: SizedBox(
+                                  width: Dimensions.height100,
+                                  child: ButtonCustom(
+                                    text: "Next",
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                    );
+                  },
                   child: ButtonCustom(
                     text: "Sign in",
                     background: AppColors.mainColor,

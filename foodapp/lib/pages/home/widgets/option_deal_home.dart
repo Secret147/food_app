@@ -45,9 +45,9 @@ class _OptionDealHomePageState extends State<OptionDealHomePage> {
                       bottom: currentDeal == index
                           ? const BorderSide(
                               width: 2.0, color: AppColors.mainColor)
-                          : const BorderSide(
+                          : BorderSide(
                               width: 0,
-                              color: Color.fromARGB(255, 15, 59, 145)),
+                              color: Colors.transparent.withOpacity(0)),
                     ),
                   ),
                   child: Align(

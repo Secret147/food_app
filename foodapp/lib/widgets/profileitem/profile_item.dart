@@ -16,7 +16,7 @@ class ProfileItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(vertical: Dimensions.height10),
-      margin: EdgeInsets.symmetric(horizontal: Dimensions.height10),
+      margin: EdgeInsets.symmetric(horizontal: Dimensions.height20),
       decoration: BoxDecoration(
         color: AppColors.brightColor,
         borderRadius: BorderRadius.circular(Dimensions.borderRadius15),

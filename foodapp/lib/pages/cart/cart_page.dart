@@ -21,10 +21,18 @@ class CartPage extends StatelessWidget {
         child: Column(children: [
           const HeaderCart(),
           SizedBox(
-            height: Dimensions.height30,
+            height: Dimensions.height10,
           ),
-          const ListItemCart(),
-          const PriceCart(),
+          const Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  ListItemCart(),
+                  PriceCart(),
+                ],
+              ),
+            ),
+          )
         ]),
       ),
     );

@@ -7,18 +7,36 @@ class EditProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController emailController = TextEditingController();
+    final TextEditingController nameController = TextEditingController();
+    final TextEditingController phoneController = TextEditingController();
+    final TextEditingController addressController = TextEditingController();
+
+    @override
+    void dispose() {
+      emailController.dispose();
+      nameController.dispose();
+      phoneController.dispose();
+      addressController.dispose();
+    }
+
     return Scaffold(
       body: Column(
         children: [
-          InputCustom(label: "Name", icon: Icons.person),
+          InputCustom(
+              controller: nameController, label: "Name", icon: Icons.person),
           SizedBox(
             height: Dimensions.height10,
           ),
-          InputCustom(label: "Phone", icon: Icons.phone),
+          InputCustom(
+              controller: phoneController, label: "Phone", icon: Icons.phone),
           SizedBox(
             height: Dimensions.height10,
           ),
-          InputCustom(label: "Email", icon: Icons.mail),
+          InputCustom(
+              controller: addressController,
+              label: "Address",
+              icon: Icons.location_city),
         ],
       ),
     );

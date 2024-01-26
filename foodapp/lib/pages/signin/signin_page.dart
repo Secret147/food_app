@@ -21,6 +21,19 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> {
+  final TextEditingController emailController = TextEditingController();
+
+  final TextEditingController passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    emailController.dispose();
+
+    passwordController.dispose();
+
+    super.dispose();
+  }
+
   bool isObscure = true;
   @override
   Widget build(BuildContext context) {
@@ -56,6 +69,7 @@ class _SignInPageState extends State<SignInPage> {
                   height: Dimensions.height40,
                 ),
                 InputCustom(
+                  controller: emailController,
                   label: "Email",
                   icon: CupertinoIcons.mail,
                   focus: true,
@@ -64,6 +78,7 @@ class _SignInPageState extends State<SignInPage> {
                   height: Dimensions.height20,
                 ),
                 InputPasswordCustom(
+                  controller: passwordController,
                   label: "Password",
                 ),
                 SizedBox(

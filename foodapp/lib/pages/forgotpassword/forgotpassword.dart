@@ -14,6 +14,13 @@ class ForgotPassword extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController emailController = TextEditingController();
+
+    @override
+    void dispose() {
+      emailController.dispose();
+    }
+
     return Scaffold(
       body: SafeArea(
         child: Container(
@@ -63,6 +70,7 @@ class ForgotPassword extends StatelessWidget {
                 borderRadius: BorderRadius.circular(Dimensions.borderRadius10),
               ),
               child: InputCustom(
+                controller: emailController,
                 icon: Icons.email,
                 label: "Email",
                 focus: true,

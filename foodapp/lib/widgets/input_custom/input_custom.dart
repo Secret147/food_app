@@ -9,15 +9,18 @@ class InputCustom extends StatelessWidget {
     required this.label,
     required this.icon,
     this.focus = false,
+    required this.controller,
   });
   final String label;
   final IconData icon;
   bool focus;
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
     return TextField(
       textInputAction: TextInputAction.next,
+      controller: controller,
       style: TextStyle(
         color: AppColors.modeColor,
         fontSize: Dimensions.font20,

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:foodapp/providers/test.dart';
+
 import 'package:foodapp/utils/colors.dart';
 import 'package:foodapp/utils/dimensions.dart';
 import 'package:provider/provider.dart';
@@ -48,12 +48,6 @@ class _SearchHomePageState extends State<SearchHomePage> {
           ),
         ),
         GestureDetector(
-          onTap: () {
-            setState(() {
-              context.read<TestProvider>().changeMode();
-              print(Dimensions.darkmode);
-            });
-          },
           child: Container(
             width: Dimensions.height60,
             margin: EdgeInsets.only(left: Dimensions.height20),

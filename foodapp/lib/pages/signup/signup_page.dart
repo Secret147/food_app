@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:foodapp/models/user.dart';
 import 'package:foodapp/pages/signup/widgets/header_signup.dart';
+import 'package:foodapp/providers/userProvider.dart';
 import 'package:foodapp/utils/colors.dart';
 import 'package:foodapp/utils/dimensions.dart';
 import 'package:foodapp/widgets/big_text/big_text.dart';
@@ -12,6 +14,7 @@ import 'package:foodapp/widgets/input_pass_custom/input_password_custom.dart';
 import 'package:foodapp/widgets/text_darkmode/text_dark_mode.dart';
 import 'package:foodapp/widgets/text_normal/text_normal.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -21,6 +24,20 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController repasswordController = TextEditingController();
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    nameController.dispose();
+    passwordController.dispose();
+    repasswordController.dispose();
+    super.dispose();
+  }
+
   bool isObscure = true;
   @override
   Widget build(BuildContext context) {
@@ -56,6 +73,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   height: Dimensions.height40,
                 ),
                 InputCustom(
+                  controller: emailController,
                   label: "Email",
                   icon: CupertinoIcons.mail,
                   focus: true,
@@ -63,20 +81,49 @@ class _SignUpPageState extends State<SignUpPage> {
                 SizedBox(
                   height: Dimensions.height20,
                 ),
+                InputCustom(
+                  controller: nameController,
+                  label: "Name",
+                  icon: CupertinoIcons.person,
+                  focus: true,
+                ),
+                SizedBox(
+                  height: Dimensions.height20,
+                ),
                 InputPasswordCustom(
+                  controller: passwordController,
                   label: "Password",
                 ),
                 SizedBox(
                   height: Dimensions.height20,
                 ),
                 InputPasswordCustom(
+                  controller: repasswordController,
                   label: "Re-Enter Password",
                 ),
                 SizedBox(
                   height: Dimensions.height20,
                 ),
                 InkWell(
-                  onTap: () => context.goNamed("signup"),
+                  onTap: () {
+                    if (passwordController.text == repasswordController.text) {
+                      User user = User(
+                          email: emailController.text,
+                          name: nameController.text,
+                          password: passwordController.text,
+                          roles: {""});
+                      context.read<userProvider>().postNewUser(user);
+                    } else {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return const AlertDialog(
+                            title: Text("Sai mat khau nhap lai"),
+                          );
+                        },
+                      );
+                    }
+                  },
                   child: ButtonCustom(
                     text: "Sign up",
                     background: AppColors.mainColor,

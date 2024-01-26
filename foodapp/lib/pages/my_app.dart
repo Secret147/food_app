@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodapp/pages/home/home_page.dart';
-import 'package:foodapp/providers/test.dart';
+
+import 'package:foodapp/providers/userProvider.dart';
 import 'package:foodapp/router/router.dart';
 import 'package:foodapp/utils/colors.dart';
 import 'package:foodapp/utils/dimensions.dart';
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
     Dimensions dimension = Dimensions();
     dimension.init(context);
     return ChangeNotifierProvider(
-      create: (_) => TestProvider(),
+      create: (_) => userProvider(),
       child: MaterialApp.router(
         routerConfig: RouterCustom.router,
         title: 'Food app',

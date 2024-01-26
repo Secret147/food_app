@@ -8,9 +8,11 @@ class InputPasswordCustom extends StatefulWidget {
     super.key,
     required this.label,
     this.focus = false,
+    required this.controller,
   });
   final String label;
   bool focus;
+  final TextEditingController controller;
 
   @override
   State<InputPasswordCustom> createState() => _InputPasswordCustomState();
@@ -22,6 +24,7 @@ class _InputPasswordCustomState extends State<InputPasswordCustom> {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: widget.controller,
       textInputAction: TextInputAction.next,
       style: TextStyle(
         color: AppColors.modeColor,

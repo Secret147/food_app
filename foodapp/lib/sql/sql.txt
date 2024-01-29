@@ -87,3 +87,87 @@ INSERT INTO `foodapp`.`provider` (`address`, `name`, `rate`) VALUES ('Hai Bà Tr
 INSERT INTO `foodapp`.`provider` (`address`, `name`, `rate`) VALUES ('Cầu Giấy, Hà Nội', 'Cơm 3', '0');
 INSERT INTO `foodapp`.`provider` (`address`, `name`, `rate`) VALUES ('Hà Đông, Hà Nội', 'Chè 4', '0');
 INSERT INTO `foodapp`.`provider` (`address`, `name`, `rate`) VALUES ('Hoàng Mai, Hà Nội', 'Mặn 5', '0');
+
+-----------------------------------------------------------------------------------
+
+UPDATE `foodapp`.`dish` SET `purchases` = '5' WHERE (`id` = '3');
+UPDATE `foodapp`.`dish` SET `purchases` = '10' WHERE (`id` = '4');
+UPDATE `foodapp`.`dish` SET `purchases` = '4' WHERE (`id` = '5');
+UPDATE `foodapp`.`dish` SET `purchases` = '6' WHERE (`id` = '6');
+UPDATE `foodapp`.`dish` SET `purchases` = '5' WHERE (`id` = '7');
+UPDATE `foodapp`.`dish` SET `purchases` = '8' WHERE (`id` = '8');
+UPDATE `foodapp`.`dish` SET `purchases` = '9' WHERE (`id` = '9');
+UPDATE `foodapp`.`dish` SET `purchases` = '10' WHERE (`id` = '10');
+UPDATE `foodapp`.`dish` SET `purchases` = '23' WHERE (`id` = '11');
+UPDATE `foodapp`.`dish` SET `purchases` = '13' WHERE (`id` = '12');
+UPDATE `foodapp`.`dish` SET `purchases` = '4' WHERE (`id` = '13');
+UPDATE `foodapp`.`dish` SET `purchases` = '23' WHERE (`id` = '14');
+UPDATE `foodapp`.`dish` SET `purchases` = '6' WHERE (`id` = '15');
+UPDATE `foodapp`.`dish` SET `purchases` = '33' WHERE (`id` = '16');
+UPDATE `foodapp`.`dish` SET `purchases` = '21' WHERE (`id` = '17');
+UPDATE `foodapp`.`dish` SET `purchases` = '32' WHERE (`id` = '18');
+UPDATE `foodapp`.`dish` SET `purchases` = '14' WHERE (`id` = '19');
+UPDATE `foodapp`.`dish` SET `purchases` = '25' WHERE (`id` = '20');
+UPDATE `foodapp`.`dish` SET `purchases` = '4' WHERE (`id` = '21');
+UPDATE `foodapp`.`dish` SET `purchases` = '6' WHERE (`id` = '22');
+UPDATE `foodapp`.`dish` SET `purchases` = '3' WHERE (`id` = '23');
+UPDATE `foodapp`.`dish` SET `purchases` = '6' WHERE (`id` = '24');
+UPDATE `foodapp`.`dish` SET `purchases` = '8' WHERE (`id` = '25');
+UPDATE `foodapp`.`dish` SET `purchases` = '10' WHERE (`id` = '26');
+UPDATE `foodapp`.`dish` SET `purchases` = '4' WHERE (`id` = '27');
+UPDATE `foodapp`.`dish` SET `purchases` = '27' WHERE (`id` = '28');
+UPDATE `foodapp`.`dish` SET `purchases` = '28' WHERE (`id` = '29');
+UPDATE `foodapp`.`dish` SET `purchases` = '36' WHERE (`id` = '30');
+UPDATE `foodapp`.`dish` SET `purchases` = '12' WHERE (`id` = '31');
+UPDATE `foodapp`.`dish` SET `purchases` = '12' WHERE (`id` = '32');
+UPDATE `foodapp`.`dish` SET `purchases` = '30' WHERE (`id` = '33');
+UPDATE `foodapp`.`dish` SET `purchases` = '22' WHERE (`id` = '34');
+UPDATE `foodapp`.`dish` SET `purchases` = '23' WHERE (`id` = '35');
+UPDATE `foodapp`.`dish` SET `purchases` = '25' WHERE (`id` = '36');
+UPDATE `foodapp`.`dish` SET `purchases` = '26' WHERE (`id` = '37');
+UPDATE `foodapp`.`dish` SET `purchases` = '11' WHERE (`id` = '38');
+UPDATE `foodapp`.`dish` SET `purchases` = '44' WHERE (`id` = '39');
+UPDATE `foodapp`.`dish` SET `purchases` = '45' WHERE (`id` = '40');
+
+------------------------------------------------------------------------
+
+
+UPDATE `foodapp`.`dish` SET `provider_id` = '6' WHERE (`id` = '3');
+UPDATE `foodapp`.`dish` SET `provider_id` = '1' WHERE (`id` = '4');
+UPDATE `foodapp`.`dish` SET `provider_id` = '2' WHERE (`id` = '5');
+UPDATE `foodapp`.`dish` SET `provider_id` = '3' WHERE (`id` = '6');
+UPDATE `foodapp`.`dish` SET `provider_id` = '2' WHERE (`id` = '7');
+UPDATE `foodapp`.`dish` SET `provider_id` = '6' WHERE (`id` = '8');
+UPDATE `foodapp`.`dish` SET `provider_id` = '1' WHERE (`id` = '9');
+UPDATE `foodapp`.`dish` SET `provider_id` = '5' WHERE (`id` = '10');
+UPDATE `foodapp`.`dish` SET `provider_id` = '1' WHERE (`id` = '11');
+UPDATE `foodapp`.`dish` SET `provider_id` = '1' WHERE (`id` = '12');
+UPDATE `foodapp`.`dish` SET `provider_id` = '5' WHERE (`id` = '13');
+UPDATE `foodapp`.`dish` SET `provider_id` = '2' WHERE (`id` = '14');
+UPDATE `foodapp`.`dish` SET `provider_id` = '6' WHERE (`id` = '15');
+UPDATE `foodapp`.`dish` SET `type` = 'man', `provider_id` = '6' WHERE (`id` = '16');
+UPDATE `foodapp`.`dish` SET `provider_id` = '2' WHERE (`id` = '17');
+UPDATE `foodapp`.`dish` SET `provider_id` = '2' WHERE (`id` = '18');
+UPDATE `foodapp`.`dish` SET `provider_id` = '6' WHERE (`id` = '19');
+UPDATE `foodapp`.`dish` SET `provider_id` = '4' WHERE (`id` = '20');
+UPDATE `foodapp`.`dish` SET `provider_id` = '4' WHERE (`id` = '21');
+UPDATE `foodapp`.`dish` SET `provider_id` = '4' WHERE (`id` = '22');
+UPDATE `foodapp`.`dish` SET `provider_id` = '4' WHERE (`id` = '23');
+UPDATE `foodapp`.`dish` SET `provider_id` = '4' WHERE (`id` = '24');
+UPDATE `foodapp`.`dish` SET `provider_id` = '4' WHERE (`id` = '25');
+UPDATE `foodapp`.`dish` SET `provider_id` = '4' WHERE (`id` = '26');
+UPDATE `foodapp`.`dish` SET `provider_id` = '4' WHERE (`id` = '27');
+UPDATE `foodapp`.`dish` SET `provider_id` = '5' WHERE (`id` = '28');
+UPDATE `foodapp`.`dish` SET `provider_id` = '3' WHERE (`id` = '29');
+UPDATE `foodapp`.`dish` SET `provider_id` = '6' WHERE (`id` = '30');
+UPDATE `foodapp`.`dish` SET `provider_id` = '5' WHERE (`id` = '31');
+UPDATE `foodapp`.`dish` SET `provider_id` = '1' WHERE (`id` = '32');
+UPDATE `foodapp`.`dish` SET `provider_id` = '2' WHERE (`id` = '33');
+UPDATE `foodapp`.`dish` SET `provider_id` = '5' WHERE (`id` = '34');
+UPDATE `foodapp`.`dish` SET `provider_id` = '1' WHERE (`id` = '35');
+UPDATE `foodapp`.`dish` SET `provider_id` = '5' WHERE (`id` = '36');
+UPDATE `foodapp`.`dish` SET `provider_id` = '5' WHERE (`id` = '37');
+UPDATE `foodapp`.`dish` SET `provider_id` = '3' WHERE (`id` = '38');
+UPDATE `foodapp`.`dish` SET `provider_id` = '3' WHERE (`id` = '39');
+UPDATE `foodapp`.`dish` SET `provider_id` = '5' WHERE (`id` = '40');
+

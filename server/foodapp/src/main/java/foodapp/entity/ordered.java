@@ -10,10 +10,10 @@ import javax.persistence.ManyToOne;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.Data;
-
 @Entity
 @Data
-public class cart {
+public class ordered {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -26,7 +26,7 @@ public class cart {
 	
 	@ManyToOne
 	@JsonBackReference
-	@JoinColumn(name = "bill_id",referencedColumnName = "id")
+	@JoinColumn
 	private bill bill;
 	
 	@ManyToOne
@@ -38,8 +38,5 @@ public class cart {
 	@JsonBackReference
 	@JoinColumn(name = "dish_id",referencedColumnName = "id")
 	private dish dish;
-	
-	
-
 
 }

@@ -3,6 +3,8 @@ package foodapp.api;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -11,6 +13,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +27,7 @@ import foodapp.model.roleName;
 import foodapp.respository.roleRepo;
 import foodapp.respository.userRepo;
 import foodapp.security.jwt.JwtProvider;
+import foodapp.security.jwt.JwtTokenFilter;
 import foodapp.security.userprinciple.userPrinciple;
 import foodapp.service.userService;
 
@@ -49,6 +53,22 @@ public class userAPI {
 	
 	@Autowired
 	JwtProvider jwtProvider;
+	
+	@Autowired
+	JwtTokenFilter jwtFilter;
+	
+
+	@GetMapping("/infor")
+	public ResponseEntity<?> getInforUser(HttpServletRequest request){
+		String token = jwtFilter.getJwt(request);
+		if(token!=null) {
+			return ResponseEntity.ok(userSe.getUserByToken(token));
+		}else {
+			return ResponseEntity.badRequest().body("Hết phiên đăng nhập");
+		}
+		
+	}
+
 	
 	@PostMapping("/newuser")
 	public ResponseEntity<?> add(@RequestBody userDTO userDTO){
@@ -93,12 +113,14 @@ public class userAPI {
 	}
 	@PostMapping("/login")
 	public ResponseEntity<?> login(@RequestBody userDTO userDTO){
+		
+		
 		Authentication authentication = authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(userDTO.getEmail(), userDTO.getPassword()));
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		String token = jwtProvider.createToken(authentication);
 		userPrinciple userPrinciple = (userPrinciple) authentication.getPrincipal();
-		return ResponseEntity.ok(new JwtResponse(token, userPrinciple.getEmail(), userPrinciple.getImage(), userPrinciple.getAuthorities()));
+		return ResponseEntity.ok().body(new JwtResponse(token, userPrinciple.getEmail(), userPrinciple.getImage(), userPrinciple.getAuthorities()));
 	}
-
+	
 }

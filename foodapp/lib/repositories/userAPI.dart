@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 
 import 'package:foodapp/models/user.dart';
 import 'package:foodapp/utils/const.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class userAPI {
   static Future<dynamic> callAPICreateUser(User user) async {
@@ -10,7 +11,7 @@ class userAPI {
       final dio = Dio();
 
       final response = await dio.post("$baseUrl/user/newuser",
-          data: user.toJson(), options: Options(headers: mainHeader));
+          data: user.toJson(), options: Options(headers: Const.mainHeader));
       dynamic res = response.data;
       return res;
     } catch (e) {
@@ -25,7 +26,7 @@ class userAPI {
         "$baseUrl/user/login",
         data: user,
       );
-      dynamic res = response.data;
+      dynamic res = response;
       return res;
     } catch (e) {
       rethrow;

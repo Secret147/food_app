@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:foodapp/utils/colors.dart';
+import 'package:foodapp/utils/const.dart';
 import 'package:foodapp/utils/dimensions.dart';
 import 'package:foodapp/widgets/pos_icon/pos_icon_text.dart';
 import 'package:foodapp/widgets/text_darkmode/text_dark_mode.dart';
@@ -27,15 +28,18 @@ class HeaderHomePage extends StatelessWidget {
             ],
           ),
           GestureDetector(
-            onTap: () => context.goNamed("proflie"),
+            onTap: () async {
+              context.goNamed("profile");
+              print(await Const.storage.read(key: "token"));
+            },
             child: Container(
               height: Dimensions.height50,
+              clipBehavior: Clip.hardEdge,
               width: Dimensions.height50,
               decoration: const BoxDecoration(
                 shape: BoxShape.circle,
               ),
-              child:
-                  Image.asset("assets/images/Ellipse 6.png", fit: BoxFit.cover),
+              child: Image.network(Dimensions.imageUser, fit: BoxFit.cover),
             ),
           )
         ],

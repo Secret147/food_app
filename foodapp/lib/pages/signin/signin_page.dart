@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:foodapp/pages/signup/widgets/header_signup.dart';
+import 'package:foodapp/providers/userProvider.dart';
 import 'package:foodapp/utils/colors.dart';
 import 'package:foodapp/utils/dimensions.dart';
 import 'package:foodapp/widgets/big_text/big_text.dart';
@@ -12,6 +13,7 @@ import 'package:foodapp/widgets/input_pass_custom/input_password_custom.dart';
 import 'package:foodapp/widgets/text_darkmode/text_dark_mode.dart';
 import 'package:foodapp/widgets/text_normal/text_normal.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
@@ -155,8 +157,30 @@ class _SignInPageState extends State<SignInPage> {
                                 ),
                               ),
                               GestureDetector(
-                                onTap: () {
-                                  context.goNamed("home");
+                                onTap: () async {
+                                  Map<String, dynamic> user = {
+                                    "email": emailController.text,
+                                    "password": passwordController.text,
+                                  };
+                                  context
+                                      .read<userProvider>()
+                                      .postLogin(user)
+                                      .then(
+                                    (status) {
+                                      if (status == "Success") {
+                                        context.goNamed("home");
+                                      } else {
+                                        showDialog(
+                                          context: context,
+                                          builder: (context) {
+                                            return AlertDialog(
+                                              title: Text(status),
+                                            );
+                                          },
+                                        );
+                                      }
+                                    },
+                                  );
                                 },
                                 child: SizedBox(
                                   width: Dimensions.height100,

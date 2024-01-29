@@ -21,8 +21,8 @@ public class JwtEntryPoint implements AuthenticationEntryPoint{
 	public void commence(HttpServletRequest request, HttpServletResponse response,
 			AuthenticationException authException) throws IOException, ServletException {
 		// TODO Auto-generated method stub
-		logger.error("fail jwtentrypoint");
-		response.sendError(HttpServletResponse.SC_ACCEPTED,"error entrypoint");
+		logger.error("Tài khoản hoặc mật khẩu không chính xác!");
+		response.sendError(HttpServletResponse.SC_ACCEPTED,"Tài khoản hoặc mật khẩu không chính xác!");
 		
 	}
 

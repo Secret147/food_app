@@ -30,11 +30,11 @@ public class dish {
 	private String position;
 	private String description;
 	private String type;
-	private String purchases;
+	private Long purchases;
 	
 	@OneToMany(mappedBy = "dish")
 	@JsonIgnore
-	List<cart> orders = new ArrayList<>();
+	List<ordered> orders = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "dish")
 	@JsonIgnore

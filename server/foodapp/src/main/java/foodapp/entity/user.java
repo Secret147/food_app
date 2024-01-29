@@ -35,7 +35,7 @@ public class user {
 	
 	@OneToMany(mappedBy = "user")
 	@JsonIgnore
-	List<cart> orders = new ArrayList<>();
+	List<ordered> orders = new ArrayList<>();
 	
 	 @ManyToMany(fetch = FetchType.EAGER)
 	   Set<role> roles= new HashSet<>();

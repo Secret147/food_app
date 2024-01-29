@@ -40,7 +40,7 @@ public class bill {
     }
 	@OneToMany(mappedBy = "bill")
 	@JsonIgnore
-    private List<cart> orders = new ArrayList<>();
+    private List<ordered> orders = new ArrayList<>();
     
     @ManyToOne
     @JsonBackReference

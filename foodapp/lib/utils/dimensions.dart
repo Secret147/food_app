@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Dimensions {
+  static String imageUser =
+      "https://i.pinimg.com/564x/e9/0e/d3/e90ed3e66a560ee0698edaf5fdbb2d72.jpg";
   static late double heightValue;
   static late double widthValue;
   static late double heightScreen;

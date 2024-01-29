@@ -7,5 +7,7 @@ public interface userService {
 	
 	String saveUser(user user);
 	
+	user getUserByToken(String token);
+	
 
 }

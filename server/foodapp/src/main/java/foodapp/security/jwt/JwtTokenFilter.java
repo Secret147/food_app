@@ -18,7 +18,8 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import foodapp.security.jwt.JwtTokenFilter;
 import foodapp.security.userprinciple.userDetailService;
-
+import lombok.Data;
+@Data
 public class JwtTokenFilter extends OncePerRequestFilter {
 	private static final Logger logger = LoggerFactory.getLogger(JwtTokenFilter.class);
     
@@ -48,7 +49,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 		filterChain.doFilter(request, response);
 		
 	}
-	private String getJwt(HttpServletRequest request) {
+	public String getJwt(HttpServletRequest request) {
 		String authHeader = request.getHeader("Authorization");
 		if(authHeader != null && authHeader.startsWith("Bearer")) {
 			return authHeader.replace("Bearer", "");

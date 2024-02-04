@@ -27,5 +27,6 @@ public class provider {
 	private String rate;
 	
 	@OneToMany(mappedBy = "provider")
+	@JsonIgnore
 	List<dish> dishs = new ArrayList<>();
 }

@@ -20,7 +20,6 @@ public class dishServiceImpl implements dishService {
 
 	@Override
 	public List<dish> findPopualar() {
-		
 		return dishRe.findPopular();
 	}
 
@@ -28,6 +27,12 @@ public class dishServiceImpl implements dishService {
 	public List<dish> findByType(String type) {
 		// TODO Auto-generated method stub
 		return dishRe.findByType(type);
+	}
+
+	@Override
+	public dish getDetailDish(Long id) {
+		// TODO Auto-generated method stub
+		return dishRe.findById(id).orElseThrow();
 	}
 
 }

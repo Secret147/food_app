@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:foodapp/models/dish.dart';
 import 'package:foodapp/pages/detail/widgets/button_detail.dart';
 import 'package:foodapp/pages/detail/widgets/header_detail.dart';
 import 'package:foodapp/pages/detail/widgets/infor_detail.dart';
@@ -10,36 +11,47 @@ import 'package:foodapp/widgets/ExpandText/expand_text.dart';
 import 'package:foodapp/widgets/iconstar/Icon_star.dart';
 
 class DetailPage extends StatelessWidget {
-  const DetailPage({super.key});
-
+  const DetailPage({
+    super.key,
+    required this.item,
+  });
+  final Dish item;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: const NavigatinCustom(),
       body: Column(
         children: [
-          const HeaderDetailPage(),
+          HeaderDetailPage(
+            image: item.image,
+          ),
           Container(
             margin: EdgeInsets.all(Dimensions.height10),
             child: Column(children: [
               SizedBox(
                 height: Dimensions.height10,
               ),
-              const InforDetail(),
+              InforDetail(
+                  address: item.position,
+                  name: item.name,
+                  price: item.price,
+                  rate: item.provider.rate),
             ]),
           ),
           Expanded(
             child: SingleChildScrollView(
-              padding: EdgeInsets.only(
-                  left: Dimensions.height20,
-                  right: Dimensions.height20,
-                  bottom: Dimensions.height20),
-              child: const ExpandText(
-                  text:
-                      "Lorem ipsum dolor sit amet consectetur. Sagittis arcu malesuada eu sagittis elementum eget. Mi pellentesque elit sed sed. Elit tristique mi tincidunt tristique lacus elementum tortor sed. Eget amet maecenas dolor eu lectus non est ultrices sit. Ullamcorper quam aliquam nec quis dolor. Etiam cras tortor dui mauris aliquam mattis.Lorem ipsum dolor sit amet consectetur. Sagittis arcu malesuada eu sagittis elementum eget. Mi pellentesque elit sed sed. Elit tristique mi tincidunt tristique lacus elementum tortor sed. Eget amet maecenas dolor eu lectus non est ultrices sit. Ullamcorper quam aliquam nec quis dolor. Etiam cras tortor dui mauris aliquam mattis.Lorem ipsum dolor sit amet consectetur. Sagittis arcu malesuada eu sagittis elementum eget. Mi pellentesque elit sed sed. Elit tristique mi tincidunt tristique lacus elementum tortor sed. Eget amet maecenas dolor eu lectus non est ultrices sit. Ullamcorper quam aliquam nec quis dolor. Etiam cras tortor dui mauris aliquam mattis."),
-            ),
+                padding: EdgeInsets.only(
+                    left: Dimensions.height20,
+                    right: Dimensions.height20,
+                    bottom: Dimensions.height20),
+                child: ExpandText(
+                  text: item.description,
+                )),
           ),
-          const ButtonDetail(),
+          ButtonDetail(
+            price: item.price,
+            dish: item,
+          ),
         ],
       ),
     );

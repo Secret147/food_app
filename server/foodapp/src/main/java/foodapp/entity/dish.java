@@ -32,6 +32,7 @@ public class dish {
 	private String type;
 	private Long purchases;
 	
+	
 	@OneToMany(mappedBy = "dish")
 	@JsonIgnore
 	List<ordered> orders = new ArrayList<>();
@@ -41,8 +42,7 @@ public class dish {
 	List<rate> rates = new ArrayList<>();
 	
 	@ManyToOne
-	@JsonBackReference
-	@JoinColumn(name = "provider_id",referencedColumnName = "id")
+	@JoinColumn
 	private provider provider;
 	
 

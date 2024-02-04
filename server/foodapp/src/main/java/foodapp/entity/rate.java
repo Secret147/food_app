@@ -22,12 +22,10 @@ public class rate {
 	private String evalute;
 	
 	@ManyToOne
-	@JsonBackReference
 	@JoinColumn(name = "user_id",referencedColumnName = "id")
 	private user user;
 	
 	@ManyToOne 
-	@JsonBackReference
 	@JoinColumn(name = "dish_id",referencedColumnName = "id")
 	private dish dish;
 	

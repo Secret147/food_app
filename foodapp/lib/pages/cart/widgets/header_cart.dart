@@ -16,7 +16,7 @@ class HeaderCart extends StatelessWidget {
       child: Row(
         children: [
           GestureDetector(
-            onTap: () => context.goNamed("signin"),
+            onTap: () => context.goNamed("home"),
             child: Icon(
               Icons.arrow_back_ios_new,
               color: AppColors.modeColor,

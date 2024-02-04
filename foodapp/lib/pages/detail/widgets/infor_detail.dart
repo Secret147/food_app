@@ -7,7 +7,16 @@ import 'package:foodapp/widgets/text_darkmode/text_dark_mode.dart';
 import 'package:foodapp/widgets/text_normal/text_normal.dart';
 
 class InforDetail extends StatelessWidget {
-  const InforDetail({super.key});
+  const InforDetail(
+      {super.key,
+      required this.name,
+      required this.address,
+      this.price,
+      this.rate});
+  final String name;
+  final String address;
+  final dynamic price;
+  final dynamic rate;
 
   @override
   Widget build(BuildContext context) {
@@ -17,24 +26,27 @@ class InforDetail extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                TextDarkMode(text: "Margherita Pizza"),
-                SizedBox(
-                  height: Dimensions.height10,
-                ),
-                const PosIconText(pos: "Dong Da, Ha Noi"),
+                Container(
+                    margin: EdgeInsets.only(left: Dimensions.height20),
+                    child: TextDarkMode(
+                      text: name,
+                      textSize: Dimensions.font20,
+                    )),
+                PosIconText(pos: address),
               ],
             ),
             Column(
               children: [
                 TextDarkMode(
-                  text: "\$250",
+                  text: "\$$price",
                   textSize: 18,
                 ),
                 SizedBox(
                   height: Dimensions.height10,
                 ),
-                const IconStar(star: 4.2),
+                IconStar(star: rate),
               ],
             )
           ],

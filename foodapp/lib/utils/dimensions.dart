@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:foodapp/utils/const.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Dimensions {
   static String imageUser =
@@ -10,6 +12,13 @@ class Dimensions {
 
   static bool darkmode = false;
   static int pageActive = 0;
+  static int orderQuantity = 1;
+  static Future<String?> getShared(String key) async {
+    final SharedPreferences prefs = await Const.prefs;
+    String value = prefs.getString(key).toString();
+    return value;
+  }
+
   //height
   static late double height5;
   static late double height10;
@@ -23,9 +32,11 @@ class Dimensions {
 
   static late double height100;
   static late double height110;
+  static late double height130;
   static late double height140;
   static late double height150;
   static late double height170;
+  static late double height200;
   static late double height220;
   static late double height260;
   static late double height280;
@@ -69,9 +80,11 @@ class Dimensions {
     height80 = heightScreen / 10.55;
     height100 = heightScreen / 8.44;
     height110 = heightScreen / 7.67;
+    height130 = heightScreen / 6.49;
     height140 = heightScreen / 6;
     height150 = heightScreen / 5.62;
     height170 = heightScreen / 4.96;
+    height200 = heightScreen / 4.22;
     height220 = heightScreen / 3.83;
     height260 = heightScreen / 3.24;
     height280 = heightScreen / 3;

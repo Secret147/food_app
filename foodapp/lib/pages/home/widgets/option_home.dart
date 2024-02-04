@@ -9,13 +9,21 @@ class OptionHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     PageController pageController = PageController();
+    List<dynamic> listOptions = [
+      {"name": "Cơm", "url": "assets/icons/com.png"},
+      {"name": "Phở", "url": "assets/icons/pho.png"},
+      {"name": "Mặn", "url": "assets/icons/man.png"},
+      {"name": "Bún", "url": "assets/icons/bun.png"},
+      {"name": "Chè", "url": "assets/icons/che.png"},
+      {"name": "Miến", "url": "assets/icons/mien.png"},
+    ];
     return SizedBox(
       height: Dimensions.height140,
       child: Align(
         alignment: Alignment.centerLeft,
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
-          itemCount: 10,
+          itemCount: listOptions.length,
           controller: pageController,
           itemBuilder: (context, index) {
             return Container(
@@ -49,12 +57,13 @@ class OptionHomePage extends StatelessWidget {
                               ? AppColors.iconColor
                               : AppColors.brightColor,
                         ),
-                        child: Image.asset("assets/icons/pizza 1.png"),
+                        child: Image.asset(listOptions[index]["url"],
+                            fit: BoxFit.cover),
                       ),
                       SizedBox(
                         height: Dimensions.height20,
                       ),
-                      TextDarkMode(text: "Pizza"),
+                      TextDarkMode(text: listOptions[index]["name"]),
                     ],
                   ),
                 ));

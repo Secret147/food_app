@@ -6,7 +6,7 @@ import 'package:foodapp/widgets/text_normal/text_normal.dart';
 
 class IconStar extends StatelessWidget {
   const IconStar({super.key, required this.star});
-  final double star;
+  final dynamic star;
   @override
   Widget build(BuildContext context) {
     return Container(

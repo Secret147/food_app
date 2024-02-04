@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodapp/models/dish.dart';
 import 'package:foodapp/pages/cart/cart_page.dart';
 import 'package:foodapp/pages/detail/detail_page.dart';
 import 'package:foodapp/pages/edit/edit_profile_page.dart';
@@ -46,12 +47,15 @@ class RouterCustom {
         path: '/detail',
         name: "detail",
         builder: (BuildContext context, GoRouterState state) {
-          return const DetailPage();
+          Dish item = state.extra as Dish;
+          return DetailPage(
+            item: item,
+          );
         },
         pageBuilder: (BuildContext context, GoRouterState state) {
           return CustomTransitionPage<void>(
             key: state.pageKey,
-            child: const DetailPage(),
+            child: DetailPage(item: state.extra as Dish),
             transitionDuration: const Duration(milliseconds: 400),
             transitionsBuilder: (BuildContext context,
                 Animation<double> animation,

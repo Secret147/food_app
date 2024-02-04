@@ -5,8 +5,8 @@ import 'package:foodapp/utils/dimensions.dart';
 import 'package:go_router/go_router.dart';
 
 class HeaderDetailPage extends StatelessWidget {
-  const HeaderDetailPage({super.key});
-
+  const HeaderDetailPage({super.key, required this.image});
+  final String image;
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -14,9 +14,7 @@ class HeaderDetailPage extends StatelessWidget {
         SizedBox(
           height: Dimensions.height260,
           width: double.infinity,
-          child: Image.network(
-              "https://th.bing.com/th/id/OIP.2g6Pd_cJS64SaEVrwA4ZqwHaHa?w=500&h=500&rs=1&pid=ImgDetMain",
-              fit: BoxFit.cover),
+          child: Image.network(image, fit: BoxFit.cover),
         ),
         Positioned(
           child: Container(

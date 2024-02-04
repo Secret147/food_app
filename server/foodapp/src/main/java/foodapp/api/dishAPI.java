@@ -43,6 +43,16 @@ public class dishAPI {
 		}
 	}
 	
+	@GetMapping("/detail/{id}")
+	public ResponseEntity<?> getDetail(@PathVariable Long id){
+		if(dishSe.getDetailDish(id)!=null) {
+			return ResponseEntity.ok(dishSe.getDetailDish(id));
+		}
+		else {
+			return ResponseEntity.badRequest().body("Khong ton tai mon an nay");
+		}
+	}
+	
 	
 
 }

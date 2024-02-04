@@ -55,7 +55,9 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
                 Row(
                   children: [
-                    BigTextDark(text: "Welcome "),
+                    GestureDetector(
+                        onTap: () => context.goNamed("home"),
+                        child: BigTextDark(text: "Welcome ")),
                     BigText(
                       text: "PTIT",
                       color: AppColors.mainColor,

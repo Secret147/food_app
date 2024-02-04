@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:foodapp/utils/colors.dart';
+import 'package:foodapp/utils/const.dart';
 import 'package:foodapp/utils/dimensions.dart';
 import 'package:foodapp/widgets/profileitem/profile_item.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ListProfile extends StatelessWidget {
   const ListProfile({super.key});
@@ -44,7 +46,9 @@ class ListProfile extends StatelessWidget {
           height: Dimensions.height20,
         ),
         GestureDetector(
-          onTap: () {
+          onTap: () async {
+            final SharedPreferences prefs = await Const.prefs;
+            prefs.remove("token");
             context.goNamed('introduction');
             Dimensions.pageActive = 0;
           },

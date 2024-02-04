@@ -6,10 +6,16 @@ import 'package:foodapp/widgets/pos_icon/pos_icon_text.dart';
 import 'package:foodapp/widgets/text_darkmode/text_dark_mode.dart';
 import 'package:foodapp/widgets/text_normal/text_normal.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class HeaderHomePage extends StatelessWidget {
+class HeaderHomePage extends StatefulWidget {
   const HeaderHomePage({super.key});
 
+  @override
+  State<HeaderHomePage> createState() => _HeaderHomePageState();
+}
+
+class _HeaderHomePageState extends State<HeaderHomePage> {
   @override
   Widget build(BuildContext context) {
     return Container(

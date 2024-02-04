@@ -9,10 +9,12 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import foodapp.dto.orderedDTO;
 import foodapp.entity.ordered;
 import foodapp.respository.orderedRepo;
 import foodapp.security.jwt.JwtProvider;
@@ -36,7 +38,7 @@ public class orderedAPI {
 	@Autowired
 	private orderedService orderSe;
 
-	@GetMapping("/cart")
+	@GetMapping("/ordered")
 	public ResponseEntity<?> getOrderItem(HttpServletRequest request){
 		String token = jwtFilter.getJwt(request);
 		if(token!=null) {
@@ -48,9 +50,10 @@ public class orderedAPI {
 	}
 	
 	@PostMapping("/neworder")
-	public ResponseEntity<?> newOrderItem(@RequestBody ordered order){
+	public ResponseEntity<?> newOrderItem(@RequestBody orderedDTO order,HttpServletRequest request){
+		String token = jwtFilter.getJwt(request);
 		if(order !=null) {
-			orderRe.save(order);
+			orderSe.newOrder(order, token);
 			return ResponseEntity.ok("add order success");
 			
 		}
@@ -67,9 +70,31 @@ public class orderedAPI {
 	
 	@GetMapping("/all")
 	public ResponseEntity<?> getAllOrderItem(){
-		
 		return ResponseEntity.ok(orderRe.findAll());
-		
+	}
+	
+	@PutMapping("/add/quantity")
+	public ResponseEntity<?> addQuantity(@RequestBody ordered order,HttpServletRequest request){
+		String token = jwtFilter.getJwt(request);
+		if(order!=null) {
+			orderSe.addQuantity(order, token);
+			return ResponseEntity.ok("add successful");
+		}
+		else {
+			return ResponseEntity.badRequest().body("add quantity fail");
+		}
+	}
+	
+	@PutMapping("/remove/quantity")
+	public ResponseEntity<?> removeQuantity(@RequestBody ordered order,HttpServletRequest request){
+		String token = jwtFilter.getJwt(request);
+		if(order!=null) {
+			orderSe.removeQuantity(order, token);
+			return ResponseEntity.ok("add successful");
+		}
+		else {
+			return ResponseEntity.badRequest().body("add quantity fail");
+		}
 	}
 
 }

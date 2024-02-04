@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:foodapp/utils/colors.dart';
+import 'package:foodapp/utils/const.dart';
 import 'package:foodapp/utils/dimensions.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SearchHomePage extends StatefulWidget {
   const SearchHomePage({super.key});
@@ -48,6 +50,12 @@ class _SearchHomePageState extends State<SearchHomePage> {
           ),
         ),
         GestureDetector(
+          onTap: () async {
+            final SharedPreferences prefs = await Const.prefs;
+            print(prefs.getString("token"));
+            print(prefs.getString("image"));
+            print(Dimensions.imageUser);
+          },
           child: Container(
             width: Dimensions.height60,
             margin: EdgeInsets.only(left: Dimensions.height20),

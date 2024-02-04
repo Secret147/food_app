@@ -1,13 +1,25 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:foodapp/models/responseordered.dart';
+import 'package:foodapp/providers/userProvider.dart';
 import 'package:foodapp/utils/colors.dart';
 import 'package:foodapp/utils/dimensions.dart';
 import 'package:foodapp/widgets/text_darkmode/text_dark_mode.dart';
 import 'package:foodapp/widgets/text_normal/text_normal.dart';
+import 'package:provider/provider.dart';
 
-class ItemCart extends StatelessWidget {
-  const ItemCart({super.key});
+class ItemCart extends StatefulWidget {
+  const ItemCart({
+    super.key,
+    required this.ordered,
+  });
+  final ResponseOrdered ordered;
 
+  @override
+  State<ItemCart> createState() => _ItemCartState();
+}
+
+class _ItemCartState extends State<ItemCart> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -36,11 +48,11 @@ class ItemCart extends StatelessWidget {
                   ),
                   width: Dimensions.height110,
                   height: Dimensions.height110,
-                  child: Image.network(
-                      "https://th.bing.com/th/id/R.09048de787f20688b1e4c521acee4fd1?rik=ab%2fo%2fXJDwkMWdQ&riu=http%3a%2f%2fculinarydestinations.net%2fwp-content%2fuploads%2f2015%2f10%2fsaigon-vietnamese-food.jpg&ehk=6zi4inpuCwFqRdVHn1PHX6HChcf6sWcehIQVIcUv8RM%3d&risl=&pid=ImgRaw&r=0",
+                  child: Image.network(widget.ordered.dish.image,
                       fit: BoxFit.cover),
                 ),
                 Container(
+                  width: Dimensions.height100,
                   margin: EdgeInsets.symmetric(horizontal: Dimensions.height10),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,9 +61,9 @@ class ItemCart extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          TextDarkMode(text: "Grill Shrimp"),
+                          TextDarkMode(text: widget.ordered.dish.name),
                           TextNormal(
-                            text: "Westren cuisine",
+                            text: widget.ordered.dish.provider.address,
                             textSize: Dimensions.font14,
                             color: AppColors.textGrayColor,
                           ),
@@ -68,7 +80,7 @@ class ItemCart extends StatelessWidget {
                             width: Dimensions.height5,
                           ),
                           TextDarkMode(
-                            text: "24 min",
+                            text: "${widget.ordered.timedelivery} min",
                             textSize: Dimensions.font14,
                           )
                         ],
@@ -91,22 +103,40 @@ class ItemCart extends StatelessWidget {
                   ),
                   child: Row(
                     children: [
-                      Icon(
-                        Icons.remove,
-                        color: AppColors.mainColor,
-                        size: Dimensions.font18,
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            if (Dimensions.orderQuantity > 1) {
+                              Dimensions.orderQuantity--;
+                            }
+                          });
+                        },
+                        child: Icon(
+                          Icons.remove,
+                          color: AppColors.mainColor,
+                          size: Dimensions.font18,
+                        ),
                       ),
-                      const SizedBox(
-                        width: 5,
+                      SizedBox(
+                        width: Dimensions.height5,
                       ),
-                      TextNormal(text: "1"),
-                      const SizedBox(
-                        width: 5,
+                      TextNormal(text: "${widget.ordered.quantity}"),
+                      SizedBox(
+                        width: Dimensions.height5,
                       ),
-                      Icon(
-                        Icons.add,
-                        color: AppColors.mainColor,
-                        size: Dimensions.font18,
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            context
+                                .read<userProvider>()
+                                .addQuantity(widget.ordered);
+                          });
+                        },
+                        child: Icon(
+                          Icons.add,
+                          color: AppColors.mainColor,
+                          size: Dimensions.font18,
+                        ),
                       ),
                     ],
                   ),

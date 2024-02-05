@@ -2,6 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:foodapp/models/ordered.dart';
+import 'package:foodapp/pages/cart/cart_page.dart';
 import 'package:foodapp/providers/userProvider.dart';
 
 import 'package:foodapp/utils/colors.dart';
@@ -85,85 +86,85 @@ class _ButtonDetailState extends State<ButtonDetail> {
             ),
           ),
           GestureDetector(
-            onTap: () {
-              setState(() async {
-                final SharedPreferences prefs = await Const.prefs;
-                if (prefs.getString("token") != null) {
-                  Ordered ordered = Ordered(dish: widget.dish, quantity: index);
-                  // ignore: use_build_context_synchronously
-                  context.read<userProvider>().postNewOrder(ordered);
-                  // ignore: use_build_context_synchronously
-                } else {
-                  // ignore: use_build_context_synchronously
-                  showDialog(
-                    context: context,
-                    builder: (context) => AlertDialog(
-                      backgroundColor: Colors.white,
-                      content: SizedBox(
-                        height: Dimensions.height150,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.login,
-                              size: Dimensions.font32,
-                              color: AppColors.mainColor,
-                            ),
-                            SizedBox(
-                              height: Dimensions.height20,
-                            ),
-                            TextNormal(
-                              text: "Bạn cần đăng nhập trước khi",
-                              color: AppColors.textGrayColor,
-                              textSize: Dimensions.font18,
-                            ),
-                            SizedBox(
-                              height: Dimensions.height5,
-                            ),
-                            TextNormal(
-                              text: " tiến hành đặt hàng",
-                              color: AppColors.textGrayColor,
-                              textSize: Dimensions.font18,
-                            ),
-                          ],
-                        ),
+            onTap: () async {
+              final SharedPreferences prefs = await Const.prefs;
+              if (prefs.getString("token") != null) {
+                Ordered ordered = Ordered(dish: widget.dish, quantity: index);
+
+                // ignore: use_build_context_synchronously
+                await context.read<userProvider>().postNewOrder(ordered);
+                // ignore: use_build_context_synchronously
+                context.go("/cart");
+              } else {
+                // ignore: use_build_context_synchronously
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    backgroundColor: Colors.white,
+                    content: SizedBox(
+                      height: Dimensions.height150,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.login,
+                            size: Dimensions.font32,
+                            color: AppColors.mainColor,
+                          ),
+                          SizedBox(
+                            height: Dimensions.height20,
+                          ),
+                          TextNormal(
+                            text: "Bạn cần đăng nhập trước khi",
+                            color: AppColors.textGrayColor,
+                            textSize: Dimensions.font18,
+                          ),
+                          SizedBox(
+                            height: Dimensions.height5,
+                          ),
+                          TextNormal(
+                            text: " tiến hành đặt hàng",
+                            color: AppColors.textGrayColor,
+                            textSize: Dimensions.font18,
+                          ),
+                        ],
                       ),
-                      actions: <Widget>[
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.of(context).pop();
-                              },
-                              child: SizedBox(
-                                width: Dimensions.height100,
-                                child: ButtonCustom(
-                                  text: "Cancel",
-                                  color: AppColors.mainColor,
-                                  background: AppColors.brightColor,
-                                  textColor: AppColors.mainColor,
-                                ),
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                context.goNamed("signin");
-                              },
-                              child: SizedBox(
-                                width: Dimensions.height100,
-                                child: ButtonCustom(
-                                  text: "Đăng nhập",
-                                ),
-                              ),
-                            ),
-                          ],
-                        )
-                      ],
                     ),
-                  );
-                }
-              });
+                    actions: <Widget>[
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: SizedBox(
+                              width: Dimensions.height100,
+                              child: ButtonCustom(
+                                text: "Cancel",
+                                color: AppColors.mainColor,
+                                background: AppColors.brightColor,
+                                textColor: AppColors.mainColor,
+                              ),
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              context.goNamed("signin");
+                            },
+                            child: SizedBox(
+                              width: Dimensions.height100,
+                              child: ButtonCustom(
+                                text: "Đăng nhập",
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                );
+              }
             },
             child: Container(
               height: Dimensions.height50,

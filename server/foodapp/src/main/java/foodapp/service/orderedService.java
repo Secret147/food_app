@@ -11,6 +11,6 @@ public interface orderedService {
 	boolean newOrder(orderedDTO orderDTO, String token);
 	boolean addQuantity(ordered order,String token);
 	boolean removeQuantity(ordered order,String token);
-	
+	boolean deleteOrdered(String token, Long id);
 
 }

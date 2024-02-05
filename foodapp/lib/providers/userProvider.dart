@@ -45,18 +45,32 @@ class userProvider extends ChangeNotifier {
 
   Future<dynamic> postNewOrder(dynamic ordered) async {
     final data = await OrderedAPI.addTocart(ordered);
+    // Update the orders list with the new order
     notifyListeners();
     return data;
   }
 
   Future<List<dynamic>> getOrdered() async {
     final data = await OrderedAPI.callAPIgetOrdered();
+
     notifyListeners();
     return data;
   }
 
   Future<dynamic> addQuantity(ResponseOrdered order) async {
     final data = await OrderedAPI.callAPIaddQuantity(order);
+    notifyListeners();
+    return data;
+  }
+
+  Future<dynamic> removeQuantity(ResponseOrdered order) async {
+    final data = await OrderedAPI.callAPIremoveQuantity(order);
+    notifyListeners();
+    return data;
+  }
+
+  Future<dynamic> deleteOdered(dynamic id) async {
+    final data = await OrderedAPI.callAPIdeleteOrdered(id);
     notifyListeners();
     return data;
   }

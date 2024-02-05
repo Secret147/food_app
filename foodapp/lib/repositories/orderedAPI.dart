@@ -59,4 +59,37 @@ class OrderedAPI {
       rethrow;
     }
   }
+
+  static Future<dynamic> callAPIremoveQuantity(ResponseOrdered order) async {
+    try {
+      final dio = Dio();
+      final SharedPreferences prefs = await Const.prefs;
+      String? token = prefs.getString("token");
+      final response = await dio.put("$baseUrl/cart/remove/quantity",
+          data: order.toJson(),
+          options: Options(headers: {
+            "Content-type": 'application/json; charset=UTF-8',
+            'Authorization': 'Bearer $token',
+          }));
+      return response.data;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  static Future<dynamic> callAPIdeleteOrdered(dynamic id) async {
+    try {
+      final dio = Dio();
+      final SharedPreferences prefs = await Const.prefs;
+      String? token = prefs.getString("token");
+      final response = await dio.delete("$baseUrl/cart/$id",
+          options: Options(headers: {
+            "Content-type": 'application/json; charset=UTF-8',
+            'Authorization': 'Bearer $token',
+          }));
+      return response.data;
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

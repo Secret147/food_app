@@ -13,8 +13,18 @@ import 'package:foodapp/widgets/item_cart/item_cart.dart';
 import 'package:foodapp/widgets/itemcustomv2/item_custom_v2.dart';
 import 'package:provider/provider.dart';
 
-class CartPage extends StatelessWidget {
+class CartPage extends StatefulWidget {
   const CartPage({super.key});
+
+  @override
+  State<CartPage> createState() => _CartPageState();
+}
+
+class _CartPageState extends State<CartPage> {
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,9 +59,6 @@ class CartPage extends StatelessWidget {
                   child: Column(
                     children: [
                       ListItemCart(orders: orders),
-                      PriceCart(
-                        ordereds: orders,
-                      ),
                     ],
                   ),
                 ),

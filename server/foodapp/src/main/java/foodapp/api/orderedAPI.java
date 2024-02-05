@@ -53,6 +53,7 @@ public class orderedAPI {
 	public ResponseEntity<?> newOrderItem(@RequestBody orderedDTO order,HttpServletRequest request){
 		String token = jwtFilter.getJwt(request);
 		if(order !=null) {
+		    
 			orderSe.newOrder(order, token);
 			return ResponseEntity.ok("add order success");
 			
@@ -62,10 +63,17 @@ public class orderedAPI {
 		}
 	}
 	
-	@DeleteMapping
-	public ResponseEntity<?> deleteOrder(@PathVariable Long id){
-		orderRe.deleteById(id);
-		return ResponseEntity.ok("delete success");
+	@DeleteMapping("/{id}")
+	public ResponseEntity<?> deleteOrder(@PathVariable Long id,HttpServletRequest request){
+		String token = jwtFilter.getJwt(request);
+		if(id!=null) {
+			orderSe.deleteOrdered(token, id);
+			return ResponseEntity.ok("delete success");
+		}
+		else {
+			return ResponseEntity.badRequest().body("Khong tim thay order id");
+		}
+		
 	}
 	
 	@GetMapping("/all")

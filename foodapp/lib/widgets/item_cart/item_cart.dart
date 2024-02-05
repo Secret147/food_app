@@ -21,6 +21,13 @@ class ItemCart extends StatefulWidget {
 
 class _ItemCartState extends State<ItemCart> {
   @override
+  void initState() {
+    // TODO: implement initState
+    Dimensions.orderQuantity = widget.ordered.quantity;
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(bottom: Dimensions.height20),
@@ -125,12 +132,10 @@ class _ItemCartState extends State<ItemCart> {
                         width: Dimensions.height5,
                       ),
                       GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            context
-                                .read<userProvider>()
-                                .addQuantity(widget.ordered);
-                          });
+                        onTap: () async {
+                          await context
+                              .read<userProvider>()
+                              .addQuantity(widget.ordered);
                         },
                         child: Icon(
                           Icons.add,

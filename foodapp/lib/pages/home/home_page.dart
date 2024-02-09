@@ -54,7 +54,7 @@ class HomePage extends StatelessWidget {
                       SizedBox(
                         height: Dimensions.height30,
                       ),
-                      const OptionDealHomePage(),
+                      OptionDealHomePage(),
                       SizedBox(
                         height: Dimensions.height30,
                       ),

@@ -13,18 +13,8 @@ import 'package:foodapp/widgets/item_cart/item_cart.dart';
 import 'package:foodapp/widgets/itemcustomv2/item_custom_v2.dart';
 import 'package:provider/provider.dart';
 
-class CartPage extends StatefulWidget {
+class CartPage extends StatelessWidget {
   const CartPage({super.key});
-
-  @override
-  State<CartPage> createState() => _CartPageState();
-}
-
-class _CartPageState extends State<CartPage> {
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {

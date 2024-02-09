@@ -15,6 +15,18 @@ class dishAPI {
     }
   }
 
+  static Future<dynamic> getDishByType(dynamic type) async {
+    try {
+      final dio = Dio();
+      final response = await dio.get("$baseUrl/dish/type/$type");
+      List<dynamic> datas = response.data;
+      List<Dish> dishs = datas.map((data) => Dish.fromMap(data)).toList();
+      return dishs;
+    } catch (e) {
+      print(e);
+    }
+  }
+
   static Future<dynamic> getDishDetail(dynamic id) async {
     try {
       final dio = Dio();

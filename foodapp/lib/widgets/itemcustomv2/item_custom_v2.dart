@@ -1,13 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:foodapp/models/dish.dart';
 import 'package:foodapp/utils/colors.dart';
 import 'package:foodapp/utils/dimensions.dart';
 import 'package:foodapp/widgets/text_darkmode/text_dark_mode.dart';
 import 'package:foodapp/widgets/text_normal/text_normal.dart';
 
 class ItemCustomV2 extends StatelessWidget {
-  const ItemCustomV2({super.key});
-
+  const ItemCustomV2({super.key, required this.item});
+  final Dish item;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -37,9 +38,7 @@ class ItemCustomV2 extends StatelessWidget {
                   ),
                   height: Dimensions.height110,
                   width: Dimensions.height110,
-                  child: Image.network(
-                      "https://th.bing.com/th/id/R.09048de787f20688b1e4c521acee4fd1?rik=ab%2fo%2fXJDwkMWdQ&riu=http%3a%2f%2fculinarydestinations.net%2fwp-content%2fuploads%2f2015%2f10%2fsaigon-vietnamese-food.jpg&ehk=6zi4inpuCwFqRdVHn1PHX6HChcf6sWcehIQVIcUv8RM%3d&risl=&pid=ImgRaw&r=0",
-                      fit: BoxFit.cover),
+                  child: Image.network(item.image, fit: BoxFit.cover),
                 ),
                 Container(
                   margin: EdgeInsets.symmetric(
@@ -49,20 +48,23 @@ class ItemCustomV2 extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          TextDarkMode(text: "Grill Shrimp"),
-                          TextNormal(
-                            text: "Westren cuisine",
-                            textSize: Dimensions.font14,
-                            color: AppColors.textGrayColor,
-                          ),
-                        ],
+                      SizedBox(
+                        width: Dimensions.height100,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            TextDarkMode(text: item.name),
+                            TextNormal(
+                              text: item.provider.address,
+                              textSize: Dimensions.font14,
+                              color: AppColors.textGrayColor,
+                            ),
+                          ],
+                        ),
                       ),
                       TextDarkMode(
-                        text: "\$250",
-                        textSize: 18,
+                        text: "\$${item.price}",
+                        textSize: Dimensions.font18,
                       ),
                     ],
                   ),
@@ -78,11 +80,11 @@ class ItemCustomV2 extends StatelessWidget {
                       CupertinoIcons.alarm,
                       color: AppColors.mainColor,
                     ),
-                    const SizedBox(
-                      width: 5,
+                    SizedBox(
+                      width: Dimensions.height5,
                     ),
                     TextDarkMode(
-                      text: "24 min",
+                      text: "12 min",
                       textSize: Dimensions.font14,
                     )
                   ],
@@ -99,7 +101,7 @@ class ItemCustomV2 extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      TextNormal(text: "4.2"),
+                      TextNormal(text: item.provider.rate),
                       SizedBox(
                         width: Dimensions.height5,
                       ),

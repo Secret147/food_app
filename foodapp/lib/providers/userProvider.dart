@@ -37,6 +37,12 @@ class userProvider extends ChangeNotifier {
     return data;
   }
 
+  Future<List<dynamic>> getDishByType(dynamic type) async {
+    final data = await dishAPI.getDishByType(type);
+    notifyListeners();
+    return data;
+  }
+
   Future<List<dynamic>> getDishDetail(dynamic id) async {
     final data = await dishAPI.getDishDetail(id);
     notifyListeners();

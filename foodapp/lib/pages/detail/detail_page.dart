@@ -19,7 +19,6 @@ class DetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: const NavigatinCustom(),
       body: Column(
         children: [
           HeaderDetailPage(

@@ -24,7 +24,9 @@ class CartPage extends StatelessWidget {
       bottomNavigationBar: const NavigatinCustom(),
       body: SafeArea(
         child: Column(children: [
-          const HeaderCart(),
+          const HeaderCart(
+            name: "My Cart",
+          ),
           SizedBox(
             height: Dimensions.height10,
           ),

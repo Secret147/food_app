@@ -10,6 +10,7 @@ import 'package:foodapp/pages/otp/otp_page.dart';
 import 'package:foodapp/pages/profile/profile_page.dart';
 import 'package:foodapp/pages/signin/signin_page.dart';
 import 'package:foodapp/pages/signup/signup_page.dart';
+import 'package:foodapp/pages/type/type_page.dart';
 import 'package:go_router/go_router.dart';
 
 class RouterCustom {
@@ -181,6 +182,36 @@ class RouterCustom {
           return CustomTransitionPage<void>(
             key: state.pageKey,
             child: const ForgotPassword(),
+            transitionDuration: const Duration(milliseconds: 400),
+            transitionsBuilder: (BuildContext context,
+                Animation<double> animation,
+                Animation<double> secondaryAnimation,
+                Widget child) {
+              // Change the opacity of the screen using a Curve based on the the animation's
+              // value
+              return FadeTransition(
+                opacity: animation,
+                child: child,
+              );
+            },
+          );
+        },
+      ),
+      GoRoute(
+        path: '/type',
+        name: "type",
+        builder: (BuildContext context, GoRouterState state) {
+          dynamic type = state.extra as String;
+          return TypePage(
+            type: type,
+          );
+        },
+        pageBuilder: (BuildContext context, GoRouterState state) {
+          return CustomTransitionPage<void>(
+            key: state.pageKey,
+            child: TypePage(
+              type: state.extra as dynamic,
+            ),
             transitionDuration: const Duration(milliseconds: 400),
             transitionsBuilder: (BuildContext context,
                 Animation<double> animation,

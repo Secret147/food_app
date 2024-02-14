@@ -6,8 +6,8 @@ import 'package:foodapp/widgets/text_darkmode/text_dark_mode.dart';
 import 'package:go_router/go_router.dart';
 
 class HeaderCart extends StatelessWidget {
-  const HeaderCart({super.key});
-
+  const HeaderCart({super.key, required this.name});
+  final String name;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -25,7 +25,7 @@ class HeaderCart extends StatelessWidget {
           Expanded(
             child: Center(
               child: TextDarkMode(
-                text: "My Cart",
+                text: name,
                 textSize: Dimensions.font20,
               ),
             ),

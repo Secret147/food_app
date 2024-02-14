@@ -4,8 +4,12 @@ import 'package:foodapp/pages/cart/cart_page.dart';
 import 'package:foodapp/pages/home/home_page.dart';
 import 'package:foodapp/pages/profile/profile_page.dart';
 import 'package:foodapp/utils/colors.dart';
+import 'package:foodapp/utils/const.dart';
 import 'package:foodapp/utils/dimensions.dart';
+import 'package:foodapp/widgets/button_custom/buttom_custom.dart';
+import 'package:foodapp/widgets/text_normal/text_normal.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class NavigatinCustom extends StatefulWidget {
   const NavigatinCustom({super.key});
@@ -22,7 +26,7 @@ class _NavigatinCustomState extends State<NavigatinCustom> {
     const ProfilePage()
   ];
 
-  List<dynamic> path = ["home", "detail", "cart", "profile"];
+  List<dynamic> path = ["home", "introduction", "cart", "profile"];
   @override
   Widget build(BuildContext context) {
     List<BottomNavigationBarItem> listItem = [
@@ -67,9 +71,90 @@ class _NavigatinCustomState extends State<NavigatinCustom> {
       elevation: 0,
       items: listItem,
       onTap: (index) {
-        setState(() {
-          Dimensions.pageActive = index;
-          context.goNamed(path[index]);
+        setState(() async {
+          final SharedPreferences prefs = await Const.prefs;
+          if (prefs.getString("token") != null || path[index] == "home") {
+            Dimensions.pageActive = index;
+            // ignore: use_build_context_synchronously
+            context.goNamed(path[index]);
+          } else {
+            // ignore: use_build_context_synchronously
+            showDialog(
+              context: context,
+              builder: (context) => AlertDialog(
+                backgroundColor: Colors.white,
+                content: SizedBox(
+                  height: Dimensions.height150,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.login,
+                        size: Dimensions.font32,
+                        color: AppColors.mainColor,
+                      ),
+                      SizedBox(
+                        height: Dimensions.height20,
+                      ),
+                      TextNormal(
+                        text: "Bạn chưa tiến hành đăng nhập.",
+                        color: AppColors.textGrayColor,
+                        textSize: Dimensions.font16,
+                      ),
+                      SizedBox(
+                        height: Dimensions.height5,
+                      ),
+                      TextNormal(
+                        text: " Vui lòng đăng nhập để tiếp tục",
+                        color: AppColors.textGrayColor,
+                        textSize: Dimensions.font16,
+                      ),
+                      SizedBox(
+                        height: Dimensions.height5,
+                      ),
+                      TextNormal(
+                        text: " thao tác",
+                        color: AppColors.textGrayColor,
+                        textSize: Dimensions.font16,
+                      ),
+                    ],
+                  ),
+                ),
+                actions: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: SizedBox(
+                          width: Dimensions.height100,
+                          child: ButtonCustom(
+                            text: "Cancel",
+                            color: AppColors.mainColor,
+                            background: AppColors.brightColor,
+                            textColor: AppColors.mainColor,
+                          ),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          context.goNamed("signin");
+                        },
+                        child: SizedBox(
+                          width: Dimensions.height100,
+                          child: ButtonCustom(
+                            text: "Đăng nhập",
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            );
+          }
         });
       },
     );

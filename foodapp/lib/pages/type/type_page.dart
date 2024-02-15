@@ -38,21 +38,23 @@ class TypePage extends StatelessWidget {
                     }
                     List<Dish> listItem = snapshot.data as List<Dish>;
                     return Column(children: [
-                      SizedBox(
-                        height: 720,
-                        child: SingleChildScrollView(
-                          child: ListView.builder(
-                            physics: const NeverScrollableScrollPhysics(),
-                            shrinkWrap: true,
-                            itemCount: listItem.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              return GestureDetector(
-                                  onTap: () {
-                                    context.goNamed("detail",
-                                        extra: listItem[index]);
-                                  },
-                                  child: ItemCustomV2(item: listItem[index]));
-                            },
+                      Expanded(
+                        child: SizedBox(
+                          height: Dimensions.height720,
+                          child: SingleChildScrollView(
+                            child: ListView.builder(
+                              physics: const NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              itemCount: listItem.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return GestureDetector(
+                                    onTap: () {
+                                      context.goNamed("detail",
+                                          extra: listItem[index]);
+                                    },
+                                    child: ItemCustomV2(item: listItem[index]));
+                              },
+                            ),
                           ),
                         ),
                       ),

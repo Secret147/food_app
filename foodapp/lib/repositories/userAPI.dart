@@ -2,6 +2,7 @@
 import 'package:dio/dio.dart';
 
 import 'package:foodapp/models/user.dart';
+import 'package:foodapp/models/userInfor.dart';
 import 'package:foodapp/utils/const.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -28,6 +29,34 @@ class userAPI {
       );
       dynamic res = response;
       return res;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  static Future<dynamic> callAPIGetInfor() async {
+    try {
+      final dio = Dio();
+      final SharedPreferences prefs = await Const.prefs;
+      String? token = prefs.getString("token");
+      final response = await dio.get("$baseUrl/user/infor",
+          options: Options(headers: {
+            "Content-type": 'application/json; charset=UTF-8',
+            'Authorization': 'Bearer $token',
+          }));
+      dynamic data = response.data;
+      UserInfor user = UserInfor(
+        id: data["id"],
+        email: data["email"],
+        image: data["image"],
+        name: data["name"],
+        address: data["address"] ?? "",
+        birth: data["birth"] ?? "",
+        description: data["description"] ?? "",
+        phone: data["phone"] ?? "",
+      );
+
+      return user;
     } catch (e) {
       rethrow;
     }

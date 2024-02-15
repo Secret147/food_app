@@ -45,13 +45,13 @@ class _SignUpPageState extends State<SignUpPage> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
-            margin: const EdgeInsets.all(24),
+            margin: EdgeInsets.all(Dimensions.height20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const HeaderSignUp(),
                 SizedBox(
-                  height: Dimensions.height30,
+                  height: Dimensions.height20,
                 ),
                 Row(
                   children: [

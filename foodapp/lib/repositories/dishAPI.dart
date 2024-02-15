@@ -15,10 +15,34 @@ class dishAPI {
     }
   }
 
+  static Future<dynamic> getDishRecommend() async {
+    try {
+      final dio = Dio();
+      final response = await dio.get("$baseUrl/dish/recommend");
+      List<dynamic> datas = response.data;
+      List<Dish> dishs = datas.map((data) => Dish.fromMap(data)).toList();
+      return dishs;
+    } catch (e) {
+      print(e);
+    }
+  }
+
   static Future<dynamic> getDishByType(dynamic type) async {
     try {
       final dio = Dio();
       final response = await dio.get("$baseUrl/dish/type/$type");
+      List<dynamic> datas = response.data;
+      List<Dish> dishs = datas.map((data) => Dish.fromMap(data)).toList();
+      return dishs;
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  static Future<dynamic> getDishByDistribute(dynamic distribute) async {
+    try {
+      final dio = Dio();
+      final response = await dio.get("$baseUrl/dish/distribute/$distribute");
       List<dynamic> datas = response.data;
       List<Dish> dishs = datas.map((data) => Dish.fromMap(data)).toList();
       return dishs;

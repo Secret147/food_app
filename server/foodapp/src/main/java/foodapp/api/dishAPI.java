@@ -33,6 +33,39 @@ public class dishAPI {
 		}
 		
 	}
+	@GetMapping("/recommend")
+	public  ResponseEntity<?> getDishRecommend(){
+		if(dishSe.findRecommend()!=null) {
+			return ResponseEntity.ok(dishSe.findRecommend());
+		}
+		else {
+			return ResponseEntity.badRequest().body("Không có sản phẩm đề xuất");
+		}
+		
+	}
+	@GetMapping("/distribute/{distribute}")
+	public  ResponseEntity<?> getDishByDistribute(@PathVariable String distribute){
+		if(distribute.equals("featured")) {
+			return ResponseEntity.ok(dishSe.findFeatured());
+		}
+		else if(distribute.equals("popular")) {
+			return ResponseEntity.ok(dishSe.findPopualar());
+		}
+		else if(distribute.equals("newest")) {
+			return ResponseEntity.ok(dishSe.findNewest());
+		}
+		else if(distribute.equals("trending")) {
+			return ResponseEntity.ok(dishSe.findTrending());
+		}
+		else if(distribute.equals("recommend")) {
+			return ResponseEntity.ok(dishSe.findRecommend());
+		}
+		else {
+			return ResponseEntity.badRequest().body("not found distribute");
+		}
+		
+	}
+	
 	
 	@GetMapping("/type/{type}")
 	public  ResponseEntity<?> getDishByType(@PathVariable String type){

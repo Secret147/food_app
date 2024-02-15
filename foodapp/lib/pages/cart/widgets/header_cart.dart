@@ -11,12 +11,15 @@ class HeaderCart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: Dimensions.height30),
+      margin: EdgeInsets.symmetric(horizontal: Dimensions.height20),
       height: Dimensions.height60,
       child: Row(
         children: [
           GestureDetector(
-            onTap: () => context.goNamed("home"),
+            onTap: () {
+              Dimensions.pageActive = 0;
+              context.goNamed("home");
+            },
             child: Icon(
               Icons.arrow_back_ios_new,
               color: AppColors.modeColor,

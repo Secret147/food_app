@@ -24,7 +24,10 @@ class HeaderDetailPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 InkWell(
-                  onTap: () => context.goNamed("home"),
+                  onTap: () {
+                    Dimensions.pageActive = 0;
+                    context.goNamed("home");
+                  },
                   child: Container(
                     height: Dimensions.height50,
                     width: Dimensions.height50,

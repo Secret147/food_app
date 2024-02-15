@@ -20,7 +20,7 @@ class RecommendHomePage extends StatelessWidget {
           height: Dimensions.height10,
         ),
         FutureBuilder(
-            future: context.read<userProvider>().getDishPopular(),
+            future: context.read<userProvider>().getDishRecommend(),
             builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(

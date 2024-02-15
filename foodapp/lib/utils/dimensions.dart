@@ -44,6 +44,7 @@ class Dimensions {
   static late double height400;
   static late double height520;
   static late double height600;
+  static late double height720;
   static late double imageHeight;
   static late double boxHeight;
   static late double circleHeight;
@@ -93,6 +94,7 @@ class Dimensions {
     height400 = heightScreen / 2.11;
     height520 = heightScreen / 1.62;
     height600 = heightScreen / 1.4;
+    height720 = heightScreen / 1.172;
     imageHeight = heightScreen / 2.56;
     boxHeight = heightScreen / 2.34;
     circleHeight = heightScreen / 3;

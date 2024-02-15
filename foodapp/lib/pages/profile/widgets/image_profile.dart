@@ -7,8 +7,8 @@ import 'package:foodapp/widgets/text_normal/text_normal.dart';
 import 'package:go_router/go_router.dart';
 
 class ImageProfile extends StatelessWidget {
-  const ImageProfile({super.key});
-
+  const ImageProfile({super.key, required this.image});
+  final String image;
   @override
   Widget build(BuildContext context) {
     return Stack(children: [
@@ -17,15 +17,13 @@ class ImageProfile extends StatelessWidget {
         decoration: const BoxDecoration(shape: BoxShape.circle),
         height: Dimensions.height140,
         width: Dimensions.height140,
-        child: Image.network(
-            "https://i.pinimg.com/564x/0b/62/0f/0b620f63aa0c3484e142add74ef26130.jpg",
-            fit: BoxFit.cover),
+        child: Image.network(image, fit: BoxFit.cover),
       ),
       Positioned(
         bottom: 0,
         right: 0,
         child: GestureDetector(
-          onTap: () => context.goNamed("otp555"),
+          onTap: () => context.goNamed("editprofile"),
           child: Container(
               decoration: BoxDecoration(
                 shape: BoxShape.circle,

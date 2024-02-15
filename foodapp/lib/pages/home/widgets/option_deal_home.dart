@@ -16,16 +16,16 @@ class OptionDealHomePage extends StatefulWidget {
 
 class _OptionDealHomePageState extends State<OptionDealHomePage> {
   List<dynamic> listDeals = [
-    {"name": "Featured", "type": "bun"},
-    {"name": "Popular", "type": "mien"},
-    {"name": "Newest", "type": "com"},
-    {"name": "Trending", "type": "che"},
-    {"name": "Recommend", "type": "man"},
+    {"name": "Featured", "distribute": "featured"},
+    {"name": "Popular", "distribute": "popular"},
+    {"name": "Newest", "distribute": "newest"},
+    {"name": "Trending", "distribute": "trending"},
+    {"name": "Recommend", "distribute": "recommend"},
   ];
 
   int currentDeal = 0;
 
-  String type = "bun";
+  String distribute = "featured";
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +42,7 @@ class _OptionDealHomePageState extends State<OptionDealHomePage> {
                   if (index != currentDeal) {
                     currentDeal = index;
                   }
-                  type = listDeals[index]["type"];
+                  distribute = listDeals[index]["distribute"];
                 });
               },
               child: Container(
@@ -78,7 +78,7 @@ class _OptionDealHomePageState extends State<OptionDealHomePage> {
         height: Dimensions.height30,
       ),
       FutureBuilder(
-        future: context.read<userProvider>().getDishByType(type),
+        future: context.read<userProvider>().getDishByDistribute(distribute),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(

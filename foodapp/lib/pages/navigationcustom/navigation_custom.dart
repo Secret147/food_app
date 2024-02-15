@@ -70,9 +70,9 @@ class _NavigatinCustomState extends State<NavigatinCustom> {
       ),
       elevation: 0,
       items: listItem,
-      onTap: (index) {
-        setState(() async {
-          final SharedPreferences prefs = await Const.prefs;
+      onTap: (index) async {
+        final SharedPreferences prefs = await Const.prefs;
+        setState(() {
           if (prefs.getString("token") != null || path[index] == "home") {
             Dimensions.pageActive = index;
             // ignore: use_build_context_synchronously

@@ -12,7 +12,7 @@ class HeaderSignUp extends StatelessWidget {
       width: Dimensions.height80,
       child: Image.asset(
         "assets/icons/logo.png",
-        color: AppColors.brightColor,
+        color: AppColors.mainColor,
       ),
     );
   }

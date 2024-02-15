@@ -11,6 +11,7 @@ import 'package:foodapp/utils/dimensions.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class userProvider extends ChangeNotifier {
+  //***********************************************************User***************************** */
   Future<dynamic> postNewUser(dynamic user) async {
     final data = await userAPI.callAPICreateUser(user);
     notifyListeners();
@@ -31,8 +32,22 @@ class userProvider extends ChangeNotifier {
     }
   }
 
+  Future<dynamic> getUserInfor() async {
+    final data = await userAPI.callAPIGetInfor();
+    notifyListeners();
+    return data;
+  }
+
+  //'''''''''''''''''''''''''' Dish .......................................
+
   Future<List<dynamic>> getDishPopular() async {
     final data = await dishAPI.getDishPopular();
+    notifyListeners();
+    return data;
+  }
+
+  Future<List<dynamic>> getDishRecommend() async {
+    final data = await dishAPI.getDishRecommend();
     notifyListeners();
     return data;
   }
@@ -43,11 +58,19 @@ class userProvider extends ChangeNotifier {
     return data;
   }
 
+  Future<List<dynamic>> getDishByDistribute(dynamic distribute) async {
+    final data = await dishAPI.getDishByDistribute(distribute);
+    notifyListeners();
+    return data;
+  }
+
   Future<List<dynamic>> getDishDetail(dynamic id) async {
     final data = await dishAPI.getDishDetail(id);
     notifyListeners();
     return data;
   }
+
+  //*********************************************ordered***************************** */
 
   Future<dynamic> postNewOrder(dynamic ordered) async {
     final data = await OrderedAPI.addTocart(ordered);

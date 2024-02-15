@@ -13,12 +13,16 @@ class HeaderProfile extends StatelessWidget {
     return Container(
       height: Dimensions.height110,
       decoration: const BoxDecoration(),
+      margin: EdgeInsets.symmetric(horizontal: Dimensions.height20),
       child: Align(
         alignment: Alignment.bottomCenter,
         child: Row(
           children: [
             GestureDetector(
-              onTap: () => context.goNamed("signin"),
+              onTap: () {
+                Dimensions.pageActive = 0;
+                context.goNamed("home");
+              },
               child: Icon(
                 Icons.arrow_back_ios_new,
                 color: AppColors.modeColor,

@@ -35,4 +35,28 @@ public class dishServiceImpl implements dishService {
 		return dishRe.findById(id).orElseThrow();
 	}
 
+	@Override
+	public List<dish> findRecommend() {
+		
+		return dishRe.findRecommend();
+	}
+
+	@Override
+	public List<dish> findNewest() {
+		// TODO Auto-generated method stub
+		return dishRe.findNewest();
+	}
+
+	@Override
+	public List<dish> findTrending() {
+		// TODO Auto-generated method stub
+		return dishRe.findTrending();
+	}
+
+	@Override
+	public List<dish> findFeatured() {
+		// TODO Auto-generated method stub
+		return dishRe.findFeatured();
+	}
+
 }

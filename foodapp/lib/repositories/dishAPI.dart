@@ -15,6 +15,18 @@ class dishAPI {
     }
   }
 
+  static Future<dynamic> getDish() async {
+    try {
+      final dio = Dio();
+      final response = await dio.get("$baseUrl/dish/all");
+      List<dynamic> datas = response.data;
+      List<Dish> dishs = datas.map((data) => Dish.fromMap(data)).toList();
+      return dishs;
+    } catch (e) {
+      print(e);
+    }
+  }
+
   static Future<dynamic> getDishRecommend() async {
     try {
       final dio = Dio();

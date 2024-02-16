@@ -23,6 +23,19 @@ public class dishAPI {
 	@Autowired
 	private dishService dishSe;
 	
+	@Autowired
+	private dishRepo dishRe;
+	
+	@GetMapping("/all")
+	public  ResponseEntity<?> getDish(){
+		if(dishRe.findAll()!=null) {
+			return ResponseEntity.ok(dishRe.findAll());
+		}
+		else {
+			return ResponseEntity.badRequest().body("Không có sản phẩm ");
+		}
+		
+	}
 	@GetMapping("/popular")
 	public  ResponseEntity<?> getDishPopular(){
 		if(dishSe.findPopualar()!=null) {

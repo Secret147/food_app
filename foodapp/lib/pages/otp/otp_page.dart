@@ -14,10 +14,12 @@ import 'package:go_router/go_router.dart';
 import 'package:pinput/pinput.dart';
 
 class OTPPage extends StatelessWidget {
-  const OTPPage({super.key});
+  const OTPPage({super.key, required this.otp});
+  final String otp;
 
   @override
   Widget build(BuildContext context) {
+    String result = "";
     final defaultPinTheme = PinTheme(
         width: Dimensions.height60,
         height: Dimensions.height60,
@@ -81,6 +83,9 @@ class OTPPage extends StatelessWidget {
                 autofocus: true,
                 length: 5,
                 defaultPinTheme: defaultPinTheme,
+                onCompleted: (value) {
+                  result = value;
+                },
                 focusedPinTheme: defaultPinTheme.copyWith(
                     decoration: defaultPinTheme.decoration!
                         .copyWith(border: Border.all(color: Colors.green))),
@@ -91,81 +96,20 @@ class OTPPage extends StatelessWidget {
             ),
             GestureDetector(
                 onTap: () {
-                  showDialog(
-                    context: context,
-                    builder: (context) => AlertDialog(
-                      backgroundColor: Colors.white,
-                      content: SizedBox(
-                        height: Dimensions.height150,
-                        child: Column(
-                          children: [
-                            TextNormal(
-                              text: "Sign in with phone number",
-                              color: AppColors.textGrayColor,
-                            ),
-                            Text(
-                              "(+91) 65485 8XX98",
-                              style: TextStyle(
-                                fontSize: Dimensions.font20,
-                                fontWeight: FontWeight.bold,
-                                color: AppColors.textColor,
-                              ),
-                            ),
-                            SizedBox(
-                              height: Dimensions.height20,
-                            ),
-                            TextNormal(
-                              text: "We will send the authentication code",
-                              color: AppColors.textGrayColor,
-                              textSize: 14,
-                            ),
-                            TextNormal(
-                              text: "to the phone number you entered",
-                              color: AppColors.textGrayColor,
-                              textSize: 14,
-                            ),
-                            TextNormal(
-                              text: "Do you want to continue?",
-                              color: AppColors.textGrayColor,
-                              textSize: 14,
-                            ),
-                          ],
-                        ),
-                      ),
-                      actions: <Widget>[
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.of(context).pop();
-                              },
-                              child: SizedBox(
-                                width: Dimensions.height100,
-                                child: ButtonCustom(
-                                  text: "Cancel",
-                                  color: AppColors.mainColor,
-                                  background: AppColors.brightColor,
-                                  textColor: AppColors.mainColor,
-                                ),
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                context.goNamed("home");
-                              },
-                              child: SizedBox(
-                                width: Dimensions.height100,
-                                child: ButtonCustom(
-                                  text: "Next",
-                                ),
-                              ),
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                  );
+                  if (result == otp) {
+                    context.goNamed("home");
+                  } else {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: TextDarkMode(
+                            text: "Sai mã OTP",
+                          ),
+                        );
+                      },
+                    );
+                  }
                 },
                 child: ButtonCustom(text: "Next")),
             SizedBox(

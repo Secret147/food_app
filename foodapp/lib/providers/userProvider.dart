@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:foodapp/models/mail.dart';
 import 'package:foodapp/models/responseordered.dart';
 import 'package:foodapp/models/user.dart';
 import 'package:foodapp/repositories/auth.dart';
@@ -14,6 +15,12 @@ class userProvider extends ChangeNotifier {
   //***********************************************************User***************************** */
   Future<dynamic> postNewUser(dynamic user) async {
     final data = await userAPI.callAPICreateUser(user);
+    notifyListeners();
+    return data;
+  }
+
+  Future<dynamic> sendMail(String mail, Mail mailBody) async {
+    final data = await userAPI.callAPISendEmail(mail, mailBody);
     notifyListeners();
     return data;
   }
@@ -42,6 +49,12 @@ class userProvider extends ChangeNotifier {
 
   Future<List<dynamic>> getDishPopular() async {
     final data = await dishAPI.getDishPopular();
+    notifyListeners();
+    return data;
+  }
+
+  Future<List<dynamic>> getDish() async {
+    final data = await dishAPI.getDish();
     notifyListeners();
     return data;
   }

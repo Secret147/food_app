@@ -8,6 +8,7 @@ import 'package:foodapp/pages/home/home_page.dart';
 import 'package:foodapp/pages/introduction/introduction_page.dart';
 import 'package:foodapp/pages/otp/otp_page.dart';
 import 'package:foodapp/pages/profile/profile_page.dart';
+import 'package:foodapp/pages/search/search_page.dart';
 import 'package:foodapp/pages/signin/signin_page.dart';
 import 'package:foodapp/pages/signup/signup_page.dart';
 import 'package:foodapp/pages/type/type_page.dart';
@@ -151,12 +152,15 @@ class RouterCustom {
         path: '/otp',
         name: "otp",
         builder: (BuildContext context, GoRouterState state) {
-          return const OTPPage();
+          String otp = state.extra as String;
+          return OTPPage(
+            otp: otp,
+          );
         },
         pageBuilder: (BuildContext context, GoRouterState state) {
           return CustomTransitionPage<void>(
             key: state.pageKey,
-            child: const OTPPage(),
+            child: OTPPage(otp: state.extra as String),
             transitionDuration: const Duration(milliseconds: 400),
             transitionsBuilder: (BuildContext context,
                 Animation<double> animation,
@@ -212,6 +216,34 @@ class RouterCustom {
             child: TypePage(
               type: state.extra as dynamic,
             ),
+            transitionDuration: const Duration(milliseconds: 400),
+            transitionsBuilder: (BuildContext context,
+                Animation<double> animation,
+                Animation<double> secondaryAnimation,
+                Widget child) {
+              // Change the opacity of the screen using a Curve based on the the animation's
+              // value
+              return FadeTransition(
+                opacity: animation,
+                child: child,
+              );
+            },
+          );
+        },
+      ),
+      GoRoute(
+        path: '/search',
+        name: "search",
+        builder: (BuildContext context, GoRouterState state) {
+          List<Dish> listItem = state.extra as List<Dish>;
+          return SearchPage(
+            listItem: listItem,
+          );
+        },
+        pageBuilder: (BuildContext context, GoRouterState state) {
+          return CustomTransitionPage<void>(
+            key: state.pageKey,
+            child: SearchPage(listItem: state.extra as List<Dish>),
             transitionDuration: const Duration(milliseconds: 400),
             transitionsBuilder: (BuildContext context,
                 Animation<double> animation,

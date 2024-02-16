@@ -10,7 +10,7 @@ class Dimensions {
   static late double heightScreen;
   static late double widthScreen;
 
-  static bool darkmode = false;
+  static bool darkmode = true;
   static int pageActive = 0;
   static int orderQuantity = 1;
   static Future<String?> getShared(String key) async {
@@ -20,6 +20,7 @@ class Dimensions {
   }
 
   //height
+  static late double height2;
   static late double height5;
   static late double height10;
   static late double height20;
@@ -70,7 +71,7 @@ class Dimensions {
     widthScreen = MediaQuery.of(context).size.width;
 
     //height
-
+    height2 = heightScreen / 844;
     height5 = heightScreen / 176.8;
     height10 = heightScreen / 84.4;
     height20 = heightScreen / 42.2;

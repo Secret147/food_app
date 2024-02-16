@@ -1,5 +1,8 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:foodapp/models/mail.dart';
 import 'package:foodapp/pages/signup/widgets/header_signup.dart';
 import 'package:foodapp/providers/userProvider.dart';
 import 'package:foodapp/utils/colors.dart';
@@ -106,13 +109,14 @@ class _SignInPageState extends State<SignInPage> {
                           child: Column(
                             children: [
                               TextNormal(
-                                text: "Sign in with gmail",
+                                text: "Sign in with email",
                                 color: AppColors.textGrayColor,
                               ),
                               Text(
-                                "(+91) 65485 8XX98",
+                                emailController.text,
+                                overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
-                                  fontSize: Dimensions.font20,
+                                  fontSize: Dimensions.font16,
                                   fontWeight: FontWeight.bold,
                                   color: AppColors.modeColor,
                                 ),
@@ -126,7 +130,7 @@ class _SignInPageState extends State<SignInPage> {
                                 textSize: 14,
                               ),
                               TextNormal(
-                                text: "to the phone number you entered",
+                                text: "to the email you entered",
                                 color: AppColors.textGrayColor,
                                 textSize: 14,
                               ),
@@ -166,9 +170,18 @@ class _SignInPageState extends State<SignInPage> {
                                       .read<userProvider>()
                                       .postLogin(user)
                                       .then(
-                                    (status) {
+                                    (status) async {
                                       if (status == "Success") {
-                                        context.goNamed("home");
+                                        var rng = Random();
+                                        int randomNumber =
+                                            rng.nextInt(90000) + 10000;
+                                        String otp = randomNumber.toString();
+                                        Mail mail = Mail(
+                                            subject: "OTP đăng nhập",
+                                            message: otp);
+                                        context.read<userProvider>().sendMail(
+                                            emailController.text, mail);
+                                        context.goNamed("otp", extra: otp);
                                       } else {
                                         showDialog(
                                           context: context,

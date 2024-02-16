@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:dio/dio.dart';
+import 'package:foodapp/models/mail.dart';
 
 import 'package:foodapp/models/user.dart';
 import 'package:foodapp/models/userInfor.dart';
@@ -26,6 +27,20 @@ class userAPI {
       final response = await dio.post(
         "$baseUrl/user/login",
         data: user,
+      );
+      dynamic res = response;
+      return res;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  static Future<dynamic> callAPISendEmail(String mail, Mail mailBody) async {
+    try {
+      final dio = Dio();
+      final response = await dio.post(
+        "$baseUrl/mail/send/$mail",
+        data: mailBody.toJson(),
       );
       dynamic res = response;
       return res;

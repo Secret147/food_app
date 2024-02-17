@@ -152,7 +152,7 @@ class RouterCustom {
         path: '/otp',
         name: "otp",
         builder: (BuildContext context, GoRouterState state) {
-          String otp = state.extra as String;
+          dynamic otp = state.extra as dynamic;
           return OTPPage(
             otp: otp,
           );
@@ -160,7 +160,7 @@ class RouterCustom {
         pageBuilder: (BuildContext context, GoRouterState state) {
           return CustomTransitionPage<void>(
             key: state.pageKey,
-            child: OTPPage(otp: state.extra as String),
+            child: OTPPage(otp: state.extra as dynamic),
             transitionDuration: const Duration(milliseconds: 400),
             transitionsBuilder: (BuildContext context,
                 Animation<double> animation,

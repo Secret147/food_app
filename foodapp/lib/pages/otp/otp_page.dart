@@ -15,7 +15,7 @@ import 'package:pinput/pinput.dart';
 
 class OTPPage extends StatelessWidget {
   const OTPPage({super.key, required this.otp});
-  final String otp;
+  final dynamic otp;
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +68,7 @@ class OTPPage extends StatelessWidget {
               color: AppColors.textGrayColor,
             ),
             TextNormal(
-              text: "(+91) 65485 8XX98",
+              text: otp["email"],
               color: AppColors.textGrayColor,
             ),
             SizedBox(
@@ -96,15 +96,48 @@ class OTPPage extends StatelessWidget {
             ),
             GestureDetector(
                 onTap: () {
-                  if (result == otp) {
+                  if (result == otp["otp"]) {
                     context.goNamed("home");
                   } else {
                     showDialog(
                       context: context,
                       builder: (context) {
                         return AlertDialog(
-                          title: TextDarkMode(
-                            text: "Sai mã OTP",
+                          actions: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: SizedBox(
+                                    width: Dimensions.height100,
+                                    child: ButtonCustom(
+                                      text: "Cancel",
+                                      color: AppColors.mainColor,
+                                      background: AppColors.brightColor,
+                                      textColor: AppColors.mainColor,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            )
+                          ],
+                          title: Center(
+                            child: Column(
+                              children: [
+                                TextDarkMode(
+                                  text: "Sai mã OTP",
+                                ),
+                                SizedBox(
+                                  height: Dimensions.height5,
+                                ),
+                                TextDarkMode(
+                                  text: "Vui lòng nhập lại OTP chính xác",
+                                ),
+                              ],
+                            ),
                           ),
                         );
                       },

@@ -125,17 +125,17 @@ class _SignInPageState extends State<SignInPage> {
                                 height: Dimensions.height20,
                               ),
                               TextNormal(
-                                text: "We will send the authentication code",
+                                text: "Chúng tôi sẽ gửi mã OTP đến",
                                 color: AppColors.textGrayColor,
                                 textSize: 14,
                               ),
                               TextNormal(
-                                text: "to the email you entered",
+                                text: "email của bạn. Vui lòng chọn Next",
                                 color: AppColors.textGrayColor,
                                 textSize: 14,
                               ),
                               TextNormal(
-                                text: "Do you want to continue?",
+                                text: "để tiếp tục quá trình đăng nhập",
                                 color: AppColors.textGrayColor,
                                 textSize: 14,
                               ),
@@ -181,13 +181,76 @@ class _SignInPageState extends State<SignInPage> {
                                             message: otp);
                                         context.read<userProvider>().sendMail(
                                             emailController.text, mail);
-                                        context.goNamed("otp", extra: otp);
+                                        context.goNamed("otp", extra: {
+                                          "otp": otp,
+                                          "email": emailController.text
+                                        });
                                       } else {
+                                        Navigator.of(context).pop();
                                         showDialog(
                                           context: context,
                                           builder: (context) {
                                             return AlertDialog(
-                                              title: Text(status),
+                                              title: Center(
+                                                child: Column(
+                                                  children: [
+                                                    TextDarkMode(
+                                                      text:
+                                                          "Tài khoản hoặc mật khẩu của bạn",
+                                                      overflow:
+                                                          TextOverflow.clip,
+                                                    ),
+                                                    SizedBox(
+                                                      height:
+                                                          Dimensions.height10,
+                                                    ),
+                                                    TextDarkMode(
+                                                      text:
+                                                          " không chính xác! Vui lòng nhập lại ",
+                                                      overflow:
+                                                          TextOverflow.clip,
+                                                    ),
+                                                    SizedBox(
+                                                      height:
+                                                          Dimensions.height10,
+                                                    ),
+                                                    TextDarkMode(
+                                                      text:
+                                                          " tài khoản và mật khẩu.",
+                                                      overflow:
+                                                          TextOverflow.clip,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              actions: [
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceAround,
+                                                  children: [
+                                                    GestureDetector(
+                                                      onTap: () {
+                                                        Navigator.of(context)
+                                                            .pop();
+                                                      },
+                                                      child: SizedBox(
+                                                        width: Dimensions
+                                                            .height100,
+                                                        child: ButtonCustom(
+                                                          text: "Cancel",
+                                                          color: AppColors
+                                                              .mainColor,
+                                                          background: AppColors
+                                                              .brightColor,
+                                                          textColor: AppColors
+                                                              .mainColor,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                )
+                                              ],
                                             );
                                           },
                                         );

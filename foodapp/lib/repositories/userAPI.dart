@@ -49,6 +49,25 @@ class userAPI {
     }
   }
 
+  static Future<dynamic> callAPISendPassword(String mail) async {
+    try {
+      final dio = Dio();
+      final response = await dio.post(
+        "$baseUrl/mail/newpassword/$mail",
+        options: Options(
+          followRedirects: false,
+          validateStatus: (status) {
+            return status! < 500;
+          },
+        ),
+      );
+      dynamic res = response;
+      return res;
+    } catch (e) {
+      return e;
+    }
+  }
+
   static Future<dynamic> callAPIGetInfor() async {
     try {
       final dio = Dio();

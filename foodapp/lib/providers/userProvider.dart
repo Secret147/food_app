@@ -25,6 +25,15 @@ class userProvider extends ChangeNotifier {
     return data;
   }
 
+  Future<dynamic> sendMailPassword(String mail) async {
+    final data = await userAPI.callAPISendPassword(mail);
+    if (data.statusCode == 200) {
+      return "Success";
+    }
+    notifyListeners();
+    return data;
+  }
+
   Future<dynamic> postLogin(dynamic user) async {
     final data = await userAPI.callAPILogin(user);
     final SharedPreferences prefs = await Const.prefs;
@@ -37,6 +46,14 @@ class userProvider extends ChangeNotifier {
     } else {
       return data.data["message"];
     }
+  }
+
+  Future<String> getUserAvatar() async {
+    final SharedPreferences prefs = await Const.prefs;
+    String img = prefs.getString("image").toString();
+
+    notifyListeners();
+    return img;
   }
 
   Future<dynamic> getUserInfor() async {

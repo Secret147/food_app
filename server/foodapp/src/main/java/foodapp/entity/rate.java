@@ -8,6 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 
@@ -18,7 +19,7 @@ public class rate {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private int rate;
+	private double rate;
 	private String evalute;
 	
 	@ManyToOne
@@ -26,6 +27,7 @@ public class rate {
 	private user user;
 	
 	@ManyToOne 
+	@JsonIgnore
 	@JoinColumn(name = "dish_id",referencedColumnName = "id")
 	private dish dish;
 	

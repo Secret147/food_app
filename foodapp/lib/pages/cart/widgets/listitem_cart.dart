@@ -99,7 +99,7 @@ class _ListItemCartState extends State<ListItemCart> {
                                                   .orders[index].dish.name),
                                           TextNormal(
                                             text: widget.orders[index].dish
-                                                .provider.address,
+                                                .provider!.address,
                                             textSize: Dimensions.font14,
                                             color: AppColors.textGrayColor,
                                           ),

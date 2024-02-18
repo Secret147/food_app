@@ -6,8 +6,10 @@ import 'package:foodapp/pages/edit/edit_profile_page.dart';
 import 'package:foodapp/pages/forgotpassword/forgotpassword.dart';
 import 'package:foodapp/pages/home/home_page.dart';
 import 'package:foodapp/pages/introduction/introduction_page.dart';
+import 'package:foodapp/pages/listreview/list_review_page.dart';
 import 'package:foodapp/pages/otp/otp_page.dart';
 import 'package:foodapp/pages/profile/profile_page.dart';
+import 'package:foodapp/pages/review/review_page.dart';
 import 'package:foodapp/pages/search/search_page.dart';
 import 'package:foodapp/pages/signin/signin_page.dart';
 import 'package:foodapp/pages/signup/signup_page.dart';
@@ -244,6 +246,58 @@ class RouterCustom {
           return CustomTransitionPage<void>(
             key: state.pageKey,
             child: SearchPage(listItem: state.extra as List<Dish>),
+            transitionDuration: const Duration(milliseconds: 400),
+            transitionsBuilder: (BuildContext context,
+                Animation<double> animation,
+                Animation<double> secondaryAnimation,
+                Widget child) {
+              // Change the opacity of the screen using a Curve based on the the animation's
+              // value
+              return FadeTransition(
+                opacity: animation,
+                child: child,
+              );
+            },
+          );
+        },
+      ),
+      GoRoute(
+        path: '/review',
+        name: "review",
+        builder: (BuildContext context, GoRouterState state) {
+          Dish dish = state.extra as Dish;
+          return ReviewPage(dish: dish);
+        },
+        pageBuilder: (BuildContext context, GoRouterState state) {
+          return CustomTransitionPage<void>(
+            key: state.pageKey,
+            child: ReviewPage(dish: state.extra as Dish),
+            transitionDuration: const Duration(milliseconds: 400),
+            transitionsBuilder: (BuildContext context,
+                Animation<double> animation,
+                Animation<double> secondaryAnimation,
+                Widget child) {
+              // Change the opacity of the screen using a Curve based on the the animation's
+              // value
+              return FadeTransition(
+                opacity: animation,
+                child: child,
+              );
+            },
+          );
+        },
+      ),
+      GoRoute(
+        path: '/listreview',
+        name: "listreview",
+        builder: (BuildContext context, GoRouterState state) {
+          Dish dish = state.extra as Dish;
+          return ListReviewPage(dish: dish);
+        },
+        pageBuilder: (BuildContext context, GoRouterState state) {
+          return CustomTransitionPage<void>(
+            key: state.pageKey,
+            child: ListReviewPage(dish: state.extra as Dish),
             transitionDuration: const Duration(milliseconds: 400),
             transitionsBuilder: (BuildContext context,
                 Animation<double> animation,

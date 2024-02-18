@@ -70,7 +70,7 @@ class _ItemCartState extends State<ItemCart> {
                         children: [
                           TextDarkMode(text: widget.ordered.dish.name),
                           TextNormal(
-                            text: widget.ordered.dish.provider.address,
+                            text: widget.ordered.dish.provider!.address,
                             textSize: Dimensions.font14,
                             color: AppColors.textGrayColor,
                           ),

@@ -72,7 +72,7 @@ class _SearchHomePageState extends State<SearchHomePage> {
             ),
             GestureDetector(
               onTap: () async {
-                final SharedPreferences prefs = await Const.prefs;
+                context.goNamed("review");
               },
               child: Container(
                 width: Dimensions.height60,

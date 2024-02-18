@@ -149,21 +149,25 @@ class _SearchPageState extends State<SearchPage> {
                                       SizedBox(
                                         width: Dimensions.height20,
                                       ),
-                                      Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          BigTextDark(
-                                            text: _foundDishs[index].name,
-                                            textSize: Dimensions.font16,
-                                          ),
-                                          TextDarkMode(
-                                            text: _foundDishs[index].position,
-                                            textSize: Dimensions.font12,
-                                          )
-                                        ],
+                                      SizedBox(
+                                        width: Dimensions.height170,
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceAround,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            BigTextDark(
+                                              text: _foundDishs[index].name,
+                                              textSize: Dimensions.font16,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                            TextDarkMode(
+                                              text: _foundDishs[index].position,
+                                              textSize: Dimensions.font12,
+                                            )
+                                          ],
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -177,8 +181,8 @@ class _SearchPageState extends State<SearchPage> {
                                           MainAxisAlignment.center,
                                       children: [
                                         TextDarkMode(
-                                            text: widget
-                                                .listItem[index].provider.rate),
+                                            text:
+                                                "${widget.listItem[index].rate}"),
                                         SizedBox(
                                           width: Dimensions.height5,
                                         ),

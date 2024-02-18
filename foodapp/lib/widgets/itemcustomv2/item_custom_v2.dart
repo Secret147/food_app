@@ -101,7 +101,7 @@ class ItemCustomV2 extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      TextNormal(text: item.provider.rate),
+                      TextNormal(text: "${item.rate}"),
                       SizedBox(
                         width: Dimensions.height5,
                       ),

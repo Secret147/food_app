@@ -97,7 +97,7 @@ class ListItemCustom extends StatelessWidget {
                               ],
                             ),
                           ),
-                          IconStar(star: listItem[index].provider.rate),
+                          IconStar(star: listItem[index].rate),
                         ],
                       )
                     ],

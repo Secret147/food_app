@@ -1,7 +1,5 @@
-import 'dart:convert';
-
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-class Rate {}
+import 'dart:convert';
 
 class ProviderModel {
   int id;
@@ -49,6 +47,7 @@ class Dish {
   String description;
   String type;
   int purchases;
+  double rate;
 
   ProviderModel provider;
   Dish({
@@ -60,6 +59,7 @@ class Dish {
     required this.description,
     required this.type,
     required this.purchases,
+    required this.rate,
     required this.provider,
   });
 
@@ -73,6 +73,7 @@ class Dish {
       'description': description,
       'type': type,
       'purchases': purchases,
+      'rate': rate,
       'provider': provider.toMap(),
     };
   }
@@ -87,6 +88,7 @@ class Dish {
       description: map['description'] as String,
       type: map['type'] as String,
       purchases: map['purchases'] as int,
+      rate: map['rate'] as double,
       provider: ProviderModel.fromMap(map['provider'] as Map<String, dynamic>),
     );
   }

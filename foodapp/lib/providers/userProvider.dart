@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:foodapp/models/dish.dart';
 import 'package:foodapp/models/mail.dart';
+import 'package:foodapp/models/rate.dart';
 import 'package:foodapp/models/responseordered.dart';
 import 'package:foodapp/models/user.dart';
 import 'package:foodapp/repositories/auth.dart';
 import 'package:foodapp/repositories/dishAPI.dart';
 import 'package:foodapp/repositories/orderedAPI.dart';
+import 'package:foodapp/repositories/rateAPI.dart';
 import 'package:foodapp/repositories/userAPI.dart';
 import 'package:foodapp/utils/const.dart';
 import 'package:foodapp/utils/dimensions.dart';
@@ -132,5 +135,16 @@ class userProvider extends ChangeNotifier {
     final data = await OrderedAPI.callAPIdeleteOrdered(id);
     notifyListeners();
     return data;
+  }
+
+//*******************************************Rate***************************************** */
+  Future<dynamic> postNewEvalutes(Rate rate) async {
+    final data = await RateAPI().callNewEvalute(rate);
+    notifyListeners();
+    if (data.statusCode == 200) {
+      return "Success";
+    } else {
+      return "Fail";
+    }
   }
 }

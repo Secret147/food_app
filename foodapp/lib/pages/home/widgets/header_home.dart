@@ -62,9 +62,7 @@ class _HeaderHomePageState extends State<HeaderHomePage> {
                     );
                   }
                   String image = snapshot.data as String;
-                  return Image.network(
-                      image.isEmpty ? image : Dimensions.imageUser,
-                      fit: BoxFit.cover);
+                  return Image.network(image, fit: BoxFit.cover);
                 },
               ),
             ),

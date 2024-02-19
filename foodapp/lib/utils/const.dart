@@ -1,7 +1,7 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-const String baseUrl = "http://192.42.42.100:8080";
+const String baseUrl = "http://localhost:8080";
 
 class Const {
   static String? token = "mytoken";

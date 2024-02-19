@@ -60,7 +60,6 @@ class _RateReviewPageState extends State<RateReviewPage> {
                 itemSize: Dimensions.height50,
                 onRatingUpdate: (rating) {
                   rate = rating.toDouble();
-                  print(rate);
                 },
               ),
             ),
@@ -99,12 +98,12 @@ class _RateReviewPageState extends State<RateReviewPage> {
               ],
             ),
             GestureDetector(
-                onTap: () {
+                onTap: () async {
                   final rates = Rate(
                       rate: rate,
                       evalute: reviewController.text,
                       dish: widget.dish);
-                  context
+                  await context
                       .read<userProvider>()
                       .postNewEvalutes(rates)
                       .then((value) {

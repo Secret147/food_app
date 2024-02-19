@@ -8,8 +8,10 @@ class ExpandText extends StatefulWidget {
   const ExpandText({
     Key? key,
     required this.text,
+    required this.textHeight,
   }) : super(key: key);
   final String text;
+  final double textHeight;
   @override
   State<ExpandText> createState() => _ExpandTextState();
 }
@@ -17,14 +19,14 @@ class ExpandText extends StatefulWidget {
 class _ExpandTextState extends State<ExpandText> {
   late String firstString;
   late String secondString;
-  double textHeight = Dimensions.heightScreen / 2;
+
   bool checked = true;
   @override
   void initState() {
-    if (widget.text.length > textHeight) {
-      firstString = widget.text.substring(0, textHeight.toInt());
-      secondString =
-          widget.text.substring(textHeight.toInt() + 1, widget.text.length);
+    if (widget.text.length > widget.textHeight) {
+      firstString = widget.text.substring(0, widget.textHeight.toInt());
+      secondString = widget.text
+          .substring(widget.textHeight.toInt() + 1, widget.text.length);
     } else {
       firstString = widget.text;
       secondString = "";

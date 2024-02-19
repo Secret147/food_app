@@ -136,6 +136,7 @@ class DetailPage extends StatelessWidget {
                     bottom: Dimensions.height20),
                 child: ExpandText(
                   text: item.description,
+                  textHeight: Dimensions.heightScreen / 2,
                 )),
           ),
           ButtonDetail(

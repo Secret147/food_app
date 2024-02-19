@@ -53,8 +53,14 @@ class userProvider extends ChangeNotifier {
 
   Future<String> getUserAvatar() async {
     final SharedPreferences prefs = await Const.prefs;
-    String img = prefs.getString("image").toString();
+    String img = "";
 
+    if (prefs.getString("token") == null) {
+      img =
+          "https://i.pinimg.com/564x/e9/0e/d3/e90ed3e66a560ee0698edaf5fdbb2d72.jpg";
+    } else {
+      img = prefs.getString("image").toString();
+    }
     notifyListeners();
     return img;
   }
@@ -139,12 +145,18 @@ class userProvider extends ChangeNotifier {
 
 //*******************************************Rate***************************************** */
   Future<dynamic> postNewEvalutes(Rate rate) async {
-    final data = await RateAPI().callNewEvalute(rate);
+    final data = await RateAPI.callNewEvalute(rate);
     notifyListeners();
     if (data.statusCode == 200) {
       return "Success";
     } else {
       return "Fail";
     }
+  }
+
+  Future<List<dynamic>> getListReview(Dish dish) async {
+    final data = await RateAPI.getListReview(dish);
+    notifyListeners();
+    return data;
   }
 }

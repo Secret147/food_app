@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:flutter_timer_countdown/flutter_timer_countdown.dart';
 import 'package:foodapp/pages/signup/widgets/header_signup.dart';
 import 'package:foodapp/utils/colors.dart';
 import 'package:foodapp/utils/dimensions.dart';
@@ -155,11 +156,37 @@ class OTPPage extends StatelessWidget {
                   text: "Didn’t receive the code?",
                   textSize: 14,
                 ),
-                TextNormal(
-                  text: " Resend (30s)",
-                  color: AppColors.mainColor,
-                  textSize: 14,
-                )
+                Row(
+                  children: [
+                    TextNormal(
+                      text: " Resend (",
+                      color: AppColors.mainColor,
+                      textSize: 14,
+                    ),
+                    TimerCountdown(
+                      format: CountDownTimerFormat.secondsOnly,
+                      timeTextStyle: TextStyle(
+                        color: AppColors.mainColor,
+                        fontWeight: FontWeight.w600,
+                        fontSize: Dimensions.font14,
+                      ),
+                      endTime: DateTime.now().add(
+                        const Duration(
+                          seconds: 30,
+                        ),
+                      ),
+                      enableDescriptions: false,
+                      onEnd: () {
+                        print("Timer finished");
+                      },
+                    ),
+                    TextNormal(
+                      text: "s)",
+                      color: AppColors.mainColor,
+                      textSize: 14,
+                    ),
+                  ],
+                ),
               ],
             )
           ]),

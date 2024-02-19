@@ -1,5 +1,7 @@
 package foodapp.service.impl;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,8 +54,9 @@ public class rateServiceImpl implements rateService {
 	}
 
 	@Override
-	public List<rate> getListReview(dish dish) {
-		List<rate> rates= rateRe.findByDish(dish);
+	public List<rate> getListReview(Long dish_id) {
+		List<rate> rates= rateRe.findByDishId(dish_id);
+		Collections.reverse(rates);
 		return rates;
 	}
 

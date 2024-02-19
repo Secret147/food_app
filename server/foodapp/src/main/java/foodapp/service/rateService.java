@@ -8,5 +8,5 @@ import foodapp.entity.rate;
 
 public interface rateService {
 	void newEvalute(String token, rateDTO rate );
-    List<rate> getListReview(dish dish); 
+    List<rate> getListReview(Long dish_id); 
 }

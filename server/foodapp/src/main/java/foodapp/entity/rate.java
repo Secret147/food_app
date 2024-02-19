@@ -27,7 +27,6 @@ public class rate {
 	private user user;
 	
 	@ManyToOne 
-	@JsonIgnore
 	@JoinColumn(name = "dish_id",referencedColumnName = "id")
 	private dish dish;
 	

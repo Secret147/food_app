@@ -15,5 +15,5 @@ public interface rateRepo extends JpaRepository<rate, Long>{
 			+ "WHERE foodapp.rate.dish_id = ?", nativeQuery = true)
     double AvgRate(Long dishId);
     
-	List<rate> findByDish(dish dish);
+	List<rate> findByDishId(Long dish_id);
 }

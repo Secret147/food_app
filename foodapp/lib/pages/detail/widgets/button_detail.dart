@@ -37,7 +37,7 @@ class _ButtonDetailState extends State<ButtonDetail> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         GestureDetector(
-          onTap: () => context.goNamed("review", extra: widget.dish),
+          onTap: () => context.goNamed("listreview", extra: widget.dish),
           child: Container(
             height: Dimensions.height50,
             alignment: Alignment.center,

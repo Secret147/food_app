@@ -30,11 +30,12 @@ class userProvider extends ChangeNotifier {
 
   Future<dynamic> sendMailPassword(String mail) async {
     final data = await userAPI.callAPISendPassword(mail);
+    notifyListeners();
     if (data.statusCode == 200) {
       return "Success";
+    } else {
+      return "Fail";
     }
-    notifyListeners();
-    return data;
   }
 
   Future<dynamic> postLogin(dynamic user) async {

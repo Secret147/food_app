@@ -22,9 +22,10 @@ class InputCustom extends StatelessWidget {
       textInputAction: TextInputAction.next,
       controller: controller,
       style: TextStyle(
-        color: AppColors.modeColor,
-        fontSize: Dimensions.font20,
-      ),
+          color: AppColors.modeColor,
+          fontSize: Dimensions.font20,
+          decoration: TextDecoration.none,
+          decorationThickness: 0),
       autofocus: focus,
       decoration: InputDecoration(
         labelStyle: const TextStyle(

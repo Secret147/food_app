@@ -32,6 +32,7 @@ class RateAPI {
       );
 
       List<dynamic> datas = response.data;
+      print("dataane$datas");
       List<RateList> dishs =
           datas.map((data) => RateList.fromMap(data)).toList();
       return dishs;

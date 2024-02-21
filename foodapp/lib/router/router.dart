@@ -20,12 +20,38 @@ class RouterCustom {
   static final GoRouter router = GoRouter(
     routes: <RouteBase>[
       GoRoute(
-        path: '/',
-        name: "home",
-        builder: (BuildContext context, GoRouterState state) {
-          return const HomePage();
-        },
-      ),
+          path: '/',
+          name: "home",
+          builder: (BuildContext context, GoRouterState state) {
+            return const HomePage();
+          },
+          routes: <RouteBase>[
+            GoRoute(
+              path: 'editprofile',
+              name: "editprofile",
+              builder: (BuildContext context, GoRouterState state) {
+                return const EditProfilePage();
+              },
+              pageBuilder: (BuildContext context, GoRouterState state) {
+                return CustomTransitionPage<void>(
+                  key: state.pageKey,
+                  child: const EditProfilePage(),
+                  transitionDuration: const Duration(milliseconds: 400),
+                  transitionsBuilder: (BuildContext context,
+                      Animation<double> animation,
+                      Animation<double> secondaryAnimation,
+                      Widget child) {
+                    // Change the opacity of the screen using a Curve based on the the animation's
+                    // value
+                    return FadeTransition(
+                      opacity: animation,
+                      child: child,
+                    );
+                  },
+                );
+              },
+            ),
+          ]),
       GoRoute(
         path: '/introduction',
         name: "introduction",
@@ -85,31 +111,6 @@ class RouterCustom {
           return CustomTransitionPage<void>(
             key: state.pageKey,
             child: const CartPage(),
-            transitionDuration: const Duration(milliseconds: 400),
-            transitionsBuilder: (BuildContext context,
-                Animation<double> animation,
-                Animation<double> secondaryAnimation,
-                Widget child) {
-              // Change the opacity of the screen using a Curve based on the the animation's
-              // value
-              return FadeTransition(
-                opacity: animation,
-                child: child,
-              );
-            },
-          );
-        },
-      ),
-      GoRoute(
-        path: '/editprofile',
-        name: "editprofile",
-        builder: (BuildContext context, GoRouterState state) {
-          return const EditProfilePage();
-        },
-        pageBuilder: (BuildContext context, GoRouterState state) {
-          return CustomTransitionPage<void>(
-            key: state.pageKey,
-            child: const EditProfilePage(),
             transitionDuration: const Duration(milliseconds: 400),
             transitionsBuilder: (BuildContext context,
                 Animation<double> animation,

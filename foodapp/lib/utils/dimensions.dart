@@ -10,7 +10,7 @@ class Dimensions {
   static late double heightScreen;
   static late double widthScreen;
 
-  static bool darkmode = true;
+  static bool darkmode = false;
   static int pageActive = 0;
   static int orderQuantity = 1;
   static Future<String?> getShared(String key) async {

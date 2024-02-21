@@ -42,9 +42,7 @@ dependencies:
   dio: ^5.4.0
   shared_preferences: ^2.2.2
   flutter_secure_storage: ^9.0.0
-  google_maps_flutter: ^2.5.3
-  geocoding: ^2.1.1
-  geolocator: ^11.0.0
+
   flutter_timer_countdown: ^1.0.7
 
 dev_dependencies:

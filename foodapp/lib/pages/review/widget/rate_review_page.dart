@@ -33,96 +33,99 @@ class _RateReviewPageState extends State<RateReviewPage> {
   Widget build(BuildContext context) {
     double rate = 5.0;
     return Expanded(
-      child: Container(
-        margin: EdgeInsets.symmetric(horizontal: Dimensions.height10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            TextDarkMode(
-              text: "Please Rate For Dish",
-              textSize: Dimensions.font20,
-            ),
-            Center(
-              child: RatingBar.builder(
-                initialRating: 5,
-                minRating: 1,
-                direction: Axis.horizontal,
-                allowHalfRating: true,
-                itemCount: 5,
-                itemPadding:
-                    EdgeInsets.symmetric(horizontal: Dimensions.height5),
-                itemBuilder: (context, _) => Icon(
-                  Icons.star,
-                  color: AppColors.buttonStartColor,
-                  size: Dimensions.height40,
-                ),
-                itemSize: Dimensions.height50,
-                onRatingUpdate: (rating) {
-                  rate = rating.toDouble();
-                },
+      child: SingleChildScrollView(
+        child: Container(
+          height: Dimensions.height400,
+          margin: EdgeInsets.symmetric(horizontal: Dimensions.height10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              TextDarkMode(
+                text: "Đánh giá cho món ăn",
+                textSize: Dimensions.font20,
               ),
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                TextDarkMode(
-                  text: "Write your review",
-                  textSize: Dimensions.font20,
+              Center(
+                child: RatingBar.builder(
+                  initialRating: 5,
+                  minRating: 1,
+                  direction: Axis.horizontal,
+                  allowHalfRating: true,
+                  itemCount: 5,
+                  itemPadding:
+                      EdgeInsets.symmetric(horizontal: Dimensions.height5),
+                  itemBuilder: (context, _) => Icon(
+                    Icons.star,
+                    color: AppColors.buttonStartColor,
+                    size: Dimensions.height40,
+                  ),
+                  itemSize: Dimensions.height50,
+                  onRatingUpdate: (rating) {
+                    rate = rating.toDouble();
+                  },
                 ),
-                SizedBox(
-                  height: Dimensions.height20,
-                ),
-                SizedBox(
-                  height: Dimensions.height140,
-                  child: TextField(
-                    controller: reviewController,
-                    keyboardType: TextInputType.multiline,
-                    maxLines: null,
-                    minLines: null,
-                    expands: true,
-                    style: TextStyle(
-                      color: AppColors.textColor,
-                      fontSize: Dimensions.font20,
-                    ),
-                    textAlignVertical: const TextAlignVertical(y: -1),
-                    textAlign: TextAlign.left,
-                    decoration: InputDecoration(
-                      enabledBorder: outlineCustom(),
-                      focusedBorder: outlineCustom(),
-                      hintText: 'Write a review',
-                      filled: true,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  TextDarkMode(
+                    text: "Đánh giá",
+                    textSize: Dimensions.font20,
+                  ),
+                  SizedBox(
+                    height: Dimensions.height20,
+                  ),
+                  SizedBox(
+                    height: Dimensions.height140,
+                    child: TextField(
+                      controller: reviewController,
+                      keyboardType: TextInputType.multiline,
+                      maxLines: null,
+                      minLines: null,
+                      expands: true,
+                      style: TextStyle(
+                        decorationThickness: 0,
+                        color: AppColors.textColor,
+                        fontSize: Dimensions.font20,
+                      ),
+                      textAlignVertical: const TextAlignVertical(y: -1),
+                      textAlign: TextAlign.left,
+                      decoration: InputDecoration(
+                        enabledBorder: outlineCustom(),
+                        focusedBorder: outlineCustom(),
+                        hintText: 'Write a review',
+                      ),
                     ),
                   ),
-                ),
-              ],
-            ),
-            GestureDetector(
-                onTap: () async {
-                  final rates = Rate(
-                      rate: rate,
-                      evalute: reviewController.text,
-                      dish: widget.dish);
-                  await context
-                      .read<userProvider>()
-                      .postNewEvalutes(rates)
-                      .then((value) {
-                    if (value == "Success") {
-                      context.goNamed("listreview", extra: widget.dish);
-                    } else {
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return const AlertDialog(
-                            content: Text("Fail to send review"),
-                          );
-                        },
-                      );
-                    }
-                  });
-                },
-                child: ButtonCustom(text: "Submit Review"))
-          ],
+                ],
+              ),
+              GestureDetector(
+                  onTap: () async {
+                    final rates = Rate(
+                        rate: rate,
+                        evalute: reviewController.text,
+                        dish: widget.dish);
+                    await context
+                        .read<userProvider>()
+                        .postNewEvalutes(rates)
+                        .then((value) {
+                      if (value == "Success") {
+                        context.goNamed("listreview", extra: widget.dish);
+                      } else {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return const AlertDialog(
+                              content: Text("Fail to send review"),
+                            );
+                          },
+                        );
+                      }
+                    });
+                  },
+                  child: ButtonCustom(text: "Submit Review"))
+            ],
+          ),
         ),
       ),
     );

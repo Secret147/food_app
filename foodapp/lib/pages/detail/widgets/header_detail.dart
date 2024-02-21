@@ -42,25 +42,6 @@ class HeaderDetailPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                InkWell(
-                  onTap: () => context.goNamed("cart"),
-                  child: Container(
-                    height: Dimensions.height50,
-                    width: Dimensions.height50,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.transparent.withOpacity(0.4),
-                    ),
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: Icon(
-                        CupertinoIcons.cart,
-                        color: AppColors.brightColor,
-                        size: Dimensions.font32,
-                      ),
-                    ),
-                  ),
-                ),
               ],
             ),
           ),

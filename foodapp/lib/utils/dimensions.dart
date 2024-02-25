@@ -43,6 +43,7 @@ class Dimensions {
   static late double height280;
   static late double height320;
   static late double height400;
+  static late double height480;
   static late double height520;
   static late double height600;
   static late double height720;
@@ -93,6 +94,7 @@ class Dimensions {
     height280 = heightScreen / 3;
     height320 = heightScreen / 2.63;
     height400 = heightScreen / 2.11;
+    height480 = heightScreen / 1.76;
     height520 = heightScreen / 1.62;
     height600 = heightScreen / 1.4;
     height720 = heightScreen / 1.172;

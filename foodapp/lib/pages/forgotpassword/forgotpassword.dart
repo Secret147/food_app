@@ -149,7 +149,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                                   ),
                                 );
                               });
-                          context.goNamed("signin");
                         } else {
                           setState(() {
                             isAPICalled = false;

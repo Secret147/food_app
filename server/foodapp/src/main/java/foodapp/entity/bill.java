@@ -30,6 +30,10 @@ public class bill {
 	private Long id;
 	private String description;
 	private Long totalprice;
+	private String paymentmethod;
+	private Long discout;
+	private Long delivery;
+	private String location;
 	
 	@Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	private Date created_at;
@@ -47,5 +51,8 @@ public class bill {
 	@JoinColumn(name = "shipper_id",referencedColumnName = "id")
     private shipper shipper;
     
+    @ManyToOne
+	@JoinColumn(name = "user_id",referencedColumnName = "id")
+	private user user;
 
 }

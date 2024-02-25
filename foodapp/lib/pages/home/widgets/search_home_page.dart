@@ -72,7 +72,7 @@ class _SearchHomePageState extends State<SearchHomePage> {
             ),
             GestureDetector(
               onTap: () async {
-                context.goNamed("review");
+                context.goNamed("payment");
               },
               child: Container(
                 width: Dimensions.height60,

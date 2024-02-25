@@ -38,7 +38,7 @@ class _HeaderHomePageState extends State<HeaderHomePage> {
           ),
           GestureDetector(
             onTap: () async {
-              context.goNamed("profile");
+              context.goNamed("order");
             },
             child: Container(
               height: Dimensions.height50,

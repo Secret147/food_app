@@ -37,6 +37,10 @@ public class user {
 	@JsonIgnore
 	List<ordered> orders = new ArrayList<>();
 	
+	@OneToMany(mappedBy = "user")
+	@JsonIgnore
+	List<bill> bills = new ArrayList<>();
+	
 	 @ManyToMany(fetch = FetchType.EAGER)
 	   Set<role> roles= new HashSet<>();
 	

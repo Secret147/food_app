@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodapp/models/bill.dart';
 import 'package:foodapp/models/dish.dart';
 import 'package:foodapp/pages/cart/cart_page.dart';
 import 'package:foodapp/pages/detail/detail_page.dart';
@@ -7,7 +8,9 @@ import 'package:foodapp/pages/forgotpassword/forgotpassword.dart';
 import 'package:foodapp/pages/home/home_page.dart';
 import 'package:foodapp/pages/introduction/introduction_page.dart';
 import 'package:foodapp/pages/listreview/list_review_page.dart';
+import 'package:foodapp/pages/order/order_page.dart';
 import 'package:foodapp/pages/otp/otp_page.dart';
+import 'package:foodapp/pages/payment/payment_page.dart';
 import 'package:foodapp/pages/profile/profile_page.dart';
 import 'package:foodapp/pages/review/review_page.dart';
 import 'package:foodapp/pages/search/search_page.dart';
@@ -299,6 +302,58 @@ class RouterCustom {
           return CustomTransitionPage<void>(
             key: state.pageKey,
             child: ListReviewPage(dish: state.extra as Dish),
+            transitionDuration: const Duration(milliseconds: 400),
+            transitionsBuilder: (BuildContext context,
+                Animation<double> animation,
+                Animation<double> secondaryAnimation,
+                Widget child) {
+              // Change the opacity of the screen using a Curve based on the the animation's
+              // value
+              return FadeTransition(
+                opacity: animation,
+                child: child,
+              );
+            },
+          );
+        },
+      ),
+      GoRoute(
+        path: '/payment',
+        name: "payment",
+        builder: (BuildContext context, GoRouterState state) {
+          Bill bill = state.extra as Bill;
+          return PaymentPage(bill: bill);
+        },
+        pageBuilder: (BuildContext context, GoRouterState state) {
+          return CustomTransitionPage<void>(
+            key: state.pageKey,
+            child: PaymentPage(bill: state.extra as Bill),
+            transitionDuration: const Duration(milliseconds: 400),
+            transitionsBuilder: (BuildContext context,
+                Animation<double> animation,
+                Animation<double> secondaryAnimation,
+                Widget child) {
+              // Change the opacity of the screen using a Curve based on the the animation's
+              // value
+              return FadeTransition(
+                opacity: animation,
+                child: child,
+              );
+            },
+          );
+        },
+      ),
+      GoRoute(
+        path: '/order',
+        name: "order",
+        builder: (BuildContext context, GoRouterState state) {
+          Dish dish = state.extra as Dish;
+          return const OrderPage();
+        },
+        pageBuilder: (BuildContext context, GoRouterState state) {
+          return CustomTransitionPage<void>(
+            key: state.pageKey,
+            child: const OrderPage(),
             transitionDuration: const Duration(milliseconds: 400),
             transitionsBuilder: (BuildContext context,
                 Animation<double> animation,

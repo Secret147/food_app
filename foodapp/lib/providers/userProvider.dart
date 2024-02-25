@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:foodapp/models/bill.dart';
 import 'package:foodapp/models/dish.dart';
 import 'package:foodapp/models/mail.dart';
 import 'package:foodapp/models/rate.dart';
 import 'package:foodapp/models/responseordered.dart';
 import 'package:foodapp/models/user.dart';
 import 'package:foodapp/repositories/auth.dart';
+import 'package:foodapp/repositories/billAPI.dart';
 import 'package:foodapp/repositories/dishAPI.dart';
 import 'package:foodapp/repositories/orderedAPI.dart';
 import 'package:foodapp/repositories/rateAPI.dart';
@@ -157,6 +159,21 @@ class userProvider extends ChangeNotifier {
 
   Future<List<dynamic>> getListReview(Dish dish) async {
     final data = await RateAPI.getListReview(dish);
+    notifyListeners();
+    return data;
+  }
+
+//****************************************bill**************************** */
+
+  Future<dynamic> postNewBill(Bill bill) async {
+    final data = await BillAPI.callAPINewBill(bill);
+    notifyListeners();
+    return data;
+  }
+
+  Future<List<dynamic>> getListBill() async {
+    final data = await BillAPI.callAPIgetBill();
+
     notifyListeners();
     return data;
   }

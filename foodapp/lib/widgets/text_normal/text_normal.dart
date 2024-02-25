@@ -8,6 +8,7 @@ class TextNormal extends StatelessWidget {
   double textSize;
   Color color;
   TextOverflow overflow;
+  FontWeight weight;
 
   TextNormal({
     Key? key,
@@ -15,6 +16,7 @@ class TextNormal extends StatelessWidget {
     this.textSize = 0,
     this.color = AppColors.brightColor,
     this.overflow = TextOverflow.ellipsis,
+    this.weight = FontWeight.w600,
   }) : super(key: key);
 
   @override
@@ -24,7 +26,7 @@ class TextNormal extends StatelessWidget {
       style: TextStyle(
         fontSize: textSize == 0 ? Dimensions.font16 : textSize,
         overflow: overflow,
-        fontWeight: FontWeight.w600,
+        fontWeight: weight,
         color: color,
       ),
     );

@@ -1,5 +1,6 @@
 package foodapp.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +15,7 @@ import foodapp.respository.orderedRepo;
 import foodapp.respository.userRepo;
 import foodapp.security.jwt.JwtProvider;
 import foodapp.service.orderedService;
+import java.util.Random;
 
 @Service
 public class orderedServiceImpl implements orderedService{
@@ -35,26 +37,42 @@ public class orderedServiceImpl implements orderedService{
 		String email = provider.getUserNameFromToken(token);
 		user user = userRe.findByEmail(email).orElseThrow();
 		List<ordered> orders = orderedRe.findAllByUserId(user.getId());
-		return orders;
+		List<ordered> orderResponse = new ArrayList<>();
+		for(ordered x : orders) {
+			if(x.getBill()==null) {
+				orderResponse.add(x);
+			}
+		}
+		return orderResponse;
 	}
 
 	@Override
 	public boolean newOrder(orderedDTO orderedDTO, String token) {
 		ordered ordered = new ordered();
+		ordered ordercheck = new ordered();
+		boolean check = false;
 		String email = provider.getUserNameFromToken(token);
 		user user = userRe.findByEmail(email).orElseThrow();
-		ordered ordercheck = orderedRe.findByDishIdAndUserId(orderedDTO.getDish().getId(),user.getId());
-		if(ordercheck !=null) {
-			
-			ordercheck.setQuantity(orderedDTO.getQuantity()+ ordercheck.getQuantity());
-		
-			orderedRe.save(ordercheck);
+		List<ordered> orderList = orderedRe.findByDishIdAndUserId(orderedDTO.getDish().getId(),user.getId());
+		for(ordered x : orderList) {
+			if(x.getBill()==null) {
+				ordered = x;
+				check = true;
+				break;
+			}
+		}
+		if(check) {		
+			ordered.setQuantity(orderedDTO.getQuantity()+ ordered.getQuantity());
+			orderedRe.save(ordered);
 			return true;
 		}
-		else {
+		else {		
+			Random random = new Random();
+	        Long time = random.nextLong(50);
 			ordered.setUser(user);
 			ordered.setDish(orderedDTO.getDish());
 			ordered.setQuantity(orderedDTO.getQuantity());
+			ordered.setTimedelivery(time);
 			orderedRe.save(ordered);
 			return true;
 		}

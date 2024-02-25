@@ -26,7 +26,7 @@ class _NavigatinCustomState extends State<NavigatinCustom> {
     const ProfilePage()
   ];
 
-  List<dynamic> path = ["home", "introduction", "cart", "profile"];
+  List<dynamic> path = ["home", "cart", "order", "profile"];
   @override
   Widget build(BuildContext context) {
     List<BottomNavigationBarItem> listItem = [
@@ -38,14 +38,14 @@ class _NavigatinCustomState extends State<NavigatinCustom> {
       ),
       const BottomNavigationBarItem(
           icon: Icon(
-            Icons.favorite_border,
-          ),
-          label: "Favorite"),
-      const BottomNavigationBarItem(
-          icon: Icon(
             CupertinoIcons.cart,
           ),
           label: "Cart"),
+      const BottomNavigationBarItem(
+          icon: Icon(
+            Icons.library_books_outlined,
+          ),
+          label: "Order"),
       const BottomNavigationBarItem(
           icon: Icon(
             Icons.person_2_outlined,

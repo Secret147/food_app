@@ -46,6 +46,7 @@ class ProfilePage extends StatelessWidget {
                 ),
                 ImageProfile(
                   image: user.image,
+                  user: user,
                 ),
                 SizedBox(
                   height: Dimensions.height30,

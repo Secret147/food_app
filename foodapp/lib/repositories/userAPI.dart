@@ -80,7 +80,6 @@ class userAPI {
           }));
       dynamic data = response.data;
       UserInfor user = UserInfor(
-        id: data["id"],
         email: data["email"],
         image: data["image"],
         name: data["name"],
@@ -91,6 +90,25 @@ class userAPI {
       );
 
       return user;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  static Future<dynamic> callAPIEditInfor(UserInfor user) async {
+    try {
+      final dio = Dio();
+      final SharedPreferences prefs = await Const.prefs;
+      String? token = prefs.getString("token");
+      final response = await dio.put("$baseUrl/user/edituser",
+          data: user.toJson(),
+          options: Options(headers: {
+            "Content-type": 'application/json; charset=UTF-8',
+            'Authorization': 'Bearer $token',
+          }));
+      dynamic data = response.data;
+
+      return response;
     } catch (e) {
       rethrow;
     }

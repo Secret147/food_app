@@ -3,6 +3,7 @@ package foodapp.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import foodapp.dto.userDTO;
 import foodapp.entity.user;
 import foodapp.respository.userRepo;
 import foodapp.security.jwt.JwtProvider;
@@ -41,6 +42,23 @@ public class userServiceImpl implements userService {
 		String username = provider.getUserNameFromToken(token);
 		user user = userRe.findByEmail(username).orElseThrow();
 		return user;
+	}
+
+
+	@Override
+	public void editUser(String token, userDTO userDTO) {
+		// TODO Auto-generated method stub
+		String username = provider.getUserNameFromToken(token);
+		user user = userRe.findByEmail(username).orElseThrow();
+		user.setName(userDTO.getName());
+		user.setPhone(userDTO.getPhone());
+		user.setAddress(userDTO.getAddress());
+		user.setBirth(userDTO.getBirth());
+		user.setImage(userDTO.getImage());
+		user.setDescription(userDTO.getDescription());
+		userRe.save(user);
+		
+		
 	}
 
 }

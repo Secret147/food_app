@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:foodapp/models/bill.dart';
 import 'package:foodapp/models/dish.dart';
+
+import 'package:foodapp/models/userInfor.dart';
 import 'package:foodapp/pages/cart/cart_page.dart';
 import 'package:foodapp/pages/detail/detail_page.dart';
 import 'package:foodapp/pages/edit/edit_profile_page.dart';
@@ -30,15 +32,18 @@ class RouterCustom {
           },
           routes: <RouteBase>[
             GoRoute(
-              path: 'editprofile',
-              name: "editprofile",
+              path: 'search',
+              name: "search",
               builder: (BuildContext context, GoRouterState state) {
-                return const EditProfilePage();
+                List<Dish> listItem = state.extra as List<Dish>;
+                return SearchPage(
+                  listItem: listItem,
+                );
               },
               pageBuilder: (BuildContext context, GoRouterState state) {
                 return CustomTransitionPage<void>(
                   key: state.pageKey,
-                  child: const EditProfilePage(),
+                  child: SearchPage(listItem: state.extra as List<Dish>),
                   transitionDuration: const Duration(milliseconds: 400),
                   transitionsBuilder: (BuildContext context,
                       Animation<double> animation,
@@ -130,30 +135,61 @@ class RouterCustom {
         },
       ),
       GoRoute(
-        path: '/profile',
-        name: "profile",
-        builder: (BuildContext context, GoRouterState state) {
-          return const ProfilePage();
-        },
-        pageBuilder: (BuildContext context, GoRouterState state) {
-          return CustomTransitionPage<void>(
-            key: state.pageKey,
-            child: const ProfilePage(),
-            transitionDuration: const Duration(milliseconds: 400),
-            transitionsBuilder: (BuildContext context,
-                Animation<double> animation,
-                Animation<double> secondaryAnimation,
-                Widget child) {
-              // Change the opacity of the screen using a Curve based on the the animation's
-              // value
-              return FadeTransition(
-                opacity: animation,
-                child: child,
-              );
-            },
-          );
-        },
-      ),
+          path: '/profile',
+          name: "profile",
+          builder: (BuildContext context, GoRouterState state) {
+            return const ProfilePage();
+          },
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return CustomTransitionPage<void>(
+              key: state.pageKey,
+              child: const ProfilePage(),
+              transitionDuration: const Duration(milliseconds: 400),
+              transitionsBuilder: (BuildContext context,
+                  Animation<double> animation,
+                  Animation<double> secondaryAnimation,
+                  Widget child) {
+                // Change the opacity of the screen using a Curve based on the the animation's
+                // value
+                return FadeTransition(
+                  opacity: animation,
+                  child: child,
+                );
+              },
+            );
+          },
+          routes: <RouteBase>[
+            GoRoute(
+              path: 'editprofile',
+              name: "editprofile",
+              builder: (BuildContext context, GoRouterState state) {
+                UserInfor user = state.extra as UserInfor;
+                return EditProfilePage(
+                  user: user,
+                );
+              },
+              pageBuilder: (BuildContext context, GoRouterState state) {
+                return CustomTransitionPage<void>(
+                  key: state.pageKey,
+                  child: EditProfilePage(
+                    user: state.extra as UserInfor,
+                  ),
+                  transitionDuration: const Duration(milliseconds: 400),
+                  transitionsBuilder: (BuildContext context,
+                      Animation<double> animation,
+                      Animation<double> secondaryAnimation,
+                      Widget child) {
+                    // Change the opacity of the screen using a Curve based on the the animation's
+                    // value
+                    return FadeTransition(
+                      opacity: animation,
+                      child: child,
+                    );
+                  },
+                );
+              },
+            ),
+          ]),
       GoRoute(
         path: '/otp',
         name: "otp",
@@ -222,34 +258,6 @@ class RouterCustom {
             child: TypePage(
               type: state.extra as dynamic,
             ),
-            transitionDuration: const Duration(milliseconds: 400),
-            transitionsBuilder: (BuildContext context,
-                Animation<double> animation,
-                Animation<double> secondaryAnimation,
-                Widget child) {
-              // Change the opacity of the screen using a Curve based on the the animation's
-              // value
-              return FadeTransition(
-                opacity: animation,
-                child: child,
-              );
-            },
-          );
-        },
-      ),
-      GoRoute(
-        path: '/search',
-        name: "search",
-        builder: (BuildContext context, GoRouterState state) {
-          List<Dish> listItem = state.extra as List<Dish>;
-          return SearchPage(
-            listItem: listItem,
-          );
-        },
-        pageBuilder: (BuildContext context, GoRouterState state) {
-          return CustomTransitionPage<void>(
-            key: state.pageKey,
-            child: SearchPage(listItem: state.extra as List<Dish>),
             transitionDuration: const Duration(milliseconds: 400),
             transitionsBuilder: (BuildContext context,
                 Animation<double> animation,

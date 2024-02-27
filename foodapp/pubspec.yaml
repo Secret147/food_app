@@ -44,6 +44,12 @@ dependencies:
   flutter_secure_storage: ^9.0.0
 
   flutter_timer_countdown: ^1.0.7
+  intl: ^0.19.0
+  image_picker: ^1.0.7
+  firebase_core: ^2.25.4
+  firebase_storage: ^11.6.6
+  cloud_firestore: ^4.15.5
+  flutter_launcher_icons: ^0.13.1
 
 dev_dependencies:
   flutter_test:
@@ -55,6 +61,11 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+
+flutter_icons:
+  ios: true
+  android: true
+  image_path: "assets/icons/bun.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

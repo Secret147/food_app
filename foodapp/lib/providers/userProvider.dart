@@ -6,6 +6,7 @@ import 'package:foodapp/models/mail.dart';
 import 'package:foodapp/models/rate.dart';
 import 'package:foodapp/models/responseordered.dart';
 import 'package:foodapp/models/user.dart';
+import 'package:foodapp/models/userInfor.dart';
 import 'package:foodapp/repositories/auth.dart';
 import 'package:foodapp/repositories/billAPI.dart';
 import 'package:foodapp/repositories/dishAPI.dart';
@@ -72,6 +73,16 @@ class userProvider extends ChangeNotifier {
     final data = await userAPI.callAPIGetInfor();
     notifyListeners();
     return data;
+  }
+
+  Future<dynamic> putUserInfor(UserInfor user) async {
+    final data = await userAPI.callAPIEditInfor(user);
+    notifyListeners();
+    if (data.statusCode == 200) {
+      return "Success";
+    } else {
+      return data.data["Edit fail"];
+    }
   }
 
   //'''''''''''''''''''''''''' Dish .......................................

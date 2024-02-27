@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -63,6 +64,18 @@ public class userAPI {
 		String token = jwtFilter.getJwt(request);
 		if(token!=null) {
 			return ResponseEntity.ok(userSe.getUserByToken(token));
+		}else {
+			return ResponseEntity.badRequest().body("Hết phiên đăng nhập");
+		}
+		
+	}
+	
+	@PutMapping("/edituser")
+	public ResponseEntity<?> editUser(@RequestBody userDTO userDTO,HttpServletRequest request){
+		String token = jwtFilter.getJwt(request);
+		if(token!=null) {
+			userSe.editUser(token, userDTO);
+			return ResponseEntity.ok("edit success");
 		}else {
 			return ResponseEntity.badRequest().body("Hết phiên đăng nhập");
 		}

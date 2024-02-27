@@ -137,7 +137,10 @@ class ListOrderPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         GestureDetector(
-                          onTap: () => context.goNamed("home"),
+                          onTap: () {
+                            context.goNamed("home");
+                            Dimensions.pageActive = 0;
+                          },
                           child: SizedBox(
                             width: Dimensions.height130,
                             height: Dimensions.height40,

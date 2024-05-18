@@ -48,6 +48,7 @@ class Dish {
   String type;
   int purchases;
   double rate;
+  int review;
 
   ProviderModel provider;
   Dish({
@@ -60,6 +61,7 @@ class Dish {
     required this.type,
     required this.purchases,
     required this.rate,
+    required this.review,
     required this.provider,
   });
 
@@ -74,6 +76,7 @@ class Dish {
       'type': type,
       'purchases': purchases,
       'rate': rate,
+      'review': review,
       'provider': provider.toMap(),
     };
   }
@@ -89,6 +92,7 @@ class Dish {
       type: map['type'] as String,
       purchases: map['purchases'] as int,
       rate: map['rate'] as double,
+      review: map['review'] as int,
       provider: ProviderModel.fromMap(map['provider'] as Map<String, dynamic>),
     );
   }

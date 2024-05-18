@@ -38,7 +38,6 @@ class ListReviewPage extends StatelessWidget {
                 );
               }
               List<RateList> listItem = snapshot.data as List<RateList>;
-              print("listItem=====================$listItem");
 
               return listItem.isNotEmpty
                   ? Stack(

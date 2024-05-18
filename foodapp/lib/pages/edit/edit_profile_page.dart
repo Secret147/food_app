@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:foodapp/local_notifications.dart';
 import 'package:foodapp/models/user.dart';
 import 'package:foodapp/models/userInfor.dart';
 import 'package:foodapp/pages/profile/widgets/image_profile.dart';
@@ -211,9 +212,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       Reference referenceImageToUpload =
                           referenceDireImages.child(fileName);
                       try {
-                        await FirebaseStorage.instance
-                            .refFromURL(widget.user.image)
-                            .delete();
+                        if (widget.user.image !=
+                            "https://i.pinimg.com/564x/7c/4e/79/7c4e791a1941af7d16ad0a1e27385bea.jpg") {
+                          await FirebaseStorage.instance
+                              .refFromURL(widget.user.image)
+                              .delete();
+                        }
+
                         await referenceImageToUpload.putFile(_image!,
                             SettableMetadata(contentType: 'image/jpeg'));
                         imageUrl =
@@ -243,8 +248,14 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         setState(() {
                           check = false;
                         });
+
                         Dimensions.pageActive = 0;
                         context.goNamed("home");
+                        LocalNotifications.showSimpleNotification(
+                            title: "Cập nhật thông tin người dùng",
+                            body:
+                                "Thông tin của bạn đã được cập nhật lại. Vui lòng kiểm tra lại thông tin!",
+                            payload: "This is simple data");
                         // ignore: use_build_context_synchronously
                       }
                     });

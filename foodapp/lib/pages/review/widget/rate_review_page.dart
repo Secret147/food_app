@@ -85,7 +85,7 @@ class _RateReviewPageState extends State<RateReviewPage> {
                       expands: true,
                       style: TextStyle(
                         decorationThickness: 0,
-                        color: AppColors.textColor,
+                        color: AppColors.modeColor,
                         fontSize: Dimensions.font20,
                       ),
                       textAlignVertical: const TextAlignVertical(y: -1),
@@ -93,6 +93,7 @@ class _RateReviewPageState extends State<RateReviewPage> {
                       decoration: InputDecoration(
                         enabledBorder: outlineCustom(),
                         focusedBorder: outlineCustom(),
+                        hintStyle: TextStyle(color: AppColors.modeColor),
                         hintText: 'Write a review',
                       ),
                     ),

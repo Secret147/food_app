@@ -124,6 +124,7 @@ class _ButtonDetailState extends State<ButtonDetail> {
                     await context.read<userProvider>().postNewOrder(ordered);
                     // ignore: use_build_context_synchronously
                     context.go("/cart");
+                    Dimensions.pageActive = 1;
                   } else {
                     // ignore: use_build_context_synchronously
                     showDialog(

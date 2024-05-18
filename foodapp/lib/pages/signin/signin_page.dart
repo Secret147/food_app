@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:foodapp/models/mail.dart';
 import 'package:foodapp/pages/signup/widgets/header_signup.dart';
 import 'package:foodapp/providers/userProvider.dart';
+import 'package:foodapp/repositories/auth_service.dart';
 import 'package:foodapp/utils/colors.dart';
 import 'package:foodapp/utils/dimensions.dart';
 import 'package:foodapp/widgets/big_text/big_text.dart';
@@ -101,175 +102,232 @@ class _SignInPageState extends State<SignInPage> {
                 ),
                 InkWell(
                   onTap: () {
-                    showDialog(
-                      context: context,
-                      builder: (context) => AlertDialog(
-                        content: SizedBox(
-                          height: Dimensions.height150,
-                          child: Column(
-                            children: [
-                              TextNormal(
-                                text: "Sign in with email",
-                                color: AppColors.textGrayColor,
-                              ),
-                              Text(
-                                emailController.text,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                  fontSize: Dimensions.font16,
-                                  fontWeight: FontWeight.bold,
-                                  color: AppColors.modeColor,
+                    if (emailController.text != "" &&
+                        passwordController.text != "") {
+                      showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          content: SizedBox(
+                            height: Dimensions.height150,
+                            child: Column(
+                              children: [
+                                TextNormal(
+                                  text: "Sign in with email",
+                                  color: AppColors.textGrayColor,
                                 ),
-                              ),
-                              SizedBox(
-                                height: Dimensions.height20,
-                              ),
-                              TextNormal(
-                                text: "Chúng tôi sẽ gửi mã OTP đến",
-                                color: AppColors.textGrayColor,
-                                textSize: 14,
-                              ),
-                              TextNormal(
-                                text: "email của bạn. Vui lòng chọn Next",
-                                color: AppColors.textGrayColor,
-                                textSize: 14,
-                              ),
-                              TextNormal(
-                                text: "để tiếp tục quá trình đăng nhập",
-                                color: AppColors.textGrayColor,
-                                textSize: 14,
-                              ),
-                            ],
+                                Text(
+                                  emailController.text,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    fontSize: Dimensions.font16,
+                                    fontWeight: FontWeight.bold,
+                                    color: AppColors.modeColor,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: Dimensions.height20,
+                                ),
+                                TextNormal(
+                                  text: "Chúng tôi sẽ gửi mã OTP đến",
+                                  color: AppColors.textGrayColor,
+                                  textSize: 14,
+                                ),
+                                TextNormal(
+                                  text: "email của bạn. Vui lòng chọn Next",
+                                  color: AppColors.textGrayColor,
+                                  textSize: 14,
+                                ),
+                                TextNormal(
+                                  text: "để tiếp tục quá trình đăng nhập",
+                                  color: AppColors.textGrayColor,
+                                  textSize: 14,
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                        actions: <Widget>[
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.of(context).pop();
-                                },
-                                child: SizedBox(
-                                  width: Dimensions.height100,
-                                  child: ButtonCustom(
-                                    text: "Cancel",
-                                    color: AppColors.mainColor,
-                                    background: AppColors.brightColor,
-                                    textColor: AppColors.mainColor,
+                          actions: <Widget>[
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: SizedBox(
+                                    width: Dimensions.height100,
+                                    child: ButtonCustom(
+                                      text: "Cancel",
+                                      color: AppColors.mainColor,
+                                      background: AppColors.brightColor,
+                                      textColor: AppColors.mainColor,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              GestureDetector(
-                                onTap: () async {
-                                  Map<String, dynamic> user = {
-                                    "email": emailController.text,
-                                    "password": passwordController.text,
-                                  };
-                                  context
-                                      .read<userProvider>()
-                                      .postLogin(user)
-                                      .then(
-                                    (status) async {
-                                      if (status == "Success") {
-                                        var rng = Random();
-                                        int randomNumber =
-                                            rng.nextInt(90000) + 10000;
-                                        String otp = randomNumber.toString();
-                                        Mail mail = Mail(
-                                            subject: "OTP đăng nhập",
-                                            message: otp);
-                                        context.read<userProvider>().sendMail(
-                                            emailController.text, mail);
-                                        context.goNamed("otp", extra: {
-                                          "otp": otp,
-                                          "email": emailController.text
-                                        });
-                                      } else {
-                                        Navigator.of(context).pop();
-                                        showDialog(
-                                          context: context,
-                                          builder: (context) {
-                                            return AlertDialog(
-                                              title: Center(
-                                                child: Column(
-                                                  children: [
-                                                    TextDarkMode(
-                                                      text:
-                                                          "Tài khoản hoặc mật khẩu của bạn",
-                                                      overflow:
-                                                          TextOverflow.clip,
-                                                    ),
-                                                    SizedBox(
-                                                      height:
-                                                          Dimensions.height10,
-                                                    ),
-                                                    TextDarkMode(
-                                                      text:
-                                                          " không chính xác! Vui lòng nhập lại ",
-                                                      overflow:
-                                                          TextOverflow.clip,
-                                                    ),
-                                                    SizedBox(
-                                                      height:
-                                                          Dimensions.height10,
-                                                    ),
-                                                    TextDarkMode(
-                                                      text:
-                                                          " tài khoản và mật khẩu.",
-                                                      overflow:
-                                                          TextOverflow.clip,
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              actions: [
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceAround,
-                                                  children: [
-                                                    GestureDetector(
-                                                      onTap: () {
-                                                        Navigator.of(context)
-                                                            .pop();
-                                                      },
-                                                      child: SizedBox(
-                                                        width: Dimensions
-                                                            .height100,
-                                                        child: ButtonCustom(
-                                                          text: "Cancel",
-                                                          color: AppColors
-                                                              .mainColor,
-                                                          background: AppColors
-                                                              .brightColor,
-                                                          textColor: AppColors
-                                                              .mainColor,
+                                GestureDetector(
+                                  onTap: () async {
+                                    if (emailController.text != "" &&
+                                        passwordController.text != "") {
+                                      Map<String, dynamic> user = {
+                                        "email": emailController.text,
+                                        "password": passwordController.text,
+                                      };
+                                      context
+                                          .read<userProvider>()
+                                          .postLogin(user)
+                                          .then(
+                                        (status) async {
+                                          if (status == "Success") {
+                                            var rng = Random();
+                                            int randomNumber =
+                                                rng.nextInt(90000) + 10000;
+                                            String otp =
+                                                randomNumber.toString();
+                                            Mail mail = Mail(
+                                                subject: "OTP đăng nhập",
+                                                message: otp);
+                                            context
+                                                .read<userProvider>()
+                                                .sendMail(
+                                                    emailController.text, mail);
+                                            context.goNamed("otp", extra: {
+                                              "otp": otp,
+                                              "email": emailController.text
+                                            });
+                                          } else {
+                                            Navigator.of(context).pop();
+                                            showDialog(
+                                              context: context,
+                                              builder: (context) {
+                                                return AlertDialog(
+                                                  title: Center(
+                                                    child: Column(
+                                                      children: [
+                                                        TextDarkMode(
+                                                          text:
+                                                              "Tài khoản hoặc mật khẩu của bạn",
+                                                          overflow:
+                                                              TextOverflow.clip,
                                                         ),
-                                                      ),
+                                                        SizedBox(
+                                                          height: Dimensions
+                                                              .height10,
+                                                        ),
+                                                        TextDarkMode(
+                                                          text:
+                                                              " không chính xác! Vui lòng nhập lại ",
+                                                          overflow:
+                                                              TextOverflow.clip,
+                                                        ),
+                                                        SizedBox(
+                                                          height: Dimensions
+                                                              .height10,
+                                                        ),
+                                                        TextDarkMode(
+                                                          text:
+                                                              " tài khoản và mật khẩu.",
+                                                          overflow:
+                                                              TextOverflow.clip,
+                                                        ),
+                                                      ],
                                                     ),
+                                                  ),
+                                                  actions: [
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceAround,
+                                                      children: [
+                                                        GestureDetector(
+                                                          onTap: () {
+                                                            Navigator.of(
+                                                                    context)
+                                                                .pop();
+                                                          },
+                                                          child: SizedBox(
+                                                            width: Dimensions
+                                                                .height100,
+                                                            child: ButtonCustom(
+                                                              text: "Cancel",
+                                                              color: AppColors
+                                                                  .mainColor,
+                                                              background: AppColors
+                                                                  .brightColor,
+                                                              textColor:
+                                                                  AppColors
+                                                                      .mainColor,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    )
                                                   ],
-                                                )
-                                              ],
+                                                );
+                                              },
                                             );
-                                          },
-                                        );
-                                      }
-                                    },
-                                  );
-                                },
-                                child: SizedBox(
-                                  width: Dimensions.height100,
-                                  child: ButtonCustom(
-                                    text: "Next",
+                                          }
+                                        },
+                                      );
+                                    } else {
+                                      showDialog(
+                                        context: context,
+                                        builder: (context) {
+                                          return const AlertDialog(
+                                            title: Text(
+                                                "Vui lòng nhập đầy đủ các trường"),
+                                          );
+                                        },
+                                      );
+                                    }
+                                  },
+                                  child: SizedBox(
+                                    width: Dimensions.height100,
+                                    child: ButtonCustom(
+                                      text: "Next",
+                                    ),
                                   ),
                                 ),
+                              ],
+                            )
+                          ],
+                        ),
+                      );
+                    } else {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: const Center(
+                              child: Text(
+                                "Vui lòng nhập đầy đủ các trường",
+                                style: TextStyle(fontSize: 16),
                               ),
+                            ),
+                            actions: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: SizedBox(
+                                      width: Dimensions.height100,
+                                      child: ButtonCustom(
+                                        text: "Cancel",
+                                        color: AppColors.mainColor,
+                                        background: AppColors.brightColor,
+                                        textColor: AppColors.mainColor,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              )
                             ],
-                          )
-                        ],
-                      ),
-                    );
+                          );
+                        },
+                      );
+                    }
                   },
                   child: ButtonCustom(
                     text: "Sign in",
@@ -306,11 +364,14 @@ class _SignInPageState extends State<SignInPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    ButtonIconCustom(
-                      icon: "assets/icons/google (2) 1.png",
-                      text: "Google",
-                      heightIcon: Dimensions.height170,
-                      widthIcon: Dimensions.height50,
+                    GestureDetector(
+                      onTap: () => AuthService().signInWithGoogle(),
+                      child: ButtonIconCustom(
+                        icon: "assets/icons/google (2) 1.png",
+                        text: "Google",
+                        heightIcon: Dimensions.height170,
+                        widthIcon: Dimensions.height50,
+                      ),
                     ),
                     ButtonIconCustom(
                       icon: "assets/icons/facebook (2) 1.png",

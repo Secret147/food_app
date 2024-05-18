@@ -1,8 +1,11 @@
 package foodapp.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import foodapp.dto.ResetPasswordDTO;
 import foodapp.dto.userDTO;
 import foodapp.entity.user;
 import foodapp.respository.userRepo;
@@ -17,6 +20,9 @@ public class userServiceImpl implements userService {
 	
 	@Autowired
 	private JwtProvider provider;
+	
+	@Autowired
+	PasswordEncoder passwordEncoder;
 	
 
 	@Override
@@ -58,6 +64,21 @@ public class userServiceImpl implements userService {
 		user.setDescription(userDTO.getDescription());
 		userRe.save(user);
 		
+		
+	}
+
+
+	@Override
+	public boolean resetPassword(ResetPasswordDTO resetPasswordDTO) {
+		user user = userRe.findById(resetPasswordDTO.getUserId()).orElseThrow();
+		if(passwordEncoder.matches( resetPasswordDTO.getOldPassword(), user.getPassword())) {
+			String newHashedPassword = passwordEncoder.encode(resetPasswordDTO.getNewPassword());
+			user.setPassword(newHashedPassword);
+			userRe.save(user);
+			return true;
+		}
+		
+		return false;
 		
 	}
 

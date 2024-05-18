@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import foodapp.dto.JwtResponse;
 import foodapp.dto.userDTO;
+import foodapp.dto.ResetPasswordDTO;
 import foodapp.entity.role;
 import foodapp.entity.user;
 import foodapp.model.roleName;
@@ -86,7 +87,7 @@ public class userAPI {
 	@PostMapping("/newuser")
 	public ResponseEntity<?> add(@RequestBody userDTO userDTO){
 		if(userSe.existsByEmail(userDTO.getEmail())) {
-			return ResponseEntity.badRequest().body("Email đã tồn tại!");
+			return ResponseEntity.ok("0");
 		}
 		if(userDTO.getImage() ==null ||userDTO.getImage().trim().isEmpty()) {
 			userDTO.setImage("https://i.pinimg.com/564x/7c/4e/79/7c4e791a1941af7d16ad0a1e27385bea.jpg");
@@ -134,6 +135,16 @@ public class userAPI {
 		String token = jwtProvider.createToken(authentication);
 		userPrinciple userPrinciple = (userPrinciple) authentication.getPrincipal();
 		return ResponseEntity.ok().body(new JwtResponse(token, userPrinciple.getEmail(), userPrinciple.getImage(), userPrinciple.getAuthorities()));
+	}
+	
+	@PostMapping("/reset/password")
+	public ResponseEntity<?> test(@RequestBody ResetPasswordDTO resetPasswordDTO ){
+		
+	    if(userSe.resetPassword(resetPasswordDTO)) {
+	    	return ResponseEntity.ok("Reset Success");
+	    }
+	    return  ResponseEntity.badRequest().body("Reset Fail");
+		
 	}
 	
 }

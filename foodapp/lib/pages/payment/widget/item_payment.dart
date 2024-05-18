@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodapp/local_notifications.dart';
 import 'package:foodapp/models/bill.dart';
 import 'package:foodapp/providers/userProvider.dart';
 import 'package:foodapp/utils/colors.dart';
@@ -18,6 +19,20 @@ class ItemPaymentMethod extends StatefulWidget {
 }
 
 class _ItemPaymentMethodState extends State<ItemPaymentMethod> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    listenToNotifications(context) {
+      print("Listening to notification");
+      LocalNotifications.onClickNotification.stream.listen((event) {
+        print(event);
+        Navigator.pushNamed(context, '/order', arguments: event);
+      });
+    }
+
+    super.initState();
+  }
+
   bool value = false;
   bool valueCash = false;
   String method = "";
@@ -195,6 +210,12 @@ class _ItemPaymentMethodState extends State<ItemPaymentMethod> {
           onTap: () async {
             widget.bill.paymentmethod = method;
             await context.read<userProvider>().postNewBill(widget.bill);
+            LocalNotifications.showSimpleNotification(
+                title: "Tình trạng đơn hàng",
+                body:
+                    "Đơn hàng của bạn đã được tạo thành công. Tổng hóa đơn ${widget.bill.totalprice}\$. Vui lòng kiểm tra lại thông tin đơn hàng",
+                payload: "This is simple data");
+            Dimensions.pageActive = 2;
             context.goNamed("order");
           },
           child: Container(

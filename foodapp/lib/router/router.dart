@@ -19,6 +19,7 @@ import 'package:foodapp/pages/search/search_page.dart';
 import 'package:foodapp/pages/signin/signin_page.dart';
 import 'package:foodapp/pages/signup/signup_page.dart';
 import 'package:foodapp/pages/type/type_page.dart';
+import 'package:foodapp/repositories/auth_service.dart';
 import 'package:go_router/go_router.dart';
 
 class RouterCustom {
@@ -31,6 +32,112 @@ class RouterCustom {
             return const HomePage();
           },
           routes: <RouteBase>[
+            GoRoute(
+              path: 'detail',
+              name: "detail",
+              builder: (BuildContext context, GoRouterState state) {
+                Dish item = state.extra as Dish;
+                return DetailPage(
+                  item: item,
+                );
+              },
+              routes: <RouteBase>[
+                GoRoute(
+                  path: 'listreview',
+                  name: "listreview",
+                  builder: (BuildContext context, GoRouterState state) {
+                    Dish dish = state.extra as Dish;
+                    return ListReviewPage(dish: dish);
+                  },
+                  routes: <RouteBase>[
+                    GoRoute(
+                      path: 'review',
+                      name: "review",
+                      builder: (BuildContext context, GoRouterState state) {
+                        Dish dish = state.extra as Dish;
+                        return ReviewPage(dish: dish);
+                      },
+                      pageBuilder: (BuildContext context, GoRouterState state) {
+                        return CustomTransitionPage<void>(
+                          key: state.pageKey,
+                          child: ReviewPage(dish: state.extra as Dish),
+                          transitionDuration: const Duration(milliseconds: 400),
+                          transitionsBuilder: (BuildContext context,
+                              Animation<double> animation,
+                              Animation<double> secondaryAnimation,
+                              Widget child) {
+                            return FadeTransition(
+                              opacity: animation,
+                              child: child,
+                            );
+                          },
+                        );
+                      },
+                    ),
+                  ],
+                  pageBuilder: (BuildContext context, GoRouterState state) {
+                    return CustomTransitionPage<void>(
+                      key: state.pageKey,
+                      child: ListReviewPage(dish: state.extra as Dish),
+                      transitionDuration: const Duration(milliseconds: 400),
+                      transitionsBuilder: (BuildContext context,
+                          Animation<double> animation,
+                          Animation<double> secondaryAnimation,
+                          Widget child) {
+                        return FadeTransition(
+                          opacity: animation,
+                          child: child,
+                        );
+                      },
+                    );
+                  },
+                ),
+              ],
+              pageBuilder: (BuildContext context, GoRouterState state) {
+                return CustomTransitionPage<void>(
+                  key: state.pageKey,
+                  child: DetailPage(item: state.extra as Dish),
+                  transitionDuration: const Duration(milliseconds: 400),
+                  transitionsBuilder: (BuildContext context,
+                      Animation<double> animation,
+                      Animation<double> secondaryAnimation,
+                      Widget child) {
+                    return FadeTransition(
+                      opacity: animation,
+                      child: child,
+                    );
+                  },
+                );
+              },
+            ),
+            GoRoute(
+              path: 'type',
+              name: "type",
+              builder: (BuildContext context, GoRouterState state) {
+                dynamic type = state.extra as String;
+                return TypePage(
+                  type: type,
+                );
+              },
+              pageBuilder: (BuildContext context, GoRouterState state) {
+                return CustomTransitionPage<void>(
+                  key: state.pageKey,
+                  child: TypePage(
+                    type: state.extra as dynamic,
+                  ),
+                  transitionDuration: const Duration(milliseconds: 400),
+                  transitionsBuilder: (BuildContext context,
+                      Animation<double> animation,
+                      Animation<double> secondaryAnimation,
+                      Widget child) {
+                    return FadeTransition(
+                      opacity: animation,
+                      child: child,
+                    );
+                  },
+                );
+              },
+            ),
             GoRoute(
               path: 'search',
               name: "search",
@@ -49,8 +156,6 @@ class RouterCustom {
                       Animation<double> animation,
                       Animation<double> secondaryAnimation,
                       Widget child) {
-                    // Change the opacity of the screen using a Curve based on the the animation's
-                    // value
                     return FadeTransition(
                       opacity: animation,
                       child: child,
@@ -61,60 +166,37 @@ class RouterCustom {
             ),
           ]),
       GoRoute(
-        path: '/introduction',
-        name: "introduction",
-        builder: (BuildContext context, GoRouterState state) {
-          return const IntroductionPage();
-        },
-      ),
-      GoRoute(
-        path: '/signup',
-        name: "signup",
-        builder: (BuildContext context, GoRouterState state) {
-          return const SignUpPage();
-        },
-      ),
-      GoRoute(
-        path: '/signin',
-        name: "signin",
-        builder: (BuildContext context, GoRouterState state) {
-          return const SignInPage();
-        },
-      ),
-      GoRoute(
-        path: '/detail',
-        name: "detail",
-        builder: (BuildContext context, GoRouterState state) {
-          Dish item = state.extra as Dish;
-          return DetailPage(
-            item: item,
-          );
-        },
-        pageBuilder: (BuildContext context, GoRouterState state) {
-          return CustomTransitionPage<void>(
-            key: state.pageKey,
-            child: DetailPage(item: state.extra as Dish),
-            transitionDuration: const Duration(milliseconds: 400),
-            transitionsBuilder: (BuildContext context,
-                Animation<double> animation,
-                Animation<double> secondaryAnimation,
-                Widget child) {
-              // Change the opacity of the screen using a Curve based on the the animation's
-              // value
-              return FadeTransition(
-                opacity: animation,
-                child: child,
-              );
-            },
-          );
-        },
-      ),
-      GoRoute(
         path: '/cart',
         name: "cart",
         builder: (BuildContext context, GoRouterState state) {
           return const CartPage();
         },
+        routes: <RouteBase>[
+          GoRoute(
+            path: 'payment',
+            name: "payment",
+            builder: (BuildContext context, GoRouterState state) {
+              Bill bill = state.extra as Bill;
+              return PaymentPage(bill: bill);
+            },
+            pageBuilder: (BuildContext context, GoRouterState state) {
+              return CustomTransitionPage<void>(
+                key: state.pageKey,
+                child: PaymentPage(bill: state.extra as Bill),
+                transitionDuration: const Duration(milliseconds: 400),
+                transitionsBuilder: (BuildContext context,
+                    Animation<double> animation,
+                    Animation<double> secondaryAnimation,
+                    Widget child) {
+                  return FadeTransition(
+                    opacity: animation,
+                    child: child,
+                  );
+                },
+              );
+            },
+          ),
+        ],
         pageBuilder: (BuildContext context, GoRouterState state) {
           return CustomTransitionPage<void>(
             key: state.pageKey,
@@ -124,8 +206,6 @@ class RouterCustom {
                 Animation<double> animation,
                 Animation<double> secondaryAnimation,
                 Widget child) {
-              // Change the opacity of the screen using a Curve based on the the animation's
-              // value
               return FadeTransition(
                 opacity: animation,
                 child: child,
@@ -149,8 +229,6 @@ class RouterCustom {
                   Animation<double> animation,
                   Animation<double> secondaryAnimation,
                   Widget child) {
-                // Change the opacity of the screen using a Curve based on the the animation's
-                // value
                 return FadeTransition(
                   opacity: animation,
                   child: child,
@@ -179,8 +257,6 @@ class RouterCustom {
                       Animation<double> animation,
                       Animation<double> secondaryAnimation,
                       Widget child) {
-                    // Change the opacity of the screen using a Curve based on the the animation's
-                    // value
                     return FadeTransition(
                       opacity: animation,
                       child: child,
@@ -190,167 +266,6 @@ class RouterCustom {
               },
             ),
           ]),
-      GoRoute(
-        path: '/otp',
-        name: "otp",
-        builder: (BuildContext context, GoRouterState state) {
-          dynamic otp = state.extra as dynamic;
-          return OTPPage(
-            otp: otp,
-          );
-        },
-        pageBuilder: (BuildContext context, GoRouterState state) {
-          return CustomTransitionPage<void>(
-            key: state.pageKey,
-            child: OTPPage(otp: state.extra as dynamic),
-            transitionDuration: const Duration(milliseconds: 400),
-            transitionsBuilder: (BuildContext context,
-                Animation<double> animation,
-                Animation<double> secondaryAnimation,
-                Widget child) {
-              // Change the opacity of the screen using a Curve based on the the animation's
-              // value
-              return FadeTransition(
-                opacity: animation,
-                child: child,
-              );
-            },
-          );
-        },
-      ),
-      GoRoute(
-        path: '/forgotpassword',
-        name: "forgotpassword",
-        builder: (BuildContext context, GoRouterState state) {
-          return const ForgotPassword();
-        },
-        pageBuilder: (BuildContext context, GoRouterState state) {
-          return CustomTransitionPage<void>(
-            key: state.pageKey,
-            child: const ForgotPassword(),
-            transitionDuration: const Duration(milliseconds: 400),
-            transitionsBuilder: (BuildContext context,
-                Animation<double> animation,
-                Animation<double> secondaryAnimation,
-                Widget child) {
-              // Change the opacity of the screen using a Curve based on the the animation's
-              // value
-              return FadeTransition(
-                opacity: animation,
-                child: child,
-              );
-            },
-          );
-        },
-      ),
-      GoRoute(
-        path: '/type',
-        name: "type",
-        builder: (BuildContext context, GoRouterState state) {
-          dynamic type = state.extra as String;
-          return TypePage(
-            type: type,
-          );
-        },
-        pageBuilder: (BuildContext context, GoRouterState state) {
-          return CustomTransitionPage<void>(
-            key: state.pageKey,
-            child: TypePage(
-              type: state.extra as dynamic,
-            ),
-            transitionDuration: const Duration(milliseconds: 400),
-            transitionsBuilder: (BuildContext context,
-                Animation<double> animation,
-                Animation<double> secondaryAnimation,
-                Widget child) {
-              // Change the opacity of the screen using a Curve based on the the animation's
-              // value
-              return FadeTransition(
-                opacity: animation,
-                child: child,
-              );
-            },
-          );
-        },
-      ),
-      GoRoute(
-        path: '/review',
-        name: "review",
-        builder: (BuildContext context, GoRouterState state) {
-          Dish dish = state.extra as Dish;
-          return ReviewPage(dish: dish);
-        },
-        pageBuilder: (BuildContext context, GoRouterState state) {
-          return CustomTransitionPage<void>(
-            key: state.pageKey,
-            child: ReviewPage(dish: state.extra as Dish),
-            transitionDuration: const Duration(milliseconds: 400),
-            transitionsBuilder: (BuildContext context,
-                Animation<double> animation,
-                Animation<double> secondaryAnimation,
-                Widget child) {
-              // Change the opacity of the screen using a Curve based on the the animation's
-              // value
-              return FadeTransition(
-                opacity: animation,
-                child: child,
-              );
-            },
-          );
-        },
-      ),
-      GoRoute(
-        path: '/listreview',
-        name: "listreview",
-        builder: (BuildContext context, GoRouterState state) {
-          Dish dish = state.extra as Dish;
-          return ListReviewPage(dish: dish);
-        },
-        pageBuilder: (BuildContext context, GoRouterState state) {
-          return CustomTransitionPage<void>(
-            key: state.pageKey,
-            child: ListReviewPage(dish: state.extra as Dish),
-            transitionDuration: const Duration(milliseconds: 400),
-            transitionsBuilder: (BuildContext context,
-                Animation<double> animation,
-                Animation<double> secondaryAnimation,
-                Widget child) {
-              // Change the opacity of the screen using a Curve based on the the animation's
-              // value
-              return FadeTransition(
-                opacity: animation,
-                child: child,
-              );
-            },
-          );
-        },
-      ),
-      GoRoute(
-        path: '/payment',
-        name: "payment",
-        builder: (BuildContext context, GoRouterState state) {
-          Bill bill = state.extra as Bill;
-          return PaymentPage(bill: bill);
-        },
-        pageBuilder: (BuildContext context, GoRouterState state) {
-          return CustomTransitionPage<void>(
-            key: state.pageKey,
-            child: PaymentPage(bill: state.extra as Bill),
-            transitionDuration: const Duration(milliseconds: 400),
-            transitionsBuilder: (BuildContext context,
-                Animation<double> animation,
-                Animation<double> secondaryAnimation,
-                Widget child) {
-              // Change the opacity of the screen using a Curve based on the the animation's
-              // value
-              return FadeTransition(
-                opacity: animation,
-                child: child,
-              );
-            },
-          );
-        },
-      ),
       GoRoute(
         path: '/order',
         name: "order",
@@ -367,8 +282,6 @@ class RouterCustom {
                 Animation<double> animation,
                 Animation<double> secondaryAnimation,
                 Widget child) {
-              // Change the opacity of the screen using a Curve based on the the animation's
-              // value
               return FadeTransition(
                 opacity: animation,
                 child: child,
@@ -376,6 +289,78 @@ class RouterCustom {
             },
           );
         },
+      ),
+      GoRoute(
+        path: '/introduction',
+        name: "introduction",
+        builder: (BuildContext context, GoRouterState state) {
+          return const IntroductionPage();
+        },
+      ),
+      GoRoute(
+        path: '/signin',
+        name: "signin",
+        builder: (BuildContext context, GoRouterState state) {
+          return const SignInPage();
+        },
+        routes: <RouteBase>[
+          GoRoute(
+            path: 'forgotpassword',
+            name: "forgotpassword",
+            builder: (BuildContext context, GoRouterState state) {
+              return const ForgotPassword();
+            },
+            pageBuilder: (BuildContext context, GoRouterState state) {
+              return CustomTransitionPage<void>(
+                key: state.pageKey,
+                child: const ForgotPassword(),
+                transitionDuration: const Duration(milliseconds: 400),
+                transitionsBuilder: (BuildContext context,
+                    Animation<double> animation,
+                    Animation<double> secondaryAnimation,
+                    Widget child) {
+                  return FadeTransition(
+                    opacity: animation,
+                    child: child,
+                  );
+                },
+              );
+            },
+          ),
+          GoRoute(
+            path: 'signup',
+            name: "signup",
+            builder: (BuildContext context, GoRouterState state) {
+              return const SignUpPage();
+            },
+          ),
+          GoRoute(
+            path: 'otp',
+            name: "otp",
+            builder: (BuildContext context, GoRouterState state) {
+              dynamic otp = state.extra as dynamic;
+              return OTPPage(
+                otp: otp,
+              );
+            },
+            pageBuilder: (BuildContext context, GoRouterState state) {
+              return CustomTransitionPage<void>(
+                key: state.pageKey,
+                child: OTPPage(otp: state.extra as dynamic),
+                transitionDuration: const Duration(milliseconds: 400),
+                transitionsBuilder: (BuildContext context,
+                    Animation<double> animation,
+                    Animation<double> secondaryAnimation,
+                    Widget child) {
+                  return FadeTransition(
+                    opacity: animation,
+                    child: child,
+                  );
+                },
+              );
+            },
+          ),
+        ],
       ),
     ],
   );

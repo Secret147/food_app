@@ -47,7 +47,7 @@ class InforDishReview extends StatelessWidget {
                 height: Dimensions.height10,
               ),
               TextNormal(
-                text: "120 Reviews",
+                text: "${dish.review} Reviews",
                 color: AppColors.textGrayColor,
               ),
             ],

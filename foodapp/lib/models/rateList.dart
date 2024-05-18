@@ -9,11 +9,14 @@ class RateList {
   String evalute;
   UserInfor user;
   Dish dish;
+  String created_at;
+
   RateList({
     required this.rate,
     required this.evalute,
     required this.user,
     required this.dish,
+    required this.created_at,
   });
 
   Map<String, dynamic> toMap() {
@@ -22,6 +25,7 @@ class RateList {
       'evalute': evalute,
       'user': user.toMap(),
       'dish': dish.toMap(),
+      'created_at': created_at,
     };
   }
 
@@ -31,6 +35,7 @@ class RateList {
       evalute: map['evalute'] as String,
       user: UserInfor.fromMap(map['user'] as Map<String, dynamic>),
       dish: Dish.fromMap(map['dish'] as Map<String, dynamic>),
+      created_at: map['created_at'] as String,
     );
   }
 
@@ -38,4 +43,9 @@ class RateList {
 
   factory RateList.fromJson(String source) =>
       RateList.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  @override
+  String toString() {
+    return 'RateList(rate: $rate, evalute: $evalute, user: $user, dish: $dish, created_at: $created_at)';
+  }
 }

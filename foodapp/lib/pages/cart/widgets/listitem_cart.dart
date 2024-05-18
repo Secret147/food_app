@@ -394,7 +394,7 @@ class _ListItemCartState extends State<ListItemCart> {
                 child: Container(
                     margin:
                         EdgeInsets.symmetric(horizontal: Dimensions.height20),
-                    child: ButtonCustom(text: "Checkout")),
+                    child: ButtonCustom(text: "Đặt hàng")),
               ),
             ]),
           ]);

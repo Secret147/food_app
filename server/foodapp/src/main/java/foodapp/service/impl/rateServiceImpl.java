@@ -46,10 +46,8 @@ public class rateServiceImpl implements rateService {
 		double newRate = rateRe.AvgRate(rate.getDish().getId());
 		dish dish = dishRe.findById(rate.getDish().getId()).orElseThrow();
 		dish.setRate(newRate);
+		dish.setReview(rateRe.countReview(dish.getId()));
 		dishRe.save(dish);
-		
-		
-		
 		
 	}
 

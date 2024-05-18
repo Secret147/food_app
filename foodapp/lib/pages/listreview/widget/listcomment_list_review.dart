@@ -6,6 +6,7 @@ import 'package:foodapp/utils/dimensions.dart';
 import 'package:foodapp/widgets/ExpandText/expand_text.dart';
 import 'package:foodapp/widgets/text_darkmode/text_dark_mode.dart';
 import 'package:foodapp/widgets/text_normal/text_normal.dart';
+import 'package:intl/intl.dart';
 
 class ListCommentListReview extends StatelessWidget {
   const ListCommentListReview({super.key, required this.listRate});
@@ -20,6 +21,13 @@ class ListCommentListReview extends StatelessWidget {
         child: ListView.builder(
           itemCount: listRate.length,
           itemBuilder: (BuildContext context, int index) {
+            String dateReivew = listRate[index].created_at;
+            DateFormat inputFormat = DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
+            DateFormat outputFormat = DateFormat("dd/MM/yyyy");
+
+            // Chuyển đổi
+            DateTime createdAt = inputFormat.parse(dateReivew);
+            String formattedDate = outputFormat.format(createdAt);
             return Container(
               margin: EdgeInsets.only(bottom: Dimensions.height20),
               child:
@@ -55,7 +63,7 @@ class ListCommentListReview extends StatelessWidget {
                                   height: Dimensions.height5,
                                 ),
                                 TextNormal(
-                                  text: "05/2021",
+                                  text: formattedDate,
                                   textSize: Dimensions.font14,
                                   color: AppColors.textGrayColor,
                                 ),

@@ -12,8 +12,8 @@ class userAPI {
     try {
       final dio = Dio();
 
-      final response = await dio.post("$baseUrl/user/newuser",
-          data: user.toJson(), options: Options(headers: Const.mainHeader));
+      final response =
+          await dio.post("$baseUrl/user/newuser", data: user.toJson());
       dynamic res = response.data;
       return res;
     } catch (e) {

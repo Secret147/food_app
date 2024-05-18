@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:foodapp/local_notifications.dart';
 import 'package:foodapp/models/user.dart';
 import 'package:foodapp/pages/signup/widgets/header_signup.dart';
 import 'package:foodapp/providers/userProvider.dart';
@@ -107,20 +108,145 @@ class _SignUpPageState extends State<SignUpPage> {
                   height: Dimensions.height20,
                 ),
                 InkWell(
-                  onTap: () {
-                    if (passwordController.text == repasswordController.text) {
-                      User user = User(
-                          email: emailController.text,
-                          name: nameController.text,
-                          password: passwordController.text,
-                          roles: {""});
-                      context.read<userProvider>().postNewUser(user);
+                  onTap: () async {
+                    if (emailController.text != "" &&
+                        nameController.text != "" &&
+                        passwordController.text != "") {
+                      if (passwordController.text ==
+                          repasswordController.text) {
+                        User user = User(
+                            email: emailController.text,
+                            name: nameController.text,
+                            password: passwordController.text,
+                            roles: {""});
+                        await context
+                            .read<userProvider>()
+                            .postNewUser(user)
+                            .then((value) {
+                          if (value == "0") {
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  title: Center(
+                                    child: Center(
+                                      child: Text(
+                                        "Email đã tồn tại. Vui lòng chọn email khác để thực hiện đăng ký tài khoản",
+                                        style: TextStyle(
+                                            fontSize: Dimensions.font20),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                  ),
+                                  actions: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        GestureDetector(
+                                          onTap: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: SizedBox(
+                                            width: Dimensions.height100,
+                                            child: ButtonCustom(
+                                              text: "Cancel",
+                                              color: AppColors.mainColor,
+                                              background: AppColors.brightColor,
+                                              textColor: AppColors.mainColor,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                );
+                              },
+                            );
+                          } else {
+                            context.goNamed("signin");
+                            LocalNotifications.showSimpleNotification(
+                                title: "Reset Password",
+                                body:
+                                    "Tài khoản của bạn đã được đăng ký thành công với tên đăng nhập ${emailController.text}",
+                                payload: "This is simple data");
+                          }
+                        });
+                        // ignore: use_build_context_synchronously
+                      } else {
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              title: const Center(
+                                child: Center(
+                                  child: Text(
+                                    "Mật khẩu xác nhận không chính xác",
+                                    style: TextStyle(fontSize: 16),
+                                  ),
+                                ),
+                              ),
+                              actions: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: SizedBox(
+                                        width: Dimensions.height100,
+                                        child: ButtonCustom(
+                                          text: "Cancel",
+                                          color: AppColors.mainColor,
+                                          background: AppColors.brightColor,
+                                          textColor: AppColors.mainColor,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              ],
+                            );
+                          },
+                        );
+                      }
                     } else {
                       showDialog(
                         context: context,
                         builder: (context) {
-                          return const AlertDialog(
-                            title: Text("Sai mat khau nhap lai"),
+                          return AlertDialog(
+                            title: const Center(
+                              child: Center(
+                                child: Text(
+                                  "Vui lòng nhập đầy đủ các trường",
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                              ),
+                            ),
+                            actions: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: SizedBox(
+                                      width: Dimensions.height100,
+                                      child: ButtonCustom(
+                                        text: "Cancel",
+                                        color: AppColors.mainColor,
+                                        background: AppColors.brightColor,
+                                        textColor: AppColors.mainColor,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              )
+                            ],
                           );
                         },
                       );

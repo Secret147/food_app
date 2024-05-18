@@ -4,7 +4,6 @@ import 'package:foodapp/models/ordered.dart';
 import 'package:foodapp/models/responseordered.dart';
 import 'package:foodapp/pages/cart/widgets/header_cart.dart';
 import 'package:foodapp/pages/cart/widgets/listitem_cart.dart';
-import 'package:foodapp/pages/cart/widgets/price_cart.dart';
 import 'package:foodapp/pages/navigationcustom/navigation_custom.dart';
 import 'package:foodapp/providers/userProvider.dart';
 import 'package:foodapp/utils/colors.dart';

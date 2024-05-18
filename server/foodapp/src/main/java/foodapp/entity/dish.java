@@ -32,6 +32,7 @@ public class dish {
 	private String type;
 	private Long purchases;
 	private double rate;
+	private int review;
 	
 	
 	@OneToMany(mappedBy = "dish")

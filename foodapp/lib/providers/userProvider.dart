@@ -21,6 +21,7 @@ class userProvider extends ChangeNotifier {
   //***********************************************************User***************************** */
   Future<dynamic> postNewUser(dynamic user) async {
     final data = await userAPI.callAPICreateUser(user);
+    print(data);
     notifyListeners();
     return data;
   }

@@ -1,2 +1,2 @@
 # food_app
-food_app test
+food_app
